@@ -10,10 +10,30 @@ const DUMMY_DATA = {
   averageKM: 327,
 };
 
-function logData(e) {
+// Electric Car - 60% emissions "Source: EDF Energy"
+// Hybrid Car - 40% emissions "Source: EDF Energy"
+
+async function logData(e) {
   e.preventDefault();
 
-  const totalKilometers = kilometers.value;
+  const selectedCarType = document.querySelector(
+    'input[name="carType"]:checked'
+  );
+
+  let totalKilometers = +kilometers.value;
+
+  if (selectedCarType) {
+    const carTypeValue = selectedCarType.value;
+
+    if (carTypeValue === "electric") {
+      // Reduce by 60% for Electric cars
+      totalKilometers *= 0.4;
+    }
+    if (carTypeValue === "hybrid") {
+      // Reduce by 40% for Hybrid cars
+      totalKilometers *= 0.6;
+    }
+  }
 
   const percentOfCarKM = getPercentInRelationToAverage(
     totalKilometers,
