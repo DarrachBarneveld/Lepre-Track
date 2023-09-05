@@ -40,8 +40,12 @@ async function logData(e) {
     DUMMY_DATA.averageKM
   );
 
+  let color;
+  percentOfCarKM > 100 ? (color = "#FF0000") : (color = "#569ef9");
+
   chart.updateOptions({
     series: [percentOfCarKM / 2, options.series[1]],
+    colors: [color, options.colors[1]],
   });
 
   const data = {
@@ -67,19 +71,23 @@ const options = {
         },
         value: {
           fontSize: "16px",
+          formatter: function (val) {
+            const intVal = +val * 2;
+            return intVal.toFixed(2) + "%";
+          },
         },
         total: {
           show: true,
-          label: "Total",
-          formatter: function (w) {
-            // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
-            return 249;
+          label: "Average Km",
+          formatter: function () {
+            return 367; // Average amount of km per week Ireland
           },
         },
       },
     },
   },
   labels: ["You", "Average"],
+  colors: ["#569ef9", "#58e5a4"],
 };
 
 const chart = new ApexCharts(document.querySelector("#chart"), options);
