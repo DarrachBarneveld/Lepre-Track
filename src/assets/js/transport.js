@@ -40,7 +40,9 @@ async function logData(e) {
     DUMMY_DATA.averageKM
   );
 
-  console.log(percentOfCarKM);
+  chart.updateOptions({
+    series: [percentOfCarKM / 2, options.series[1]],
+  });
 
   const data = {
     totalKilometers,
@@ -51,8 +53,8 @@ async function logData(e) {
 
 transportForm.addEventListener("submit", logData);
 
-var options = {
-  series: [44, 55, 67, 83],
+const options = {
+  series: [10, 50],
   chart: {
     height: 350,
     type: "radialBar",
@@ -77,8 +79,8 @@ var options = {
       },
     },
   },
-  labels: ["Apples", "Oranges", "Bananas", "Berries"],
+  labels: ["You", "Average"],
 };
 
-var chart = new ApexCharts(document.querySelector("#chart"), options);
+const chart = new ApexCharts(document.querySelector("#chart"), options);
 chart.render();
