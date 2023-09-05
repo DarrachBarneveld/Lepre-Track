@@ -24,6 +24,10 @@ async function logData(e) {
     'input[name="carType"]:checked'
   );
 
+  const selectedCarYear = document.querySelector(
+    'input[name="carYear"]:checked'
+  );
+
   let totalKilometers = +kilometers.value;
 
   if (selectedCarType) {
@@ -36,6 +40,16 @@ async function logData(e) {
     if (carTypeValue === "hybrid") {
       // Reduce by 40% for Hybrid cars
       totalKilometers *= 0.6;
+    }
+  }
+
+  if (selectedCarYear) {
+    const carYearValue = selectedCarYear.value;
+    console.log(carYearValue);
+
+    if (carYearValue === "before") {
+      // Double carbon for older cars
+      totalKilometers *= 2;
     }
   }
 
@@ -74,7 +88,7 @@ async function logData(e) {
         ],
       },
     ],
-    colors: [color, options.colors[1]],
+    colors: [color, defaultBarChartOptions.colors[1]],
   });
 
   const data = {
