@@ -31,6 +31,7 @@ export async function getUserData(user) {
     const userRef = doc(firebaseDB, "users", user.uid);
     const userSnapshot = await getDoc(userRef);
     if (userSnapshot.exists()) {
+      console.log(userSnapshot.data());
       return userSnapshot.data();
     } else {
       return null;

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>TRANSPORT</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -31,14 +31,8 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link active"
-                aria-current="page"
-                href="transport.html"
-                >Transport</a
+              <a class="nav-link active" aria-current="page" href="index.html"
+                >Home</a
               >
             </li>
           </ul>
@@ -53,15 +47,43 @@
         </div>
       </div>
     </nav>
+    <div class="d-flex justify-content-center">
+      <form id="carForm" class="p-3 rounded-3 bg-light border">
+        <h4 class="text-center">Trasport Form</h4>
+        <label for="kmDriven">km per week</label>
+        <input
+          type="number"
+          id="kmDriven"
+          name="kmDriven"
+          required
+        /><br /><br />
 
-    <div class="container mx-auto d-flex justify-content-center">
-      <div class="typewriter">
-        <h1 id="welcomeText"></h1>
-      </div>
+        <label>Type of Car:</label><br />
+        <input type="radio" id="electric" name="carType" value="Electric" />
+        <label for="electric">Electric</label><br />
+
+        <input type="radio" id="hybrid" name="carType" value="Hybrid" />
+        <label for="hybrid">Hybrid</label><br />
+
+        <input type="radio" id="petrol" name="carType" value="Petrol" />
+        <label for="petrol">Petrol</label><br /><br />
+
+        <label>Car Manufactured:</label><br />
+        <input
+          type="radio"
+          id="before2000"
+          name="carYear"
+          value="Before 2000"
+        />
+        <label for="before2000">Before 2000</label><br />
+
+        <input type="radio" id="after2000" name="carYear" value="After 2000" />
+        <label for="after2000">After 2000</label><br /><br />
+
+        <input type="submit" value="Submit" />
+      </form>
     </div>
 
-    <script type="module" src="src/assets/js/auth.js"></script>
-    <script type="module" src="src/assets/js/profile.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
