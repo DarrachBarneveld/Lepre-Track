@@ -9,3 +9,11 @@ let wood = 0;
 let input_form = document.querySelector(".energy_form");
 let btn = document.querySelector(".btn");
 let inputs = document.querySelectorAll("input");
+
+function data() {
+  inputs.forEach((element) => {
+    if (element.length === 0) {
+      element.value = 0;
+    }
+  });
+}
