@@ -53,16 +53,12 @@
         <!-- First Card -->
         <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
           <div class="form-card card text-center">
-            <h2 class="mb-2 text-dark font-weight-bold">Transport</h2>
+            <h2 class="mb-2 text-dark font-weight-bold">Car</h2>
             <div
               class="dashboard-progress dashboard-progress-1 d-flex align-items-center justify-content-center item-parent position-relative"
             >
               <div id="chart"></div>
               <i class="fa-solid fa-car chart-icon"></i>
-
-              <i
-                class="mdi mdi-lightbulb icon-md absolute-center text-dark"
-              ></i>
             </div>
             <p>% Avg</p>
             <h3 id="transport-result"></h3>
@@ -130,75 +126,58 @@
         <!-- Second Card -->
         <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
           <div class="form-card card text-center">
-            <h2 class="mb-2 text-dark font-weight-bold">Transport</h2>
+            <h2 class="mb-2 text-dark font-weight-bold">Flights</h2>
             <div
               class="dashboard-progress dashboard-progress-1 d-flex align-items-center justify-content-center item-parent position-relative"
             >
-              <div id="chart"></div>
-              <i class="fa-solid fa-car chart-icon"></i>
-
-              <i
-                class="mdi mdi-lightbulb icon-md absolute-center text-dark"
-              ></i>
+              <div id="flightChart"></div>
+              <i class="fa-solid fa-plane-departure chart-icon"></i>
             </div>
             <p>% Avg</p>
-            <h3 id="transport-result"></h3>
-            <form id="transportForm">
-              <label for="kilometers">km/week</label>
+            <h3 id="flight-result"></h3>
+            <form id="flightForm">
+              <label for="flightKm">km/yearly</label>
               <input
                 type="number"
-                id="kilometers"
-                name="kilometers"
+                id="flightKm"
+                name="flightKm"
                 required
               /><br /><br />
 
-              <label>Type of Car:</label><br />
+              <label for="numFlights">Number of Flights (yearly)</label>
               <input
-                type="radio"
-                id="electric"
-                name="carType"
-                value="electric"
+                type="number"
+                id="numFlights"
+                name="numFlights"
                 required
-              />
-              <label for="electric">Electric</label><br />
+              /><br /><br />
 
               <input
                 type="radio"
-                id="hybrid"
-                name="carType"
-                value="hybrid"
+                id="economy"
+                name="flightClass"
+                value="economy"
                 required
               />
-              <label for="hybrid">Hybrid</label><br />
+              <label for="economy">Economy</label><br />
 
               <input
                 type="radio"
-                id="petrol"
-                name="carType"
-                value="petrol"
+                id="business"
+                name="flightClass"
+                value="business"
                 required
               />
-              <label for="petrol">Petrol</label><br /><br />
-
-              <label>Car Manufactured:</label><br />
-              <input
-                type="radio"
-                id="before2000"
-                name="carYear"
-                value="before"
-                required
-              />
-              <label for="before2000">Before 2000</label><br />
+              <label for="business">Business</label><br />
 
               <input
                 type="radio"
-                id="after2000"
-                name="carYear"
-                value="after"
+                id="first"
+                name="flightClass"
+                value="first"
                 required
               />
-              <label for="after2000">After 2000</label><br /><br />
-
+              <label for="first">First</label><br /><br />
               <input type="submit" value="Submit" />
             </form>
           </div>
