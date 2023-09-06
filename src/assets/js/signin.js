@@ -36,7 +36,16 @@ async function signUpUserWithEmailAndPassword(e) {
 
     const { user } = userCreds;
 
+    await Swal.fire({
+      title: "Success!",
+      text: `Welcome ${userName}`,
+      icon: "success",
+      confirmButtonText: "Cool",
+    });
+
     createUserDocumentFromAuth(user, userName);
+
+    window.location.href = "home.html";
   } catch (err) {
     console.log(err);
   }
@@ -83,7 +92,7 @@ async function signInUserWithEmailAndPassword(e) {
 
     const userData = await getUserData(user);
 
-    // FIRE POPUP ON SUCCESS SIGN IN
+    // Pop up fired on success
     await Swal.fire({
       title: "Success!",
       text: `Welcome back ${userData.name}`,
@@ -91,8 +100,7 @@ async function signInUserWithEmailAndPassword(e) {
       confirmButtonText: "Cool",
     });
 
-    // FIRE POPUP ON SUCCESS SIGN IN
-
+    // Awaits action before reloading page
     window.location.href = "home.html";
   } catch (err) {
     console.log(err);
