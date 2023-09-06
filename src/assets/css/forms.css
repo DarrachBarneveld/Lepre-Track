@@ -1,0 +1,8 @@
+.grid-forms-charts {
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.display-none {
+  display: none;
+}
