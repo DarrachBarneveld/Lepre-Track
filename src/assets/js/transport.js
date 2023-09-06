@@ -8,10 +8,29 @@ import {
 
 const transportForm = document.getElementById("transportForm");
 const kilometers = document.getElementById("kilometers");
+const flightDataForm = document.getElementById("flightDataForm");
+
+function logFLight(e) {
+  event.preventDefault(); // Prevent form submission
+
+  // Get the values from the form
+  const totalFlights = parseInt(document.getElementById("totalFlights").value);
+  const estimatedDistance = parseInt(
+    document.getElementById("estimatedDistance").value
+  );
+
+  const result = estimatedDistance * (totalFlights / 4);
+
+  console.log("result in tonnes", result);
+}
+
+flightDataForm.addEventListener("submit", logFLight);
 
 const DUMMY_DATA = {
   // this is the average milage/carbon per week of a car
   averageKM: 327,
+  averageFlights: 6.5,
+  averageFlightKM: 14500,
 };
 
 // Electric Car - 60% emissions "Source: EDF Energy"
@@ -111,3 +130,9 @@ const chart = new ApexCharts(
   defaultBarChartOptions
 );
 chart.render();
+
+const chart2 = new ApexCharts(
+  document.querySelector("#chart2"),
+  defaultBarChartOptions
+);
+chart2.render();
