@@ -3,6 +3,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
+import Swal from "sweetalert2";
 
 import { firebaseAuth, firebaseDB } from "../../config/firebase";
 import { delayTimer } from "../../helpers/helpers";
@@ -77,9 +78,16 @@ async function signInUserWithEmailAndPassword(e) {
 
     window.location.href = "home.html";
   } catch (err) {
-    loginMessage.innerText = "Invalid Credentials";
-    await delayTimer(2);
-    loginMessage.innerText = "";
+    // loginMessage.innerText = "Invalid Credentials";
+
+    // await delayTimer(2);
+    // loginMessage.innerText = "";
+    Swal.fire({
+      title: "Error!",
+      text: "Invalid Credentials",
+      icon: "error",
+      confirmButtonText: "Cool",
+    });
   }
 }
 
