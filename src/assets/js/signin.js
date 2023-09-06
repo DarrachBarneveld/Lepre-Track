@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 
 import { firebaseAuth, firebaseDB } from "../../config/firebase";
 import { delayTimer } from "../../helpers/helpers";
+import { getUserData } from "./auth";
 
 const signupForm = document.getElementById("signup");
 const loginForm = document.getElementById("login");
@@ -74,10 +75,27 @@ async function signInUserWithEmailAndPassword(e) {
   const password = loginPasswordInput.value;
 
   try {
-    await signInWithEmailAndPassword(firebaseAuth, email, password);
+    const { user } = await signInWithEmailAndPassword(
+      firebaseAuth,
+      email,
+      password
+    );
+
+    const userData = await getUserData(user);
+
+    // FIRE POPUP ON SUCCESS SIGN IN
+    await Swal.fire({
+      title: "Success!",
+      text: `Welcome back ${userData.name}`,
+      icon: "success",
+      confirmButtonText: "Cool",
+    });
+
+    // FIRE POPUP ON SUCCESS SIGN IN
 
     window.location.href = "home.html";
   } catch (err) {
+    console.log(err);
     // loginMessage.innerText = "Invalid Credentials";
 
     // await delayTimer(2);
