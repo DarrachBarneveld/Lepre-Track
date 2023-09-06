@@ -5,6 +5,7 @@ let coal = 0;
 let lpg = 0;
 let propane = 0;
 let wood = 0;
+let average_house = 4;
 
 let input_form = document.querySelector(".energy_form");
 let btn = document.querySelector(".btn");
@@ -49,10 +50,45 @@ function addNumbers(numbers) {
   return +sum.toFixed(2);
 }
 
+function calculateAverage(array) {
+  var total = 0;
+  var count = 0;
+
+  array.forEach(function (item, index) {
+    total += item;
+    count++;
+  });
+
+  return total / count;
+}
+
 inputs.forEach((element) => {
   element.addEventListener("input", console.log(data()));
 });
 btn.addEventListener("click", (e) => {
   e.preventDefault();
-  console.log(data());
+  let charting = document.querySelector(".energy-chart");
+  charting.classList.add("display-none");
+  let comparedToAverage = (data() / average_house) * 100;
+
+  var options = {
+    series: [comparedToAverage.toFixed(2)],
+    chart: {
+      height: 350,
+      type: "radialBar",
+    },
+    plotOptions: {
+      radialBar: {
+        hollow: {
+          size: "70%",
+        },
+      },
+    },
+    labels: ["Testing"],
+  };
+
+  var chart = new ApexCharts(document.querySelector(".energy-chart"), options);
+  chart.render();
+
+  charting.classList.remove("display-none");
 });
