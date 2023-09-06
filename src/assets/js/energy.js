@@ -1,3 +1,5 @@
+import ApexCharts from "apexcharts";
+
 let electricity = 0;
 let gas = 0;
 let oil = 0;
