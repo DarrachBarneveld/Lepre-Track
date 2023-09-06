@@ -8,35 +8,72 @@ import {
 
 const transportForm = document.getElementById("transportForm");
 const kilometers = document.getElementById("kilometers");
-const flightDataForm = document.getElementById("flightDataForm");
+const flightForm = document.getElementById("flightForm");
+const transportResultLabel = document.getElementById("transport-result");
+const flightResultLabel = document.getElementById("flight-result");
 
-function logFLight(e) {
-  event.preventDefault(); // Prevent form submission
+function flightCarbonCalc(e) {
+  e.preventDefault(); // Prevent form submission
 
   // Get the values from the form
-  const totalFlights = parseInt(document.getElementById("totalFlights").value);
-  const estimatedDistance = parseInt(
-    document.getElementById("estimatedDistance").value
+  const totalFlights = parseInt(document.getElementById("numFlights").value);
+  const estimatedDistance = parseInt(document.getElementById("flightKm").value);
+  const selectedFlightClass = document.querySelector(
+    'input[name="flightClass"]:checked'
   );
 
-  const result = estimatedDistance * (totalFlights / 4);
+  let tonnesPerDistance = estimatedDistance * DUMMY_DATA.tonnesPerKM;
 
-  console.log("result in tonnes", result);
+  if (selectedFlightClass) {
+    const flightClass = selectedFlightClass.value;
+
+    if (flightClass === "business") {
+      // Multiple by 3 for Business Class
+      tonnesPerDistance *= 3;
+    }
+    if (flightClass === "first") {
+      // Multiple by 4 for First Class
+      tonnesPerDistance *= 4;
+    }
+  }
+
+  const totalFlightCalc = 1 + totalFlights / 5;
+
+  tonnesPerDistance *= totalFlightCalc;
+  console.log("result in tonnes", tonnesPerDistance.toFixed(2));
+
+  const averageFlightCarbon =
+    DUMMY_DATA.averageFlightKM * DUMMY_DATA.tonnesPerKM;
+
+  let percentOfFlightKM = getPercentInRelationToAverage(
+    tonnesPerDistance,
+    averageFlightCarbon
+  );
+
+  flightResultLabel.innerText = `${percentOfFlightKM.toFixed(2)}%`;
+
+  // avoid strange css behaviour of over 100% on chart
+  percentOfFlightKM > 100 ? (percentOfFlightKM = 100) : percentOfFlightKM;
+
+  flightChart.updateOptions({
+    series: [percentOfFlightKM.toFixed(2)],
+  });
 }
 
-flightDataForm.addEventListener("submit", logFLight);
+flightForm.addEventListener("submit", flightCarbonCalc);
 
 const DUMMY_DATA = {
   // this is the average milage/carbon per week of a car
   averageKM: 327,
   averageFlights: 6.5,
-  averageFlightKM: 14500,
+  averageFlightKM: 6850,
+  tonnesPerKM: 0.0002582,
 };
 
 // Electric Car - 60% emissions "Source: EDF Energy"
 // Hybrid Car - 40% emissions "Source: EDF Energy"
 
-async function logData(e) {
+async function carCarbonCalc(e) {
   e.preventDefault();
 
   const selectedCarType = document.querySelector(
@@ -64,7 +101,6 @@ async function logData(e) {
 
   if (selectedCarYear) {
     const carYearValue = selectedCarYear.value;
-    console.log(carYearValue);
 
     if (carYearValue === "before") {
       // Double carbon for older cars
@@ -72,42 +108,23 @@ async function logData(e) {
     }
   }
 
-  const percentOfCarKM = getPercentInRelationToAverage(
+  let percentOfCarKM = getPercentInRelationToAverage(
     totalKilometers,
     DUMMY_DATA.averageKM
   );
 
+  transportResultLabel.innerText = `${percentOfCarKM.toFixed(2)}%`;
   let color;
   //   percentOfCarKM > 100 ? (color = "#FF0000") : (color = "#569ef9");
 
+  // change color if over 100
   percentOfCarKM > 100 ? (color = "#FF0000") : (color = "#00E396");
 
-  //   chart.updateOptions({
-  //     series: [percentOfCarKM / 2, options.series[1]],
-  //     colors: [color, options.colors[1]],
-  //   });
+  // avoid strange css behaviour of over 100% on chart
+  percentOfCarKM > 100 ? (percentOfCarKM = 100) : percentOfCarKM;
 
-  chart.updateOptions({
-    series: [
-      {
-        name: "You",
-        data: [
-          {
-            x: "Car",
-            y: totalKilometers.toFixed(2),
-            goals: [
-              {
-                name: "Average",
-                value: 367,
-                strokeHeight: 5,
-                strokeColor: "#775DD0",
-              },
-            ],
-          },
-        ],
-      },
-    ],
-    colors: [color, defaultBarChartOptions.colors[1]],
+  carChart.updateOptions({
+    series: [percentOfCarKM.toFixed(2)],
   });
 
   const data = {
@@ -117,22 +134,181 @@ async function logData(e) {
   console.log(data);
 }
 
-transportForm.addEventListener("submit", logData);
+transportForm.addEventListener("submit", carCarbonCalc);
 
-// const radialChart = new ApexCharts(
-//   document.querySelector("#chart"),
-//   radialOptions
+const carOptions = {
+  series: [0],
+  colors: ["#009FFD"],
+  chart: {
+    height: 250,
+    type: "radialBar",
+    // toolbar: {
+    //   show: true,
+    // },
+  },
+  plotOptions: {
+    radialBar: {
+      startAngle: -135,
+      endAngle: 225,
+      hollow: {
+        margin: 0,
+        size: "70%",
+        background: "#fff",
+        image: undefined,
+        imageOffsetX: 0,
+        imageOffsetY: 0,
+        position: "front",
+        dropShadow: {
+          enabled: true,
+          top: 3,
+          left: 0,
+          blur: 4,
+          opacity: 0.24,
+        },
+      },
+      track: {
+        background: "#fff",
+        strokeWidth: "67%",
+        margin: 0,
+        dropShadow: {
+          enabled: true,
+          top: -3,
+          left: 0,
+          blur: 4,
+          opacity: 0.35,
+        },
+      },
+
+      dataLabels: {
+        show: true,
+        name: {
+          // offsetY: -10,
+          show: false,
+          // color: "#888",
+          // fontSize: "17px",
+        },
+        value: {
+          formatter: function (val, i) {
+            return parseInt(val) + "%";
+          },
+          color: "#111",
+          fontSize: "36px",
+          show: false,
+        },
+      },
+    },
+  },
+  fill: {
+    type: "gradient",
+    gradient: {
+      shade: "dark",
+      type: "horizontal",
+      shadeIntensity: 0.5,
+      gradientToColors: ["#5200AE"],
+      inverseColors: false,
+      opacityFrom: 1,
+      opacityTo: 1,
+      stops: [0, 100],
+    },
+  },
+  stroke: {
+    lineCap: "round",
+  },
+  labels: ["Percent"],
+};
+
+const flightOption = {
+  series: [0],
+  colors: ["#63D471"],
+  chart: {
+    height: 250,
+    type: "radialBar",
+    // toolbar: {
+    //   show: true,
+    // },
+  },
+  plotOptions: {
+    radialBar: {
+      startAngle: -135,
+      endAngle: 225,
+      hollow: {
+        margin: 0,
+        size: "70%",
+        background: "#fff",
+        image: undefined,
+        imageOffsetX: 0,
+        imageOffsetY: 0,
+        position: "front",
+        dropShadow: {
+          enabled: true,
+          top: 3,
+          left: 0,
+          blur: 4,
+          opacity: 0.24,
+        },
+      },
+      track: {
+        background: "#fff",
+        strokeWidth: "67%",
+        margin: 0,
+        dropShadow: {
+          enabled: true,
+          top: -3,
+          left: 0,
+          blur: 4,
+          opacity: 0.35,
+        },
+      },
+
+      dataLabels: {
+        show: true,
+        name: {
+          // offsetY: -10,
+          show: false,
+          // color: "#888",
+          // fontSize: "17px",
+        },
+        value: {
+          formatter: function (val, i) {
+            return parseInt(val) + "%";
+          },
+          color: "#111",
+          fontSize: "36px",
+          show: false,
+        },
+      },
+    },
+  },
+  fill: {
+    type: "gradient",
+    gradient: {
+      shade: "dark",
+      type: "horizontal",
+      shadeIntensity: 0.5,
+      gradientToColors: ["#378B29"],
+      inverseColors: false,
+      opacityFrom: 1,
+      opacityTo: 1,
+      stops: [0, 100],
+    },
+  },
+  stroke: {
+    lineCap: "round",
+  },
+  labels: ["Percent"],
+};
+
+const carChart = new ApexCharts(document.querySelector("#chart"), carOptions);
+carChart.render();
+
+const flightChart = new ApexCharts(
+  document.querySelector("#flightChart"),
+  flightOption
+);
+flightChart.render();
+
+// const chart2 = new ApexCharts(
+//   document.querySelector("#chart2"),
+//   defaultRadialOptions
 // );
-// radialChart.render();
-
-const chart = new ApexCharts(
-  document.querySelector("#chart"),
-  defaultBarChartOptions
-);
-chart.render();
-
-const chart2 = new ApexCharts(
-  document.querySelector("#chart2"),
-  defaultBarChartOptions
-);
-chart2.render();
+// chart2.render();

@@ -1,0 +1,11 @@
+.form-card {
+  width: fit-content;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.chart-icon {
+  position: absolute;
+  color: var(--primary-blue);
+  font-size: 2rem;
+}

@@ -9,6 +9,8 @@
   );
 
   --primary-white: #f9f6ee;
+  --primary-blue: #4b7bff;
+  --primary-green: #34a744;
 
   --box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
