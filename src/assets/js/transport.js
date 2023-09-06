@@ -8,10 +8,11 @@ import {
 
 const transportForm = document.getElementById("transportForm");
 const kilometers = document.getElementById("kilometers");
-const flightDataForm = document.getElementById("flightDataForm");
+// const flightDataForm = document.getElementById("flightDataForm");
+const transportResultLabel = document.getElementById("transport-result");
 
 function logFLight(e) {
-  event.preventDefault(); // Prevent form submission
+  e.preventDefault(); // Prevent form submission
 
   // Get the values from the form
   const totalFlights = parseInt(document.getElementById("totalFlights").value);
@@ -24,7 +25,7 @@ function logFLight(e) {
   console.log("result in tonnes", result);
 }
 
-flightDataForm.addEventListener("submit", logFLight);
+// flightDataForm.addEventListener("submit", logFLight);
 
 const DUMMY_DATA = {
   // this is the average milage/carbon per week of a car
@@ -72,7 +73,7 @@ async function logData(e) {
     }
   }
 
-  const percentOfCarKM = getPercentInRelationToAverage(
+  let percentOfCarKM = getPercentInRelationToAverage(
     totalKilometers,
     DUMMY_DATA.averageKM
   );
@@ -80,41 +81,25 @@ async function logData(e) {
   let color;
   //   percentOfCarKM > 100 ? (color = "#FF0000") : (color = "#569ef9");
 
+  // change color if over 100
   percentOfCarKM > 100 ? (color = "#FF0000") : (color = "#00E396");
 
-  //   chart.updateOptions({
-  //     series: [percentOfCarKM / 2, options.series[1]],
-  //     colors: [color, options.colors[1]],
-  //   });
+  // avoid strange css behaviour of over 100% on chart
+  percentOfCarKM > 100 ? (percentOfCarKM = 100) : percentOfCarKM;
 
   chart.updateOptions({
-    series: [
-      {
-        name: "You",
-        data: [
-          {
-            x: "Car",
-            y: totalKilometers.toFixed(2),
-            goals: [
-              {
-                name: "Average",
-                value: 367,
-                strokeHeight: 5,
-                strokeColor: "#775DD0",
-              },
-            ],
-          },
-        ],
-      },
-    ],
-    colors: [color, defaultBarChartOptions.colors[1]],
+    series: [percentOfCarKM.toFixed(2)],
   });
+
+  transportResultLabel.innerText = `${percentOfCarKM.toFixed(2)}%`;
 
   const data = {
     totalKilometers,
   };
 
   console.log(data);
+
+  console.log(totalKilometers);
 }
 
 transportForm.addEventListener("submit", logData);
@@ -125,14 +110,92 @@ transportForm.addEventListener("submit", logData);
 // );
 // radialChart.render();
 
-const chart = new ApexCharts(
-  document.querySelector("#chart"),
-  defaultBarChartOptions
-);
+var options = {
+  series: [0],
+  colors: ["#009FFD"],
+  chart: {
+    height: 250,
+    type: "radialBar",
+    // toolbar: {
+    //   show: true,
+    // },
+  },
+  plotOptions: {
+    radialBar: {
+      startAngle: -135,
+      endAngle: 225,
+      hollow: {
+        margin: 0,
+        size: "70%",
+        background: "#fff",
+        image: undefined,
+        imageOffsetX: 0,
+        imageOffsetY: 0,
+        position: "front",
+        dropShadow: {
+          enabled: true,
+          top: 3,
+          left: 0,
+          blur: 4,
+          opacity: 0.24,
+        },
+      },
+      track: {
+        background: "#fff",
+        strokeWidth: "67%",
+        margin: 0,
+        dropShadow: {
+          enabled: true,
+          top: -3,
+          left: 0,
+          blur: 4,
+          opacity: 0.35,
+        },
+      },
+
+      dataLabels: {
+        show: true,
+        name: {
+          // offsetY: -10,
+          show: false,
+          // color: "#888",
+          // fontSize: "17px",
+        },
+        value: {
+          formatter: function (val, i) {
+            return parseInt(val) + "%";
+          },
+          color: "#111",
+          fontSize: "36px",
+          show: false,
+        },
+      },
+    },
+  },
+  fill: {
+    type: "gradient",
+    gradient: {
+      shade: "dark",
+      type: "horizontal",
+      shadeIntensity: 0.5,
+      gradientToColors: ["#5200AE"],
+      inverseColors: false,
+      opacityFrom: 1,
+      opacityTo: 1,
+      stops: [0, 100],
+    },
+  },
+  stroke: {
+    lineCap: "round",
+  },
+  labels: ["Percent"],
+};
+
+const chart = new ApexCharts(document.querySelector("#chart"), options);
 chart.render();
 
-const chart2 = new ApexCharts(
-  document.querySelector("#chart2"),
-  defaultBarChartOptions
-);
-chart2.render();
+// const chart2 = new ApexCharts(
+//   document.querySelector("#chart2"),
+//   defaultRadialOptions
+// );
+// chart2.render();

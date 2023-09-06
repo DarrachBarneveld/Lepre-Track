@@ -11,7 +11,7 @@
       crossorigin="anonymous"
     />
   </head>
-  <link rel="stylesheet" href="src/assets/css/profile.css" />
+  <link rel="stylesheet" href="src/assets/css/transport.css" />
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
@@ -47,95 +47,317 @@
         </div>
       </div>
     </nav>
-    <div class="d-flex justify-content-center text-center">
-      <!-- CarForm -->
-      <form id="transportForm" class="p-3 rounded-3 bg-light border">
-        <h4 class="mb-3"><i class="fa-solid fa-car"></i> Transport Form</h4>
-        <label for="kilometers">km/week</label>
-        <input
-          type="number"
-          id="kilometers"
-          name="kilometers"
-          required
-        /><br /><br />
 
-        <label>Type of Car:</label><br />
-        <input
-          type="radio"
-          id="electric"
-          name="carType"
-          value="electric"
-          required
-        />
-        <label for="electric">Electric</label><br />
+    <div class="container mt-5">
+      <div class="row">
+        <!-- First Card -->
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+          <div class="form-card card text-center">
+            <h2 class="mb-2 text-dark font-weight-bold">Transport</h2>
+            <div
+              class="dashboard-progress dashboard-progress-1 d-flex align-items-center justify-content-center item-parent position-relative"
+            >
+              <div id="chart"></div>
+              <i class="fa-solid fa-car chart-icon"></i>
 
-        <input
-          type="radio"
-          id="hybrid"
-          name="carType"
-          value="hybrid"
-          required
-        />
-        <label for="hybrid">Hybrid</label><br />
+              <i
+                class="mdi mdi-lightbulb icon-md absolute-center text-dark"
+              ></i>
+            </div>
+            <p>% Avg</p>
+            <h3 id="transport-result"></h3>
+            <form id="transportForm">
+              <label for="kilometers">km/week</label>
+              <input
+                type="number"
+                id="kilometers"
+                name="kilometers"
+                required
+              /><br /><br />
 
-        <input
-          type="radio"
-          id="petrol"
-          name="carType"
-          value="petrol"
-          required
-        />
-        <label for="petrol">Petrol</label><br /><br />
+              <label>Type of Car:</label><br />
+              <input
+                type="radio"
+                id="electric"
+                name="carType"
+                value="electric"
+                required
+              />
+              <label for="electric">Electric</label><br />
 
-        <label>Car Manufactured:</label><br />
-        <input
-          type="radio"
-          id="before2000"
-          name="carYear"
-          value="before"
-          required
-        />
-        <label for="before2000">Before 2000</label><br />
+              <input
+                type="radio"
+                id="hybrid"
+                name="carType"
+                value="hybrid"
+                required
+              />
+              <label for="hybrid">Hybrid</label><br />
 
-        <input
-          type="radio"
-          id="after2000"
-          name="carYear"
-          value="after"
-          required
-        />
-        <label for="after2000">After 2000</label><br /><br />
+              <input
+                type="radio"
+                id="petrol"
+                name="carType"
+                value="petrol"
+                required
+              />
+              <label for="petrol">Petrol</label><br /><br />
 
-        <input type="submit" value="Submit" />
-      </form>
+              <label>Car Manufactured:</label><br />
+              <input
+                type="radio"
+                id="before2000"
+                name="carYear"
+                value="before"
+                required
+              />
+              <label for="before2000">Before 2000</label><br />
 
-      <div id="chart"></div>
-    </div>
+              <input
+                type="radio"
+                id="after2000"
+                name="carYear"
+                value="after"
+                required
+              />
+              <label for="after2000">After 2000</label><br /><br />
 
-    <div class="d-flex justify-content-center text-center">
-      <!-- CarForm -->
-      <form id="flightDataForm">
-        <div>
-          <label for="totalFlights">Total Number of Flights per Year:</label>
-          <input type="number" id="totalFlights" name="totalFlights" required />
+              <input type="submit" value="Submit" />
+            </form>
+          </div>
         </div>
-        <div>
-          <label for="estimatedDistance"
-            >Estimated Distance of Flight (in miles):</label
-          >
-          <input
-            type="number"
-            id="estimatedDistance"
-            name="estimatedDistance"
-            required
-          />
-        </div>
-        <div>
-          <input type="submit" value="Submit" />
-        </div>
-      </form>
 
-      <div id="chart2"></div>
+        <!-- Second Card -->
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+          <div class="form-card card text-center">
+            <h2 class="mb-2 text-dark font-weight-bold">Transport</h2>
+            <div
+              class="dashboard-progress dashboard-progress-1 d-flex align-items-center justify-content-center item-parent position-relative"
+            >
+              <div id="chart"></div>
+              <i class="fa-solid fa-car chart-icon"></i>
+
+              <i
+                class="mdi mdi-lightbulb icon-md absolute-center text-dark"
+              ></i>
+            </div>
+            <p>% Avg</p>
+            <h3 id="transport-result"></h3>
+            <form id="transportForm">
+              <label for="kilometers">km/week</label>
+              <input
+                type="number"
+                id="kilometers"
+                name="kilometers"
+                required
+              /><br /><br />
+
+              <label>Type of Car:</label><br />
+              <input
+                type="radio"
+                id="electric"
+                name="carType"
+                value="electric"
+                required
+              />
+              <label for="electric">Electric</label><br />
+
+              <input
+                type="radio"
+                id="hybrid"
+                name="carType"
+                value="hybrid"
+                required
+              />
+              <label for="hybrid">Hybrid</label><br />
+
+              <input
+                type="radio"
+                id="petrol"
+                name="carType"
+                value="petrol"
+                required
+              />
+              <label for="petrol">Petrol</label><br /><br />
+
+              <label>Car Manufactured:</label><br />
+              <input
+                type="radio"
+                id="before2000"
+                name="carYear"
+                value="before"
+                required
+              />
+              <label for="before2000">Before 2000</label><br />
+
+              <input
+                type="radio"
+                id="after2000"
+                name="carYear"
+                value="after"
+                required
+              />
+              <label for="after2000">After 2000</label><br /><br />
+
+              <input type="submit" value="Submit" />
+            </form>
+          </div>
+        </div>
+
+        <!-- Third Card -->
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+          <div class="form-card card text-center">
+            <h2 class="mb-2 text-dark font-weight-bold">Transport</h2>
+            <div
+              class="dashboard-progress dashboard-progress-1 d-flex align-items-center justify-content-center item-parent position-relative"
+            >
+              <div id="chart"></div>
+              <i class="fa-solid fa-car chart-icon"></i>
+
+              <i
+                class="mdi mdi-lightbulb icon-md absolute-center text-dark"
+              ></i>
+            </div>
+            <p>% Avg</p>
+            <h3 id="transport-result"></h3>
+            <form id="transportForm">
+              <label for="kilometers">km/week</label>
+              <input
+                type="number"
+                id="kilometers"
+                name="kilometers"
+                required
+              /><br /><br />
+
+              <label>Type of Car:</label><br />
+              <input
+                type="radio"
+                id="electric"
+                name="carType"
+                value="electric"
+                required
+              />
+              <label for="electric">Electric</label><br />
+
+              <input
+                type="radio"
+                id="hybrid"
+                name="carType"
+                value="hybrid"
+                required
+              />
+              <label for="hybrid">Hybrid</label><br />
+
+              <input
+                type="radio"
+                id="petrol"
+                name="carType"
+                value="petrol"
+                required
+              />
+              <label for="petrol">Petrol</label><br /><br />
+
+              <label>Car Manufactured:</label><br />
+              <input
+                type="radio"
+                id="before2000"
+                name="carYear"
+                value="before"
+                required
+              />
+              <label for="before2000">Before 2000</label><br />
+
+              <input
+                type="radio"
+                id="after2000"
+                name="carYear"
+                value="after"
+                required
+              />
+              <label for="after2000">After 2000</label><br /><br />
+
+              <input type="submit" value="Submit" />
+            </form>
+          </div>
+        </div>
+
+        <!-- Fourth Card -->
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+          <div class="form-card card text-center">
+            <h2 class="mb-2 text-dark font-weight-bold">Transport</h2>
+            <div
+              class="dashboard-progress dashboard-progress-1 d-flex align-items-center justify-content-center item-parent position-relative"
+            >
+              <div id="chart"></div>
+              <i class="fa-solid fa-car chart-icon"></i>
+
+              <i
+                class="mdi mdi-lightbulb icon-md absolute-center text-dark"
+              ></i>
+            </div>
+            <p>% Avg</p>
+            <h3 id="transport-result"></h3>
+            <form id="transportForm">
+              <label for="kilometers">km/week</label>
+              <input
+                type="number"
+                id="kilometers"
+                name="kilometers"
+                required
+              /><br /><br />
+
+              <label>Type of Car:</label><br />
+              <input
+                type="radio"
+                id="electric"
+                name="carType"
+                value="electric"
+                required
+              />
+              <label for="electric">Electric</label><br />
+
+              <input
+                type="radio"
+                id="hybrid"
+                name="carType"
+                value="hybrid"
+                required
+              />
+              <label for="hybrid">Hybrid</label><br />
+
+              <input
+                type="radio"
+                id="petrol"
+                name="carType"
+                value="petrol"
+                required
+              />
+              <label for="petrol">Petrol</label><br /><br />
+
+              <label>Car Manufactured:</label><br />
+              <input
+                type="radio"
+                id="before2000"
+                name="carYear"
+                value="before"
+                required
+              />
+              <label for="before2000">Before 2000</label><br />
+
+              <input
+                type="radio"
+                id="after2000"
+                name="carYear"
+                value="after"
+                required
+              />
+              <label for="after2000">After 2000</label><br /><br />
+
+              <input type="submit" value="Submit" />
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script type="module" src="src/assets/js/transport.js"></script>
