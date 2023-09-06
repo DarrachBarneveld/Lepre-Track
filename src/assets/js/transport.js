@@ -11,6 +11,19 @@ const carResultLabel = document.getElementById("car-result");
 const flightResultLabel = document.getElementById("flight-result");
 const transportResultLabel = document.getElementById("transport-result");
 
+function IrishAverageTravelMethodTotal() {
+  const { averageTravelMethod } = DUMMY_DATA;
+
+  const averageCarbonSum =
+    averageTravelMethod.car * 1 +
+    averageTravelMethod.carpool * 0.5 +
+    averageTravelMethod.walkCycle * 0 +
+    averageTravelMethod.train * 0.2 +
+    averageTravelMethod.bus * 0.6;
+
+  return averageCarbonSum;
+}
+
 const DUMMY_DATA = {
   // this is the average milage/carbon per week of a car
   averageKM: 327,
@@ -66,11 +79,29 @@ function flightCarbonCalc(e) {
 
   flightResultLabel.innerText = `${percentOfFlightKM.toFixed(2)}%`;
 
+  const totalChartValue = tonnesPerDistance * 100;
   // avoid strange css behaviour of over 100% on chart
   percentOfFlightKM > 100 ? (percentOfFlightKM = 100) : percentOfFlightKM;
 
   flightChart.updateOptions({
     series: [percentOfFlightKM.toFixed(2)],
+  });
+
+  const currentArray = totalChart.w.globals.series[0];
+
+  totalChart.updateOptions({
+    series: [
+      {
+        name: "Tom",
+        type: "column",
+        data: [totalChartValue, currentArray[1], currentArray[2]],
+      },
+      {
+        name: "Irish Average",
+        type: "line",
+        data: [176.867, 327, 73],
+      },
+    ],
   });
 }
 
@@ -131,11 +162,26 @@ function carCarbonCalc(e) {
     series: [percentOfCarKM.toFixed(2)],
   });
 
+  const currentArray = totalChart.w.globals.series[0];
+
+  totalChart.updateOptions({
+    series: [
+      {
+        name: "Tom",
+        type: "column",
+        data: [currentArray[0], percentOfCarKM.toFixed(2), currentArray[2]],
+      },
+      {
+        name: "Irish Average",
+        type: "line",
+        data: [176.867, 327, 73],
+      },
+    ],
+  });
+
   const data = {
     totalKilometers,
   };
-
-  console.log(data);
 }
 
 async function transportCarbonCalc(e) {
@@ -175,14 +221,7 @@ async function transportCarbonCalc(e) {
     trainPercentage * 0.2 +
     busPercentage * 0.6;
 
-  const { averageTravelMethod } = DUMMY_DATA;
-
-  const averageCarbonSum =
-    averageTravelMethod.car * 1 +
-    averageTravelMethod.carpool * 0.5 +
-    averageTravelMethod.walkCycle * 0 +
-    averageTravelMethod.train * 0.2 +
-    averageTravelMethod.bus * 0.6;
+  const averageCarbonSum = IrishAverageTravelMethodTotal();
 
   let percentMode = getPercentInRelationToAverage(
     weightedSum,
@@ -196,6 +235,23 @@ async function transportCarbonCalc(e) {
   transportChart.updateOptions({
     series: [percentMode.toFixed(2)],
   });
+
+  const currentArray = totalChart.w.globals.series[0];
+
+  totalChart.updateOptions({
+    series: [
+      {
+        name: "Tom",
+        type: "column",
+        data: [currentArray[0], currentArray[1], percentMode.toFixed(2)],
+      },
+      {
+        name: "Irish Average",
+        type: "line",
+        data: [176.867, 327, 73],
+      },
+    ],
+  });
 }
 
 carForm.addEventListener("submit", carCarbonCalc);
@@ -206,7 +262,7 @@ const carOptions = {
   series: [0],
   colors: ["#009FFD"],
   chart: {
-    height: 250,
+    height: 225,
     type: "radialBar",
     // toolbar: {
     //   show: true,
@@ -287,7 +343,7 @@ const flightOptions = {
   series: [0],
   colors: ["#DA2D2D"],
   chart: {
-    height: 250,
+    height: 225,
     type: "radialBar",
     // toolbar: {
     //   show: true,
@@ -364,11 +420,12 @@ const flightOptions = {
   labels: ["Percent"],
 };
 
+// #34a744
 const transportOptions = {
   series: [0],
   colors: ["#63D471"],
   chart: {
-    height: 250,
+    height: 225,
     type: "radialBar",
     // toolbar: {
     //   show: true,
@@ -445,7 +502,60 @@ const transportOptions = {
   labels: ["Percent"],
 };
 
-const carChart = new ApexCharts(document.getElementById("chart"), carOptions);
+const totalOptions = {
+  series: [
+    {
+      name: "Tom",
+      type: "column",
+      data: [200, 440, 5],
+    },
+    {
+      name: "Irish Average",
+      type: "line",
+      data: [176.867, 327, 73],
+    },
+  ],
+  colors: ["#4b7bff", "#DA2D2D"],
+
+  chart: {
+    height: 350,
+    type: "line",
+    toolbar: {
+      show: false,
+    },
+  },
+
+  stroke: {
+    width: [0, 4],
+  },
+  title: {
+    text: "Transport Totals",
+  },
+  dataLabels: {
+    enabled: true,
+    enabledOnSeries: [1],
+  },
+  labels: ["Flights", "Car", "Transport"],
+
+  yaxis: [
+    {
+      title: {
+        text: "Yoy",
+      },
+    },
+    {
+      opposite: true,
+      title: {
+        text: "Average",
+      },
+    },
+  ],
+};
+
+const carChart = new ApexCharts(
+  document.getElementById("carChart"),
+  carOptions
+);
 carChart.render();
 
 const flightChart = new ApexCharts(
@@ -459,3 +569,9 @@ const transportChart = new ApexCharts(
   transportOptions
 );
 transportChart.render();
+
+const totalChart = new ApexCharts(
+  document.querySelector("#chart"),
+  totalOptions
+);
+totalChart.render();
