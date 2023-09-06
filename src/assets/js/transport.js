@@ -1,16 +1,30 @@
 // USE THIS AS A BASE MODULE FOR OTHER INPUT CALCULATIONS
 import ApexCharts from "apexcharts";
+import Swal from "sweetalert2";
 import { getPercentInRelationToAverage } from "../../helpers/math";
-import {
-  defaultBarChartOptions,
-  defaultRadialOptions,
-} from "../classes/Charts";
 
+const carForm = document.getElementById("carForm");
+const flightForm = document.getElementById("flightForm");
 const transportForm = document.getElementById("transportForm");
 const kilometers = document.getElementById("kilometers");
-const flightForm = document.getElementById("flightForm");
-const transportResultLabel = document.getElementById("transport-result");
+const carResultLabel = document.getElementById("car-result");
 const flightResultLabel = document.getElementById("flight-result");
+const transportResultLabel = document.getElementById("transport-result");
+
+const DUMMY_DATA = {
+  // this is the average milage/carbon per week of a car
+  averageKM: 327,
+  averageFlights: 6.5,
+  averageFlightKM: 6850,
+  tonnesPerKM: 0.0002582,
+  averageTravelMethod: {
+    car: 65,
+    carpool: 8,
+    walkCycle: 15,
+    bus: 6,
+    train: 6,
+  },
+};
 
 function flightCarbonCalc(e) {
   e.preventDefault(); // Prevent form submission
@@ -60,20 +74,10 @@ function flightCarbonCalc(e) {
   });
 }
 
-flightForm.addEventListener("submit", flightCarbonCalc);
-
-const DUMMY_DATA = {
-  // this is the average milage/carbon per week of a car
-  averageKM: 327,
-  averageFlights: 6.5,
-  averageFlightKM: 6850,
-  tonnesPerKM: 0.0002582,
-};
-
 // Electric Car - 60% emissions "Source: EDF Energy"
 // Hybrid Car - 40% emissions "Source: EDF Energy"
 
-async function carCarbonCalc(e) {
+function carCarbonCalc(e) {
   e.preventDefault();
 
   const selectedCarType = document.querySelector(
@@ -113,7 +117,7 @@ async function carCarbonCalc(e) {
     DUMMY_DATA.averageKM
   );
 
-  transportResultLabel.innerText = `${percentOfCarKM.toFixed(2)}%`;
+  carResultLabel.innerText = `${percentOfCarKM.toFixed(2)}%`;
   let color;
   //   percentOfCarKM > 100 ? (color = "#FF0000") : (color = "#569ef9");
 
@@ -134,7 +138,69 @@ async function carCarbonCalc(e) {
   console.log(data);
 }
 
-transportForm.addEventListener("submit", carCarbonCalc);
+async function transportCarbonCalc(e) {
+  e.preventDefault();
+
+  const drivePercentage = parseInt(document.getElementById("driveInput").value);
+  const carpoolPercentage = parseInt(
+    document.getElementById("carpoolInput").value
+  );
+  const walkPercentage = parseInt(document.getElementById("walkInput").value);
+  const cyclePercentage = parseInt(document.getElementById("cycleInput").value);
+  const trainPercentage = parseInt(document.getElementById("trainInput").value);
+  const busPercentage = parseInt(document.getElementById("busInput").value);
+
+  const totalPercentage =
+    drivePercentage +
+    carpoolPercentage +
+    walkPercentage +
+    cyclePercentage +
+    trainPercentage +
+    busPercentage;
+
+  if (totalPercentage !== 100) {
+    await Swal.fire({
+      title: "Error!",
+      text: `Inputs must equal 100%`,
+      icon: "error",
+      confirmButtonText: "Try Again",
+    });
+  }
+
+  const weightedSum =
+    drivePercentage * 1 +
+    carpoolPercentage * 0.5 +
+    walkPercentage * 0 +
+    cyclePercentage * 0 +
+    trainPercentage * 0.2 +
+    busPercentage * 0.6;
+
+  const { averageTravelMethod } = DUMMY_DATA;
+
+  const averageCarbonSum =
+    averageTravelMethod.car * 1 +
+    averageTravelMethod.carpool * 0.5 +
+    averageTravelMethod.walkCycle * 0 +
+    averageTravelMethod.train * 0.2 +
+    averageTravelMethod.bus * 0.6;
+
+  let percentMode = getPercentInRelationToAverage(
+    weightedSum,
+    averageCarbonSum
+  );
+
+  transportResultLabel.innerText = `${percentMode.toFixed(2)}%`;
+
+  percentMode > 100 ? (percentMode = 100) : percentMode;
+
+  transportChart.updateOptions({
+    series: [percentMode.toFixed(2)],
+  });
+}
+
+carForm.addEventListener("submit", carCarbonCalc);
+flightForm.addEventListener("submit", flightCarbonCalc);
+transportForm.addEventListener("submit", transportCarbonCalc);
 
 const carOptions = {
   series: [0],
@@ -217,7 +283,88 @@ const carOptions = {
   labels: ["Percent"],
 };
 
-const flightOption = {
+const flightOptions = {
+  series: [0],
+  colors: ["#DA2D2D"],
+  chart: {
+    height: 250,
+    type: "radialBar",
+    // toolbar: {
+    //   show: true,
+    // },
+  },
+  plotOptions: {
+    radialBar: {
+      startAngle: -135,
+      endAngle: 225,
+      hollow: {
+        margin: 0,
+        size: "70%",
+        background: "#fff",
+        image: undefined,
+        imageOffsetX: 0,
+        imageOffsetY: 0,
+        position: "front",
+        dropShadow: {
+          enabled: true,
+          top: 3,
+          left: 0,
+          blur: 4,
+          opacity: 0.24,
+        },
+      },
+      track: {
+        background: "#fff",
+        strokeWidth: "67%",
+        margin: 0,
+        dropShadow: {
+          enabled: true,
+          top: -3,
+          left: 0,
+          blur: 4,
+          opacity: 0.35,
+        },
+      },
+
+      dataLabels: {
+        show: true,
+        name: {
+          // offsetY: -10,
+          show: false,
+          // color: "#888",
+          // fontSize: "17px",
+        },
+        value: {
+          formatter: function (val, i) {
+            return parseInt(val) + "%";
+          },
+          color: "#111",
+          fontSize: "36px",
+          show: false,
+        },
+      },
+    },
+  },
+  fill: {
+    type: "gradient",
+    gradient: {
+      shade: "dark",
+      type: "horizontal",
+      shadeIntensity: 0.5,
+      gradientToColors: ["#7C0000"],
+      inverseColors: false,
+      opacityFrom: 1,
+      opacityTo: 1,
+      stops: [0, 100],
+    },
+  },
+  stroke: {
+    lineCap: "round",
+  },
+  labels: ["Percent"],
+};
+
+const transportOptions = {
   series: [0],
   colors: ["#63D471"],
   chart: {
@@ -298,17 +445,17 @@ const flightOption = {
   labels: ["Percent"],
 };
 
-const carChart = new ApexCharts(document.querySelector("#chart"), carOptions);
+const carChart = new ApexCharts(document.getElementById("chart"), carOptions);
 carChart.render();
 
 const flightChart = new ApexCharts(
-  document.querySelector("#flightChart"),
-  flightOption
+  document.getElementById("flightChart"),
+  flightOptions
 );
 flightChart.render();
 
-// const chart2 = new ApexCharts(
-//   document.querySelector("#chart2"),
-//   defaultRadialOptions
-// );
-// chart2.render();
+const transportChart = new ApexCharts(
+  document.getElementById("transportChart"),
+  transportOptions
+);
+transportChart.render();
