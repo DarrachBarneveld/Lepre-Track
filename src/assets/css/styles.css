@@ -2,6 +2,13 @@
 
 :root {
   /* PLACE COLOUR SCHEME HERE */
+  /* CSS HEX */
+--tiffany-blue: #8CCEBEff;
+--forest-green: #558F40ff;
+--avocado: #518523ff;
+--apple-green: #6E9C11ff;
+--white: #FFFFFFff;
+
   --green-gradient: linear-gradient(
     to right,
     rgb(182, 244, 146),
@@ -85,6 +92,7 @@ input:focus:valid {
 
 .bg-nav {
   background-color: #f8faf875;
+  box-shadow: 0 0  5px;
 }
 
 .logo img {
@@ -98,4 +106,19 @@ input:focus:valid {
   width: 400px;
   opacity: 0.6;
   padding: 20px;
+  box-shadow: 0 0 5px 5px;
+}
+
+.fade-in-text {
+  opacity: 0; /* Initially, the text is invisible */
+  animation: fadeIn 2s ease-in-out forwards; /* Apply the fade-in animation */
+}
+
+@keyframes fadeIn {
+  0% {
+      opacity: 0; /* Starting from invisible */
+  }
+  100% {
+      opacity: 1; /* Ending at fully visible */
+  }
 }
