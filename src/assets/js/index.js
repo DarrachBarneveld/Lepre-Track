@@ -96,7 +96,7 @@ async function signUpUserWithEmailAndPassword(username, email, password) {
       confirmButtonText: "Cool",
     });
 
-    createUserDocumentFromAuth(user, username);
+    await createUserDocumentFromAuth(user, username);
 
     window.location.href = "dashboard.html";
   } catch (err) {
