@@ -1,14 +1,24 @@
 import Swal from "sweetalert2";
 import { firebaseAuth, firebaseDB } from "../../config/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { doc, getDoc, setDoc } from "@firebase/firestore";
+import { getUserData } from "./auth";
 
 const signUpModal = document.getElementById("signup");
+const loginModal = document.getElementById("login");
 
 const signupHtml = `
 <input type="text" class="swal2-input" minlength="5" id="username" placeholder="Username" required />
 <input type="email" id="email" class="swal2-input" placeholder="Email" required />
 <input type="password" id="password" minlength="6" class="swal2-input" placeholder="Password" required  />
+`;
+
+const loginHtml = `
+<input type="email" class="swal2-input" id="email" placeholder="Email" required />
+<input type="password" id="password" class="swal2-input" placeholder="Password" required />
 `;
 
 function signupForm() {
@@ -76,8 +86,31 @@ function signupForm() {
     );
   });
 }
+function loginForm() {
+  Swal.fire({
+    title: "Login Form",
+    icon: "question",
+    html: loginHtml,
+    confirmButtonText: "Sign in",
+    focusConfirm: false,
+    preConfirm: () => {
+      const email = Swal.getPopup().querySelector("#email").value;
+      const password = Swal.getPopup().querySelector("#password").value;
+      if (!email || !password) {
+        Swal.showValidationMessage(`Please enter login and password`);
+      }
+      return { email: email, password: password };
+    },
+  }).then(async (result) => {
+    await signInUserWithEmailAndPassword(
+      result.value.email,
+      result.value.password
+    );
+  });
+}
 
 signUpModal.addEventListener("click", signupForm);
+loginModal.addEventListener("click", loginForm);
 
 async function signUpUserWithEmailAndPassword(username, email, password) {
   try {
@@ -101,6 +134,36 @@ async function signUpUserWithEmailAndPassword(username, email, password) {
     window.location.href = "dashboard.html";
   } catch (err) {
     console.log(err);
+  }
+}
+
+async function signInUserWithEmailAndPassword(email, password) {
+  try {
+    const { user } = await signInWithEmailAndPassword(
+      firebaseAuth,
+      email,
+      password
+    );
+
+    const userData = await getUserData(user);
+
+    // Pop up fired on success
+    await Swal.fire({
+      title: "Success!",
+      text: `Welcome back ${userData.name}`,
+      icon: "success",
+      confirmButtonText: "Cool",
+    });
+
+    // Awaits action before reloading page
+    window.location.href = "dashboard.html";
+  } catch (err) {
+    Swal.fire({
+      title: "Error!",
+      text: "Invalid Credentials",
+      icon: "error",
+      confirmButtonText: "Cool",
+    });
   }
 }
 
