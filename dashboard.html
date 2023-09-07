@@ -89,26 +89,21 @@
                 <i class="fa-solid fa-phone"></i>
               </a>
             </li>
-            <!-- <li class="nav-item">
-              <a
-                class="nav-link btn btn-success text-white m-1 ms-0 mx-4 px-3"
-                href="#"
-                >Profile
-                <i class="fa-solid fa-user"></i>
-              </a>
-            </li> -->
           </ul>
           <div class="d-flex">
             <a
-              href="#"
+              class="nav-link btn btn-success text-white m-1 ms-0 mx-4 px-3 text-capitalize"
+              href="profile.html"
+              id="profile"
+            >
+              <i class="fa-solid fa-user"></i>
+            </a>
+            <button
+              id="logout"
               class="m-1 ms-0 mx-4 text-decoration-none link-secondary px-3 btn btn-success text-white"
-              >Sign Up <i class="fa-solid fa-user-plus"></i
-            ></a>
-            <a
-              href="#"
-              class="m-1 ms-0 mx-4 text-decoration-none link-secondary px-3 btn btn-success text-white"
-              >Log in <i class="fa-solid fa-right-to-bracket"></i
-            ></a>
+            >
+              Log out <i class="fa-solid fa-right-to-bracket"></i>
+            </button>
           </div>
         </div>
       </div>
@@ -164,6 +159,7 @@
       </div>
     </main>
   </body>
+  <script type="module" src="src/assets/js/auth.js"></script>
   <script type="module" src="src/assets/js/dashboard.js"></script>
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

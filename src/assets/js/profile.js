@@ -1,13 +1,13 @@
-import { checkAuthState, getUserData } from "./auth";
+// import { checkAuthState, getUserData } from "./auth";
 
-const welcomeText = document.getElementById("welcomeText");
+// const welcomeText = document.getElementById("welcomeText");
 
-async function renderWelcomeText() {
-  const user = await checkAuthState();
-  console.log(user);
-  const userData = await getUserData(user);
+// async function renderWelcomeText() {
+//   const user = await checkAuthState();
+//   console.log(user);
+//   const userData = await getUserData(user);
 
-  welcomeText.innerText = `Welcome back ${userData.name.toUpperCase()}`;
-}
+//   welcomeText.innerText = `Welcome back ${userData.name.toUpperCase()}`;
+// }
 
-renderWelcomeText();
+// renderWelcomeText();

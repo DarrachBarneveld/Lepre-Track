@@ -1,5 +1,42 @@
 import ApexCharts from "apexcharts";
 import { DashboardRadialBarChartOptions } from "../classes/Charts";
+import { firebaseAuth } from "../../config/firebase";
+import { signOut } from "firebase/auth";
+import Swal from "sweetalert2";
+import { checkAuthState, getUserData } from "./auth";
+
+const logoutBtn = document.getElementById("logout");
+
+async function init() {
+  const user = await checkAuthState();
+  if (!user) return (window.location.href = "/");
+  const userData = await getUserData(user);
+
+  const profileIcon = document.getElementById("profile");
+  profileIcon.innerHTML = `<i class="fa-solid fa-user"></i> ${userData.name}`;
+}
+
+init();
+
+async function logOutUser() {
+  const result = await Swal.fire({
+    title: "Are you sure you want to log out?",
+    text: "You will be logged out from your account.",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, log me out",
+  });
+
+  if (result.isConfirmed) {
+    await signOut(firebaseAuth);
+
+    window.location.href = "/";
+  }
+}
+
+logoutBtn.addEventListener("click", logOutUser);
 
 const transportChart = new ApexCharts(
   document.querySelector("#transportChart"),
