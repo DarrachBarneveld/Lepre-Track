@@ -51,7 +51,7 @@ async function signUpUserWithEmailAndPassword(e) {
   }
 }
 
-async function createUserDocumentFromAuth(userAuth, userName) {
+export async function createUserDocumentFromAuth(userAuth, userName) {
   if (!userAuth) return;
 
   const userDocument = await getUserDocument(userAuth);
