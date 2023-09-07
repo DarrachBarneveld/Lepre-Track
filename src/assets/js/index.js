@@ -211,3 +211,13 @@ anime({
   direction: "normal",
   easing: "easeOutBack",
 });
+
+function starRating() {
+  const { totalScore } = this.overAllScore();
+
+  const percentageDifference = Math.abs((totalScore - 400) / 400) * 100;
+
+  const starRating = Math.round((5 - percentageDifference / 20) * 100) / 100;
+
+  return Math.min(Math.max(starRating, 0), 5);
+}
