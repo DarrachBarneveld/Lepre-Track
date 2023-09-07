@@ -15,7 +15,16 @@
   border-radius: 10px;
   border: none;
 }
-.submit-btn::after,
+.forms-div {
+  gap: 1em;
+  background-color: var(--primary-white);
+  border-radius: 1rem;
+  box-shadow: var(--box-shadow);
+}
+.energy-chart {
+  width: 300px;
+}
+/* .submit-btn::after,
 .reset-btn::after {
   content: "";
   position: absolute;
@@ -38,7 +47,7 @@
   border: none;
   outline: none;
   transition: transform 500ms ease-in;
-}
+} */
 
 @media (min-width: 800px) {
   .grid-forms-charts {
