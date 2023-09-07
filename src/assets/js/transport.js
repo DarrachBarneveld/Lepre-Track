@@ -61,14 +61,11 @@ function renderStoredData(userClass) {
   const flightScore =
     userClass.travel.flight.score > 100 ? 100 : userClass.travel.flight.score;
   flightChart.updateSeries([flightScore]);
-  flightResultLabel.innerText = userClass.travel.flight.score;
-  +"%";
 
   const carScore =
     userClass.travel.car.score > 100 ? 100 : userClass.travel.car.score;
   carChart.updateSeries([carScore]);
-  carResultLabel.innerText = userClass.travel.car.score;
-  +"%";
+  carResultLabel.innerText = `${userClass.travel.car.score}%`;
 
   driveValue.value = userClass.travel.transport.drive;
 
@@ -83,8 +80,32 @@ function renderStoredData(userClass) {
       ? 100
       : userClass.travel.transport.score;
   transportChart.updateSeries([transportScore]);
-  transportResultLabel.innerText = userClass.travel.transport.score;
-  +"%";
+  transportResultLabel.innerText = `${userClass.travel.transport.score}%`;
+
+  flightResultLabel.dataset.to = userClass.travel.flight.score;
+
+  $(".counter").each(function () {
+    const $this = $(this),
+      countTo = $this.attr("data-to");
+    countDuration = parseInt($this.attr("data-duration"));
+    $({ counter: $this.text() }).animate(
+      {
+        counter: countTo,
+      },
+      {
+        duration: countDuration,
+        easing: "linear",
+        step: function () {
+          $this.text(Math.floor(this.counter));
+        },
+        complete: function () {
+          $this.text(this.counter);
+        },
+      }
+    );
+  });
+
+  flightResultLabel.innerText = `${userClass.travel.flight.score}%`;
 }
 
 init();
@@ -684,3 +705,5 @@ const totalChart = new ApexCharts(
   totalOptions
 );
 totalChart.render();
+
+// JQUERY FUNCTION FOR COUNTING
