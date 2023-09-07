@@ -3,9 +3,11 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
+import Swal from "sweetalert2";
 
 import { firebaseAuth, firebaseDB } from "../../config/firebase";
 import { delayTimer } from "../../helpers/helpers";
+import { getUserData } from "./auth";
 
 const signupForm = document.getElementById("signup");
 const loginForm = document.getElementById("login");
@@ -34,7 +36,16 @@ async function signUpUserWithEmailAndPassword(e) {
 
     const { user } = userCreds;
 
+    await Swal.fire({
+      title: "Success!",
+      text: `Welcome ${userName}`,
+      icon: "success",
+      confirmButtonText: "Cool",
+    });
+
     createUserDocumentFromAuth(user, userName);
+
+    window.location.href = "home.html";
   } catch (err) {
     console.log(err);
   }
@@ -73,13 +84,36 @@ async function signInUserWithEmailAndPassword(e) {
   const password = loginPasswordInput.value;
 
   try {
-    await signInWithEmailAndPassword(firebaseAuth, email, password);
+    const { user } = await signInWithEmailAndPassword(
+      firebaseAuth,
+      email,
+      password
+    );
 
+    const userData = await getUserData(user);
+
+    // Pop up fired on success
+    await Swal.fire({
+      title: "Success!",
+      text: `Welcome back ${userData.name}`,
+      icon: "success",
+      confirmButtonText: "Cool",
+    });
+
+    // Awaits action before reloading page
     window.location.href = "home.html";
   } catch (err) {
-    loginMessage.innerText = "Invalid Credentials";
-    await delayTimer(2);
-    loginMessage.innerText = "";
+    console.log(err);
+    // loginMessage.innerText = "Invalid Credentials";
+
+    // await delayTimer(2);
+    // loginMessage.innerText = "";
+    Swal.fire({
+      title: "Error!",
+      text: "Invalid Credentials",
+      icon: "error",
+      confirmButtonText: "Cool",
+    });
   }
 }
 

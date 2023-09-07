@@ -3,11 +3,11 @@
 :root {
   /* PLACE COLOUR SCHEME HERE */
   /* CSS HEX */
---tiffany-blue: #8CCEBEff;
---forest-green: #558F40ff;
---avocado: #518523ff;
---apple-green: #6E9C11ff;
---white: #FFFFFFff;
+  --tiffany-blue: #8ccebeff;
+  --forest-green: #558f40ff;
+  --avocado: #518523ff;
+  --apple-green: #6e9c11ff;
+  --white: #ffffffff;
 
   --green-gradient: linear-gradient(
     to right,
@@ -16,6 +16,8 @@
   );
 
   --primary-white: #f9f6ee;
+  --primary-blue: #4b7bff;
+  --primary-green: #34a744;
 
   --box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
@@ -23,7 +25,8 @@
 /* BASIC CSS FOR DEMO PURPOSES */
 
 body {
-  background: url("../images/river-landscape-illustration-with-view-mountains-green-fields-trees-and-forest-surrounding-the-rivers-in-flat-cartoon-hand-drawn-templates-vector.jpg") no-repeat center center;
+  background: url("../images/river-landscape-illustration-with-view-mountains-green-fields-trees-and-forest-surrounding-the-rivers-in-flat-cartoon-hand-drawn-templates-vector.jpg")
+    no-repeat center center;
   background-size: cover;
   height: 100vh;
   width: 100%;
@@ -87,19 +90,17 @@ input:focus:valid {
 }
 
 #loginMessage {
-
 }
 
 .bg-nav {
   background-color: #f8faf875;
-  box-shadow: 0 0  5px;
+  box-shadow: 0 0 5px;
 }
 
 .logo img {
   height: 100px;
   width: 100px;
   border-radius: 50%;
-  
 }
 
 #text-overlay {
@@ -116,9 +117,9 @@ input:focus:valid {
 
 @keyframes fadeIn {
   0% {
-      opacity: 0; /* Starting from invisible */
+    opacity: 0; /* Starting from invisible */
   }
   100% {
-      opacity: 1; /* Ending at fully visible */
+    opacity: 1; /* Ending at fully visible */
   }
 }
