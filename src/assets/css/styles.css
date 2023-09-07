@@ -17,7 +17,19 @@
 
 /* BASIC CSS FOR DEMO PURPOSES */
 
-body {
+.dropdown button {
+  border: none;
+  background: inherit;
+  color: black !important;
+}
+
+.logo img {
+  height: 50px;
+  aspect-ratio: 1;
+  margin-right: 1rem;
+}
+
+/* body {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -77,4 +89,4 @@ input:focus:valid {
 }
 
 #loginMessage {
-}
+} */

@@ -12,10 +12,11 @@
     />
   </head>
   <link rel="stylesheet" href="src/assets/css/transport.css" />
+  <link rel="stylesheet" href="src/assets/css/styles.css" />
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">LepreTrackLogo</a>
+        <a class="logo" href="#"><img src="src/assets/images/logo.png" /></a>
 
         <button
           class="navbar-toggler"
@@ -31,9 +32,38 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="index.html"
-                >Home</a
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="dashboard.html"
+                >Dashboard</a
               >
+            </li>
+            <li class="nav-item dropdown">
+              <div class="dropdown">
+                <button
+                  class="nav-link"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Categories
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="transport.html">Travel</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="food.html">Food</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="energy.html">Energy</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="index.html">Community</a>
+                  </li>
+                </ul>
+              </div>
             </li>
           </ul>
           <div class="d-flex">
@@ -47,84 +77,14 @@
         </div>
       </div>
     </nav>
-
     <div class="container mt-5">
+      <div class="container total-container">
+        <div class="card mb-4"><div id="chart"></div></div>
+      </div>
       <div class="row">
         <!-- First Card -->
-        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-          <div class="form-card card text-center">
-            <h2 class="mb-2 text-dark font-weight-bold">Car</h2>
-            <div
-              class="dashboard-progress dashboard-progress-1 d-flex align-items-center justify-content-center item-parent position-relative"
-            >
-              <div id="chart"></div>
-              <i class="fa-solid fa-car chart-icon"></i>
-            </div>
-            <p>% Avg</p>
-            <h3 id="transport-result"></h3>
-            <form id="transportForm">
-              <label for="kilometers">km/week</label>
-              <input
-                type="number"
-                id="kilometers"
-                name="kilometers"
-                required
-              /><br /><br />
 
-              <label>Type of Car:</label><br />
-              <input
-                type="radio"
-                id="electric"
-                name="carType"
-                value="electric"
-                required
-              />
-              <label for="electric">Electric</label><br />
-
-              <input
-                type="radio"
-                id="hybrid"
-                name="carType"
-                value="hybrid"
-                required
-              />
-              <label for="hybrid">Hybrid</label><br />
-
-              <input
-                type="radio"
-                id="petrol"
-                name="carType"
-                value="petrol"
-                required
-              />
-              <label for="petrol">Petrol</label><br /><br />
-
-              <label>Car Manufactured:</label><br />
-              <input
-                type="radio"
-                id="before2000"
-                name="carYear"
-                value="before"
-                required
-              />
-              <label for="before2000">Before 2000</label><br />
-
-              <input
-                type="radio"
-                id="after2000"
-                name="carYear"
-                value="after"
-                required
-              />
-              <label for="after2000">After 2000</label><br /><br />
-
-              <input type="submit" value="Submit" />
-            </form>
-          </div>
-        </div>
-
-        <!-- Second Card -->
-        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
           <div class="form-card card text-center">
             <h2 class="mb-2 text-dark font-weight-bold">Flights</h2>
             <div
@@ -183,23 +143,20 @@
           </div>
         </div>
 
-        <!-- Third Card -->
-        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+        <!-- Second Card -->
+
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
           <div class="form-card card text-center">
-            <h2 class="mb-2 text-dark font-weight-bold">Transport</h2>
+            <h2 class="mb-2 text-dark font-weight-bold">Car</h2>
             <div
               class="dashboard-progress dashboard-progress-1 d-flex align-items-center justify-content-center item-parent position-relative"
             >
-              <div id="chart"></div>
+              <div id="carChart"></div>
               <i class="fa-solid fa-car chart-icon"></i>
-
-              <i
-                class="mdi mdi-lightbulb icon-md absolute-center text-dark"
-              ></i>
             </div>
             <p>% Avg</p>
-            <h3 id="transport-result"></h3>
-            <form id="transportForm">
+            <h3 id="car-result"></h3>
+            <form id="carForm">
               <label for="kilometers">km/week</label>
               <input
                 type="number"
@@ -260,78 +217,97 @@
           </div>
         </div>
 
-        <!-- Fourth Card -->
-        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+        <!-- Third Card -->
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
           <div class="form-card card text-center">
             <h2 class="mb-2 text-dark font-weight-bold">Transport</h2>
             <div
               class="dashboard-progress dashboard-progress-1 d-flex align-items-center justify-content-center item-parent position-relative"
             >
-              <div id="chart"></div>
-              <i class="fa-solid fa-car chart-icon"></i>
-
-              <i
-                class="mdi mdi-lightbulb icon-md absolute-center text-dark"
-              ></i>
+              <div id="transportChart"></div>
+              <i class="fa-solid fa-bicycle chart-icon"></i>
             </div>
             <p>% Avg</p>
             <h3 id="transport-result"></h3>
             <form id="transportForm">
-              <label for="kilometers">km/week</label>
-              <input
-                type="number"
-                id="kilometers"
-                name="kilometers"
-                required
-              /><br /><br />
-
-              <label>Type of Car:</label><br />
-              <input
-                type="radio"
-                id="electric"
-                name="carType"
-                value="electric"
-                required
-              />
-              <label for="electric">Electric</label><br />
-
-              <input
-                type="radio"
-                id="hybrid"
-                name="carType"
-                value="hybrid"
-                required
-              />
-              <label for="hybrid">Hybrid</label><br />
-
-              <input
-                type="radio"
-                id="petrol"
-                name="carType"
-                value="petrol"
-                required
-              />
-              <label for="petrol">Petrol</label><br /><br />
-
-              <label>Car Manufactured:</label><br />
-              <input
-                type="radio"
-                id="before2000"
-                name="carYear"
-                value="before"
-                required
-              />
-              <label for="before2000">Before 2000</label><br />
-
-              <input
-                type="radio"
-                id="after2000"
-                name="carYear"
-                value="after"
-                required
-              />
-              <label for="after2000">After 2000</label><br /><br />
-
+              <div>
+                <label for="driveInput">Drive:</label>
+                <input
+                  type="number"
+                  id="driveInput"
+                  name="driveInput"
+                  min="0"
+                  max="100"
+                  value="0"
+                  required
+                />
+                <span>%</span>
+              </div>
+              <div>
+                <label for="carpoolInput">Carpool:</label>
+                <input
+                  type="number"
+                  id="carpoolInput"
+                  name="carpoolInput"
+                  min="0"
+                  max="100"
+                  value="0"
+                  required
+                />
+                <span>%</span>
+              </div>
+              <div>
+                <label for="walkInput">Walk:</label>
+                <input
+                  type="number"
+                  id="walkInput"
+                  name="walkInput"
+                  min="0"
+                  max="100"
+                  value="0"
+                  required
+                />
+                <span>%</span>
+              </div>
+              <div>
+                <label for="cycleInput">Cycle:</label>
+                <input
+                  type="number"
+                  id="cycleInput"
+                  name="cycleInput"
+                  min="0"
+                  max="100"
+                  value="0"
+                  required
+                />
+                <span>%</span>
+              </div>
+              <div>
+                <label for="trainInput">Train:</label>
+                <input
+                  type="number"
+                  id="trainInput"
+                  name="trainInput"
+                  min="0"
+                  max="100"
+                  value="0"
+                  required
+                />
+                <span>%</span>
+              </div>
+              <div>
+                <label for="busInput">Bus:</label>
+                <input
+                  type="number"
+                  id="busInput"
+                  name="busInput"
+                  min="0"
+                  max="100"
+                  value="0"
+                  required
+                />
+                <span>%</span>
+              </div>
               <input type="submit" value="Submit" />
             </form>
           </div>
