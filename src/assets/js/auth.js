@@ -7,11 +7,6 @@ export const checkAuthState = () => {
     onAuthStateChanged(firebaseAuth, async (user) => {
       if (user) {
         try {
-          // const userData = await getUserData(user);
-
-          // const profileIcon = document.getElementById("profile");
-          // profileIcon.innerHTML = `<i class="fa-solid fa-user"></i> ${userData.name}`;
-
           resolve(user);
         } catch (error) {
           console.error("Error getting user data:", error);

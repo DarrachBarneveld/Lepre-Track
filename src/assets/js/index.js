@@ -6,6 +6,7 @@ import {
 } from "firebase/auth";
 import { doc, getDoc, setDoc } from "@firebase/firestore";
 import { getUserData } from "./auth";
+import { User } from "../classes/User";
 
 const signUpModal = document.getElementById("signup");
 const loginModal = document.getElementById("login");
@@ -131,7 +132,7 @@ async function signUpUserWithEmailAndPassword(username, email, password) {
 
     await createUserDocumentFromAuth(user, username);
 
-    window.location.href = "dashboard.html";
+    // window.location.href = "dashboard.html";
   } catch (err) {
     console.log(err);
   }
@@ -175,18 +176,33 @@ async function createUserDocumentFromAuth(userAuth, userName) {
   if (!userDocument) {
     const { email, displayName, uid } = userAuth;
 
-    const createAt = new Date();
+    const createdAt = new Date();
 
-    const newUser = {
+    const data = {
       id: uid,
-      createAt,
+      createdAt,
       email,
       name: userName,
     };
 
+    // create a new class
+    const newUser = new User(data);
+
+    // User object for firebase
+    const userObject = {
+      id: newUser.id,
+      createdAt: newUser.createdAt,
+      email: newUser.email,
+      name: newUser.name,
+      travel: newUser.travel,
+      food: newUser.food,
+      energy: newUser.energy,
+      community: newUser.community,
+    };
+
     try {
       const userDocRef = doc(firebaseDB, "users", userAuth.uid);
-      await setDoc(userDocRef, newUser);
+      await setDoc(userDocRef, userObject);
     } catch (err) {
       console.log(err);
     }
@@ -211,13 +227,3 @@ anime({
   direction: "normal",
   easing: "easeOutBack",
 });
-
-function starRating() {
-  const { totalScore } = this.overAllScore();
-
-  const percentageDifference = Math.abs((totalScore - 400) / 400) * 100;
-
-  const starRating = Math.round((5 - percentageDifference / 20) * 100) / 100;
-
-  return Math.min(Math.max(starRating, 0), 5);
-}

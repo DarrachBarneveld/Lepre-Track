@@ -1,21 +1,39 @@
+const defaultTravel = {
+  flight: {
+    yearlyKM: 0,
+    numFlights: 0,
+    class: "economy",
+    score: 0,
+  },
+  car: {
+    weeklyKm: 0,
+    typeCar: "petrol",
+    year2000: "before",
+  },
+  transport: {
+    drive: 0,
+    carpool: 0,
+    walk: 0,
+    cycle: 0,
+    train: 0,
+    bus: 0,
+  },
+};
+
 export class User {
   constructor(data) {
     this.id = data.id;
     this.email = data.email;
     this.name = data.name;
     this.createdAt = data.createdAt;
-    this.travelScore = data?.travel;
-    this.foodScore = data?.food;
-    this.energyScore = data?.energy;
-    this.communityScore = data?.community;
+    this.travel = data?.travel || defaultTravel;
+    this.food = data?.food || 0;
+    this.energy = data?.energy || 0;
+    this.community = data?.community || 0;
   }
 
   overAllScore() {
-    const totalScore =
-      this.travelScore +
-      this.foodScore +
-      this.communityScore +
-      this.energyScore;
+    const totalScore = this.travel + this.food + this.community + this.energy;
 
     const totalPercentage = totalScore / 4;
 
