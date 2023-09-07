@@ -8,3 +8,10 @@
   -webkit-backdrop-filter: blur(10px);
   font: bolder;
 }
+
+body {
+  overflow: hidden;
+}
+.start-tracking {
+  padding-block: 0.5em;
+}
