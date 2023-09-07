@@ -113,10 +113,7 @@
       </div>
     </nav>
     <div class="container mt-5">
-      <div class="container total-container">
-        <div class="card mb-4"><div id="chart"></div></div>
-      </div>
-      <div class="row">
+      <div class="row container-row">
         <!-- First Card -->
 
         <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
@@ -146,33 +143,35 @@
                 name="numFlights"
                 required
               /><br /><br />
+              <div class="wrapper">
+                <h3 class="h3">Which class do you fly?</h3>
+                <input
+                  type="radio"
+                  id="economy"
+                  name="flightClass"
+                  value="economy"
+                  required
+                />
+                <label for="economy">Economy</label><br />
 
-              <input
-                type="radio"
-                id="economy"
-                name="flightClass"
-                value="economy"
-                required
-              />
-              <label for="economy">Economy</label><br />
+                <input
+                  type="radio"
+                  id="business"
+                  name="flightClass"
+                  value="business"
+                  required
+                />
+                <label for="business">Business</label><br />
 
-              <input
-                type="radio"
-                id="business"
-                name="flightClass"
-                value="business"
-                required
-              />
-              <label for="business">Business</label><br />
-
-              <input
-                type="radio"
-                id="first"
-                name="flightClass"
-                value="first"
-                required
-              />
-              <label for="first">First</label><br /><br />
+                <input
+                  type="radio"
+                  id="first"
+                  name="flightClass"
+                  value="first"
+                  required
+                />
+                <label for="first">First</label><br /><br />
+              </div>
               <input type="submit" value="Submit" />
             </form>
           </div>
@@ -200,53 +199,54 @@
                 required
               /><br /><br />
 
-              <label>Type of Car:</label><br />
-              <input
-                type="radio"
-                id="electric"
-                name="carType"
-                value="electric"
-                required
-              />
-              <label for="electric">Electric</label><br />
-
-              <input
-                type="radio"
-                id="hybrid"
-                name="carType"
-                value="hybrid"
-                required
-              />
-              <label for="hybrid">Hybrid</label><br />
-
-              <input
-                type="radio"
-                id="petrol"
-                name="carType"
-                value="petrol"
-                required
-              />
-              <label for="petrol">Petrol</label><br /><br />
-
-              <label>Car Manufactured:</label><br />
-              <input
-                type="radio"
-                id="before2000"
-                name="carYear"
-                value="before"
-                required
-              />
-              <label for="before2000">Before 2000</label><br />
-
-              <input
-                type="radio"
-                id="after2000"
-                name="carYear"
-                value="after"
-                required
-              />
-              <label for="after2000">After 2000</label><br /><br />
-
+              <div class="car-wrapper">
+                <div class="1col">
+                  <label>Type of Car:</label><br />
+                  <input
+                    type="radio"
+                    id="electric"
+                    name="carType"
+                    value="electric"
+                    required
+                  />
+                  <label for="electric">Electric</label><br />
+                  <input
+                    type="radio"
+                    id="hybrid"
+                    name="carType"
+                    value="hybrid"
+                    required
+                  />
+                  <label for="hybrid">Hybrid</label><br />
+                  <input
+                    type="radio"
+                    id="petrol"
+                    name="carType"
+                    value="petrol"
+                    required
+                  />
+                  <label for="petrol">Petrol</label><br />
+                </div>
+                <div class="2col">
+                  <label>Car Manufactured:</label><br />
+                  <input
+                    type="radio"
+                    id="before2000"
+                    name="carYear"
+                    value="before"
+                    required
+                  />
+                  <label for="before2000">Before 2000</label><br />
+                  <input
+                    type="radio"
+                    id="after2000"
+                    name="carYear"
+                    value="after"
+                    required
+                  />
+                  <label for="after2000">After 2000</label><br /><br />
+                </div>
+              </div>
               <input type="submit" value="Submit" />
             </form>
           </div>
@@ -348,6 +348,7 @@
           </div>
         </div>
       </div>
+      <div class="card mb-4"><div id="chart"></div></div>
     </div>
 
     <script type="module" src="src/assets/js/transport.js"></script>
