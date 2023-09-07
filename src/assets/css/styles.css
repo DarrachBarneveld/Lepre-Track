@@ -103,6 +103,7 @@ input:focus:valid {
   border-radius: 50%;
 }
 
+/*landing page text overlay*/
 #text-overlay {
   width: 400px;
   opacity: 0.6;
@@ -122,4 +123,9 @@ input:focus:valid {
   100% {
     opacity: 1; /* Ending at fully visible */
   }
+}
+
+/*signup*/
+#signup{
+  opacity: 0.8;
 }
