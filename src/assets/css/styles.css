@@ -69,27 +69,37 @@ button:focus {
   color: var(--primary-white);
 } */
 
-/* input {
+input {
   padding: 0.5rem;
   border-radius: 0.5rem;
-  outline: 2px solid darkslategray;
-  border: none;
+  border: 2px solid darkslategray;
+  outline: none;
 }
 
 input:focus:invalid {
-  outline-color: red;
+  border-color: rgba(255, 1, 1, 0.5) !important;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.06),
+    0 0 0 3px rgba(255, 1, 1, 0.5);
 }
 
 input:focus:valid {
-  outline-color: green;
+  border-color: rgba(44, 255, 2, 0.5) !important;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.06),
+    0 0 0 3px rgba(44, 255, 2, 0.5);
 }
 
 .focused:invalid {
-  outline-color: red;
+  outline: none;
+  border-color: rgba(255, 1, 1, 0.5) !important;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.06),
+    0 0 0 3px rgba(255, 1, 1, 0.5);
 }
 .focused:valid {
-  outline-color: green;
-} */
+  outline: none;
+  border-color: rgba(44, 255, 2, 0.5) !important;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.06),
+    0 0 0 3px rgba(44, 255, 2, 0.5);
+}
 
 #loginMessage {
 }
