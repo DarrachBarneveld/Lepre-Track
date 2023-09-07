@@ -10,10 +10,10 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="src/assets/css/styles.css" />
+    <link rel="stylesheet" href="src/assets/css/forms.css" />
   </head>
-  <link rel="stylesheet" href="src/assets/css/styles.css" />
-  <link rel="stylesheet" href="src/assets/css/forms.css" />
-  <body>
+  <body class="align-items-center justify-content-center">
     <nav class="navbar navbar-expand-lg navbar-light bg-nav fixed-top">
       <div class="container-fluid">
         <div class="logo">
@@ -112,7 +112,7 @@
         </div>
       </div>
     </nav>
-    <div class="d-flex justify-content-center text-center flex-wrap">
+    <div class="d-flex justify-content-center text-center flex-wrap forms-div">
       <!-- energy form -->
       <form action="" class="energy_form">
         <div class="grid">
@@ -125,21 +125,21 @@
         <div class="grid">
           <label for="gas">Natural Gas</label>
           <input type="number" name="gas" id="gas" />
-          <select name="units" id="">
+          <select name="units" id="units-select">
             <option value="kwh">KWH</option>
           </select>
         </div>
         <div class="grid">
           <label for="oil">Oil</label>
           <input type="number" name="oil" id="oil" />
-          <select name="units" id="">
+          <select name="units" id="oil-select">
             <option value="lt">litres</option>
           </select>
         </div>
         <div class="grid">
           <label for="coal">Coal</label>
           <input type="number" name="coal" id="coal" />
-          <select name="units" id="">
+          <select name="units" id="coal-select">
             <option value="tonne">Tonnes</option>
           </select>
         </div>
@@ -148,26 +148,28 @@
             ><abbr title="Liquefied petroleum gas">LPG</abbr></label
           >
           <input type="number" name="lpg" id="lpg" />
-          <select name="units" id="">
+          <select name="units" id="lpg-select">
             <option value="lt">litres</option>
           </select>
         </div>
         <div class="grid">
           <label for="propane">Propane</label>
           <input type="number" name="propane" id="propane" />
-          <select name="units" id="">
+          <select name="units" id="propane-select">
             <option value="lt">litres</option>
           </select>
         </div>
         <div class="grid">
           <label for="wood">Wood</label>
           <input type="number" name="wood" id="wood" />
-          <select name="units" id="">
+          <select name="units" id="wood-select">
             <option value="lt">Tonnes</option>
           </select>
         </div>
-        <button type="submit" class="btns submit-btn">Submit</button>
-        <button type="reset" class="btns reset-btn">Reset</button>
+        <div class="button-wrapper">
+          <button type="submit" class="btns submit-btn">Submit</button>
+          <button type="reset" class="btns reset-btn">Reset</button>
+        </div>
       </form>
       <div class="energy-chart"></div>
     </div>

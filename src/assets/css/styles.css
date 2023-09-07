@@ -26,8 +26,7 @@
 /* BASIC CSS FOR DEMO PURPOSES */
 
 body {
-  background: url("../images/river-landscape-illustration-with-view-mountains-green-fields-trees-and-forest-surrounding-the-rivers-in-flat-cartoon-hand-drawn-templates-vector.jpg")
-    no-repeat center center;
+  background: url("../images/background-image.jpg") no-repeat center center;
   background-size: cover;
   min-height: 100vh;
   display: flex;
@@ -162,4 +161,17 @@ input:focus:valid {
 /*signup*/
 #signup {
   opacity: 0.8;
+}
+
+.submit-btn,
+.reset-btn {
+  background-color: #6e9c11;
+  color: white;
+  margin-top: 1em;
+  margin-left: 0.5em;
+  overflow: hidden;
+  transition: color 500ms ease;
+  border-radius: 100vmax;
+  border: none;
+  padding: 0.5em 2em;
 }

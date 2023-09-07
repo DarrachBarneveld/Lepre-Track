@@ -2,11 +2,24 @@
 import ApexCharts from "apexcharts";
 import Swal from "sweetalert2";
 import { getPercentInRelationToAverage } from "../../helpers/math";
+import { checkAuthState, getUserData } from "./auth";
+import { User } from "../classes/User";
+import { doc, updateDoc } from "@firebase/firestore";
+import { firebaseDB } from "../../config/firebase";
 
 const carForm = document.getElementById("carForm");
 const flightForm = document.getElementById("flightForm");
 const transportForm = document.getElementById("transportForm");
 const kilometers = document.getElementById("kilometers");
+const flightKM = document.getElementById("flightKm");
+const numFlights = document.getElementById("numFlights");
+const driveValue = document.getElementById("driveInput");
+const carpoolValue = document.getElementById("carpoolInput");
+const walkValue = document.getElementById("walkInput");
+const cycleValue = document.getElementById("cycleInput");
+const trainValue = document.getElementById("trainInput");
+const busValue = document.getElementById("busInput");
+
 const carResultLabel = document.getElementById("car-result");
 const flightResultLabel = document.getElementById("flight-result");
 const transportResultLabel = document.getElementById("transport-result");
@@ -24,6 +37,29 @@ function IrishAverageTravelMethodTotal() {
   return averageCarbonSum;
 }
 
+let activeUser;
+
+async function init() {
+  activeUser = await checkAuthState();
+
+  const userData = await getUserData(activeUser);
+
+  userClass = new User(userData);
+
+  console.log(userData);
+
+  console.log(userClass);
+  document.getElementById(userClass.travel.flight.class).checked = true;
+  flightKM.value = userClass.travel.flight.yearlyKM;
+  numFlights.value = userClass.travel.flight.numFlights;
+
+  kilometers.value = userClass.travel.car.weeklyKm;
+  document.getElementById(userClass.travel.car.typeCar).checked = true;
+  document.getElementById("before").checked = true;
+}
+
+init();
+
 const DUMMY_DATA = {
   // this is the average milage/carbon per week of a car
   averageKM: 327,
@@ -39,12 +75,12 @@ const DUMMY_DATA = {
   },
 };
 
-function flightCarbonCalc(e) {
+async function flightCarbonCalc(e) {
   e.preventDefault(); // Prevent form submission
 
   // Get the values from the form
-  const totalFlights = parseInt(document.getElementById("numFlights").value);
-  const estimatedDistance = parseInt(document.getElementById("flightKm").value);
+  const totalFlights = parseInt(numFlights.value);
+  const estimatedDistance = parseInt(flightKM.value);
   const selectedFlightClass = document.querySelector(
     'input[name="flightClass"]:checked'
   );
@@ -103,6 +139,21 @@ function flightCarbonCalc(e) {
       },
     ],
   });
+
+  // UPDATEFIREBASE
+
+  const userRef = doc(firebaseDB, "users", activeUser.uid);
+
+  const userData = await getUserData(activeUser);
+
+  userData.travel.flight = {
+    yearlyKM: estimatedDistance,
+    numFlights: totalFlights,
+    class: selectedFlightClass.value,
+    score: percentOfFlightKM.toFixed(2),
+  };
+
+  const update = updateDoc(userRef, userData);
 }
 
 // Electric Car - 60% emissions "Source: EDF Energy"
@@ -187,14 +238,12 @@ function carCarbonCalc(e) {
 async function transportCarbonCalc(e) {
   e.preventDefault();
 
-  const drivePercentage = parseInt(document.getElementById("driveInput").value);
-  const carpoolPercentage = parseInt(
-    document.getElementById("carpoolInput").value
-  );
-  const walkPercentage = parseInt(document.getElementById("walkInput").value);
-  const cyclePercentage = parseInt(document.getElementById("cycleInput").value);
-  const trainPercentage = parseInt(document.getElementById("trainInput").value);
-  const busPercentage = parseInt(document.getElementById("busInput").value);
+  const drivePercentage = parseInt(driveValue.value);
+  const carpoolPercentage = parseInt(carpoolValue.value);
+  const walkPercentage = parseInt(walkValue.value);
+  const cyclePercentage = parseInt(cycleValue.value);
+  const trainPercentage = parseInt(trainValue.value);
+  const busPercentage = parseInt(busValue.value);
 
   const totalPercentage =
     drivePercentage +
@@ -211,6 +260,7 @@ async function transportCarbonCalc(e) {
       icon: "error",
       confirmButtonText: "Try Again",
     });
+    return;
   }
 
   const weightedSum =
