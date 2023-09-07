@@ -46,18 +46,44 @@ async function init() {
 
   const userClass = new User(userData);
 
+  renderStoredData(userClass);
+}
+
+function renderStoredData(userClass) {
   document.getElementById(userClass.travel.flight.class).checked = true;
   flightKM.value = userClass.travel.flight.yearlyKM;
   numFlights.value = userClass.travel.flight.numFlights;
 
   kilometers.value = userClass.travel.car.weeklyKm;
-  document.getElementById(userClass.travel.car.typeCar).checked = true;
+  document.getElementById(userClass.travel.car.type).checked = true;
   document.getElementById("before").checked = true;
 
   const flightScore =
     userClass.travel.flight.score > 100 ? 100 : userClass.travel.flight.score;
   flightChart.updateSeries([flightScore]);
   flightResultLabel.innerText = userClass.travel.flight.score;
+  +"%";
+
+  const carScore =
+    userClass.travel.car.score > 100 ? 100 : userClass.travel.car.score;
+  carChart.updateSeries([carScore]);
+  carResultLabel.innerText = userClass.travel.car.score;
+  +"%";
+
+  driveValue.value = userClass.travel.transport.drive;
+
+  carpoolValue.value = userClass.travel.transport.carpool;
+  walkValue.value = userClass.travel.transport.walk;
+  cycleValue.value = userClass.travel.transport.cycle;
+  trainValue.value = userClass.travel.transport.train;
+  busValue.value = userClass.travel.transport.bus;
+
+  const transportScore =
+    userClass.travel.transport.score > 100
+      ? 100
+      : userClass.travel.transport.score;
+  transportChart.updateSeries([transportScore]);
+  transportResultLabel.innerText = userClass.travel.transport.score;
   +"%";
 }
 
@@ -158,13 +184,13 @@ async function flightCarbonCalc(e) {
     score: truePercent.toFixed(2),
   };
 
-  const update = updateDoc(userRef, userData);
+  updateDoc(userRef, userData);
 }
 
 // Electric Car - 60% emissions "Source: EDF Energy"
 // Hybrid Car - 40% emissions "Source: EDF Energy"
 
-function carCarbonCalc(e) {
+async function carCarbonCalc(e) {
   e.preventDefault();
 
   const selectedCarType = document.querySelector(
@@ -176,6 +202,7 @@ function carCarbonCalc(e) {
   );
 
   let totalKilometers = +kilometers.value;
+  const trueTotalKM = totalKilometers;
 
   if (selectedCarType) {
     const carTypeValue = selectedCarType.value;
@@ -204,6 +231,7 @@ function carCarbonCalc(e) {
     DUMMY_DATA.averageKM
   );
 
+  const trueScorePercent = percentOfCarKM;
   carResultLabel.innerText = `${percentOfCarKM.toFixed(2)}%`;
   let color;
   //   percentOfCarKM > 100 ? (color = "#FF0000") : (color = "#569ef9");
@@ -235,9 +263,18 @@ function carCarbonCalc(e) {
     ],
   });
 
-  const data = {
-    totalKilometers,
+  const userRef = doc(firebaseDB, "users", activeUser.uid);
+
+  const userData = await getUserData(activeUser);
+
+  userData.travel.car = {
+    weeklyKm: trueTotalKM,
+    type: selectedCarType.value,
+    year2000: selectedCarYear.value,
+    score: trueScorePercent.toFixed(2),
   };
+
+  updateDoc(userRef, userData);
 }
 
 async function transportCarbonCalc(e) {
@@ -283,6 +320,7 @@ async function transportCarbonCalc(e) {
     averageCarbonSum
   );
 
+  const truePercent = percentMode;
   transportResultLabel.innerText = `${percentMode.toFixed(2)}%`;
 
   percentMode > 100 ? (percentMode = 100) : percentMode;
@@ -307,6 +345,22 @@ async function transportCarbonCalc(e) {
       },
     ],
   });
+
+  const userRef = doc(firebaseDB, "users", activeUser.uid);
+
+  const userData = await getUserData(activeUser);
+
+  userData.travel.transport = {
+    drive: drivePercentage,
+    carpool: carpoolPercentage,
+    walk: walkPercentage,
+    cycle: cyclePercentage,
+    train: trainPercentage,
+    bus: busPercentage,
+    score: truePercent.toFixed(2),
+  };
+
+  updateDoc(userRef, userData);
 }
 
 carForm.addEventListener("submit", carCarbonCalc);

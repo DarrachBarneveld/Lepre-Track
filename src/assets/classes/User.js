@@ -7,7 +7,7 @@ const defaultTravel = {
   },
   car: {
     weeklyKm: 0,
-    typeCar: "petrol",
+    type: "petrol",
     year2000: "before",
   },
   transport: {
