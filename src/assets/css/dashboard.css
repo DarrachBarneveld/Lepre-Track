@@ -21,10 +21,10 @@
 }
 
 table {
-  background: var(--primary-grey);
 }
 .leaderboard-item {
-  background: ;
+  border-bottom: 1px solid darkslategrey;
+  background: var(--primary-grey);
 }
 
 .category {

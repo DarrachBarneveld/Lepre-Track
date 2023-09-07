@@ -144,6 +144,28 @@ input:focus:valid {
   }
 }
 
+.fade-in-right {
+  opacity: 0;
+  transform: translateX(100%);
+
+  animation: fadeInRight 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  90% {
+    opacity: 1;
+    transform: translateX(-5%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 /*signup*/
 #signup {
   opacity: 0.8;

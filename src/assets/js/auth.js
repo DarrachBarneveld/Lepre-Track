@@ -1,6 +1,6 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { firebaseAuth, firebaseDB } from "../../config/firebase";
-import { doc, getDoc } from "@firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "@firebase/firestore";
 
 export const checkAuthState = () => {
   return new Promise((resolve, reject) => {
@@ -38,5 +38,22 @@ export async function getUserData(user) {
     }
   } catch (error) {
     console.log("Error retrieving user data:", error);
+  }
+}
+
+export async function getAllUserDocuments() {
+  try {
+    const userCollectionRef = collection(firebaseDB, "users");
+    const querySnapshot = await getDocs(userCollectionRef);
+
+    const users = [];
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      users.push(data);
+    });
+
+    return users;
+  } catch (error) {
+    console.error("Error fetching documents: ", error);
   }
 }
