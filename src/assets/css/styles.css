@@ -18,6 +18,7 @@
   --primary-white: #f9f6ee;
   --primary-blue: #4b7bff;
   --primary-green: #34a744;
+  --primary-grey: #d1d5db;
 
   --box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
@@ -131,7 +132,7 @@ input:focus:valid {
 
 .fade-in {
   opacity: 0; /* Initially, the text is invisible */
-  animation: fadeIn 2s ease-in-out forwards; /* Apply the fade-in animation */
+  animation: fadeIn 1s ease-in-out forwards; /* Apply the fade-in animation */
 }
 
 @keyframes fadeIn {
