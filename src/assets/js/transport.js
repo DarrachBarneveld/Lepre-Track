@@ -44,11 +44,8 @@ async function init() {
 
   const userData = await getUserData(activeUser);
 
-  userClass = new User(userData);
+  const userClass = new User(userData);
 
-  console.log(userData);
-
-  console.log(userClass);
   document.getElementById(userClass.travel.flight.class).checked = true;
   flightKM.value = userClass.travel.flight.yearlyKM;
   numFlights.value = userClass.travel.flight.numFlights;
@@ -56,6 +53,12 @@ async function init() {
   kilometers.value = userClass.travel.car.weeklyKm;
   document.getElementById(userClass.travel.car.typeCar).checked = true;
   document.getElementById("before").checked = true;
+
+  const flightScore =
+    userClass.travel.flight.score > 100 ? 100 : userClass.travel.flight.score;
+  flightChart.updateSeries([flightScore]);
+  flightResultLabel.innerText = userClass.travel.flight.score;
+  +"%";
 }
 
 init();
@@ -113,6 +116,8 @@ async function flightCarbonCalc(e) {
     averageFlightCarbon
   );
 
+  const truePercent = percentOfFlightKM;
+
   flightResultLabel.innerText = `${percentOfFlightKM.toFixed(2)}%`;
 
   const totalChartValue = tonnesPerDistance * 100;
@@ -150,7 +155,7 @@ async function flightCarbonCalc(e) {
     yearlyKM: estimatedDistance,
     numFlights: totalFlights,
     class: selectedFlightClass.value,
-    score: percentOfFlightKM.toFixed(2),
+    score: truePercent.toFixed(2),
   };
 
   const update = updateDoc(userRef, userData);
