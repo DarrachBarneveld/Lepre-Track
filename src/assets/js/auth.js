@@ -1,16 +1,16 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { firebaseAuth, firebaseDB } from "../../config/firebase";
-import { doc, getDoc } from "@firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "@firebase/firestore";
 
 export const checkAuthState = () => {
   return new Promise((resolve, reject) => {
     onAuthStateChanged(firebaseAuth, async (user) => {
       if (user) {
         try {
-          const userData = await getUserData(user);
+          // const userData = await getUserData(user);
 
-          const profileIcon = document.getElementById("profile");
-          profileIcon.innerHTML = `<i class="fa-solid fa-user"></i> ${userData.name}`;
+          // const profileIcon = document.getElementById("profile");
+          // profileIcon.innerHTML = `<i class="fa-solid fa-user"></i> ${userData.name}`;
 
           resolve(user);
         } catch (error) {
@@ -25,6 +25,8 @@ export const checkAuthState = () => {
   });
 };
 
+checkAuthState();
+
 export async function getUserData(user) {
   try {
     const userRef = doc(firebaseDB, "users", user.uid);
@@ -36,5 +38,22 @@ export async function getUserData(user) {
     }
   } catch (error) {
     console.log("Error retrieving user data:", error);
+  }
+}
+
+export async function getAllUserDocuments() {
+  try {
+    const userCollectionRef = collection(firebaseDB, "users");
+    const querySnapshot = await getDocs(userCollectionRef);
+
+    const users = [];
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      users.push(data);
+    });
+
+    return users;
+  } catch (error) {
+    console.error("Error fetching documents: ", error);
   }
 }
