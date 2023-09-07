@@ -11,6 +11,8 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="src/assets/css/index.css" />
+    <link rel="stylesheet" href="src/assets/css/styles.css" />
     <title>Lepre-Track</title>
   </head>
   <body>
@@ -47,12 +49,30 @@
               ></a>
             </li>
             <li class="nav-item">
-              <a
-                class="nav-link btn btn-success text-white m-1 ms-0 mx-4 px-3"
-                href="#"
-                >Transport
-                <i class="fa-solid fa-bicycle"></i>
-              </a>
+              <div class="dropdown">
+                <button
+                  class="nav-link btn btn-success text-white m-1 ms-0 mx-4 px-3"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Categories <i class="fa-solid fa-sitemap"></i>
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="transport.html">Travel</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="food.html">Food</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="energy.html">Energy</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="index.html">Community</a>
+                  </li>
+                </ul>
+              </div>
             </li>
             <li class="nav-item">
               <a
@@ -70,23 +90,23 @@
                 <i class="fa-solid fa-phone"></i>
               </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a
                 class="nav-link btn btn-success text-white m-1 ms-0 mx-4 px-3"
                 href="#"
                 >Profile
                 <i class="fa-solid fa-user"></i>
               </a>
-            </li>
+            </li> -->
           </ul>
           <div class="d-flex">
             <a
-              href="#"
+              href="signup.html"
               class="m-1 ms-0 mx-4 text-decoration-none link-secondary px-3 btn btn-success text-white"
               >Sign Up <i class="fa-solid fa-user-plus"></i
             ></a>
             <a
-              href="#"
+              href="login.html"
               class="m-1 ms-0 mx-4 text-decoration-none link-secondary px-3 btn btn-success text-white"
               >Log in <i class="fa-solid fa-right-to-bracket"></i
             ></a>
@@ -95,7 +115,7 @@
       </div>
     </nav>
 
-    <div class="bg-white rounded" id="text-overlay">
+    <div class="glassmorphism" id="text-overlay">
       <h1 class="fade-in-text">Lepre-Track</h1>
       <p class="fs-4">Tracking Solutions for a Greener Tomorrow</p>
       <a class="btn btn-success text-white" href="#">Start Lepre-tracking</a>

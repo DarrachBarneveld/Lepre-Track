@@ -28,14 +28,11 @@ body {
   background: url("../images/river-landscape-illustration-with-view-mountains-green-fields-trees-and-forest-surrounding-the-rivers-in-flat-cartoon-hand-drawn-templates-vector.jpg")
     no-repeat center center;
   background-size: cover;
-  height: 100vh;
-  width: 100%;
-
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  /*background: var(--green-gradient);*/
   text-align: center;
 }
 
@@ -50,7 +47,12 @@ form {
   box-shadow: var(--box-shadow);
 }
 
-button {
+/* .dropdown button {
+  border: none;
+  background: inherit;
+} */
+
+/* button {
   border: none;
   border-radius: 1rem;
   background-color: rgb(97, 212, 97);
@@ -65,9 +67,9 @@ button:focus {
   cursor: pointer;
   transform: scale(0.98);
   color: var(--primary-white);
-}
+} */
 
-input {
+/* input {
   padding: 0.5rem;
   border-radius: 0.5rem;
   outline: 2px solid darkslategray;
@@ -87,7 +89,7 @@ input:focus:valid {
 }
 .focused:valid {
   outline-color: green;
-}
+} */
 
 #loginMessage {
 }
@@ -98,20 +100,20 @@ input:focus:valid {
 }
 
 .logo img {
-  height: 100px;
-  width: 100px;
+  height: 50px;
+  width: 50px;
   border-radius: 50%;
 }
 
 /*landing page text overlay*/
-#text-overlay {
+/* #text-overlay {
   width: 400px;
   opacity: 0.6;
   padding: 20px;
   box-shadow: 0 0 5px 5px;
-}
+} */
 
-.fade-in-text {
+.fade-in {
   opacity: 0; /* Initially, the text is invisible */
   animation: fadeIn 2s ease-in-out forwards; /* Apply the fade-in animation */
 }
@@ -126,6 +128,6 @@ input:focus:valid {
 }
 
 /*signup*/
-#signup{
+#signup {
   opacity: 0.8;
 }
