@@ -163,3 +163,16 @@ input:focus:valid {
 #signup {
   opacity: 0.8;
 }
+
+.submit-btn,
+.reset-btn {
+  background-color: #6e9c11;
+  color: white;
+  margin-top: 1em;
+  margin-left: 0.5em;
+  overflow: hidden;
+  transition: color 500ms ease;
+  border-radius: 100vmax;
+  border: none;
+  padding: 0.5em 2em;
+}

@@ -70,7 +70,7 @@ inputs.forEach((element) => {
 btn.addEventListener("click", (e) => {
   e.preventDefault();
   let charting = document.querySelector(".energy-chart");
-  charting.classList.add("display-none");
+
   let comparedToAverage = (data() / average_house) * 100;
 
   var options = {
@@ -91,6 +91,4 @@ btn.addEventListener("click", (e) => {
 
   var chart = new ApexCharts(document.querySelector(".energy-chart"), options);
   chart.render();
-
-  charting.classList.remove("display-none");
 });

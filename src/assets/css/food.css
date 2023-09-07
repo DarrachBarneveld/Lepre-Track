@@ -82,3 +82,17 @@ button:hover {
   color: #006400;
   padding: 20px 0;
 } */
+
+.food-wrapper {
+  background-color: var(--primary-white);
+  padding: 2em 4em;
+  border-radius: 15px;
+}
+
+.food-wrapper > * {
+  margin-bottom: 0.5em;
+}
+
+#result {
+  min-height: 1.5rem;
+}

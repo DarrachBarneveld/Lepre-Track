@@ -13,7 +13,7 @@
   </head>
   <link rel="stylesheet" href="src/assets/css/styles.css" />
   <link rel="stylesheet" href="src/assets/css/forms.css" />
-  <body>
+  <body class="align-items-center justify-content-center">
     <nav class="navbar navbar-expand-lg navbar-light bg-nav fixed-top">
       <div class="container-fluid">
         <div class="logo">
@@ -112,7 +112,7 @@
         </div>
       </div>
     </nav>
-    <div class="d-flex justify-content-center text-center flex-wrap">
+    <div class="d-flex justify-content-center text-center flex-wrap forms-div">
       <!-- energy form -->
       <form action="" class="energy_form">
         <div class="grid">
@@ -166,8 +166,10 @@
             <option value="lt">Tonnes</option>
           </select>
         </div>
-        <button type="submit" class="btns submit-btn">Submit</button>
-        <button type="reset" class="btns reset-btn">Reset</button>
+        <div class="button-wrapper">
+          <button type="submit" class="btns submit-btn">Submit</button>
+          <button type="reset" class="btns reset-btn">Reset</button>
+        </div>
       </form>
       <div class="energy-chart"></div>
     </div>

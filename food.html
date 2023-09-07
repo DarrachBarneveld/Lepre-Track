@@ -115,29 +115,32 @@
       </div>
     </nav>
     <main class="container">
-      <h1>Carbon Footprint Calculator</h1>
-      <!-- Drop down diet selection -->
-      <div>
-        <label for="diet">Choose your diet:</label>
-        <select id="diet">
-          <option value="Meat-heavy">Meat-heavy</option>
-          <option value="Omnivore">Omnivore</option>
-          <option value="Pescatarian">Pescatarian</option>
-          <option value="Vegetarian">Vegetarian</option>
-          <option value="Vegan">Vegan</option>
-        </select>
+      <div class="food-wrapper">
+        <h1>Carbon Footprint Calculator</h1>
+        <!-- Drop down diet selection -->
+        <div>
+          <label for="diet">Choose your diet:</label>
+          <select id="diet">
+            <option value="Meat-heavy">Meat-heavy</option>
+            <option value="Omnivore">Omnivore</option>
+            <option value="Pescatarian">Pescatarian</option>
+            <option value="Vegetarian">Vegetarian</option>
+            <option value="Vegan">Vegan</option>
+          </select>
+        </div>
+        <div>
+          <label for="local">Do you shop locally?</label>
+          <!-- Checkbox if eat locally -->
+          <input type="checkbox" id="local" />
+        </div>
+        <button onclick="calculateImpact()" class="submit-btn">
+          Calculate Impact %
+        </button>
+        <!-- when clicked this button will trigger the js function in script.js to calculate the user score -->
+        <!-- result display -->
+        <h2>Your Carbon Footprint Score:</h2>
+        <div id="result"></div>
       </div>
-      <div>
-        <label for="local">Do you shop locally?</label>
-        <!-- Checkbox if eat locally -->
-        <input type="checkbox" id="local" />
-      </div>
-      <button onclick="calculateImpact()">Calculate Impact %</button>
-      <!-- when clicked this button will trigger the js function in script.js to calculate the user score -->
-
-      <!-- result display -->
-      <h2>Your Carbon Footprint Score:</h2>
-      <div id="result"></div>
     </main>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
