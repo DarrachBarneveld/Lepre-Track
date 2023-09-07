@@ -3,7 +3,7 @@ import { DashboardRadialBarChartOptions } from "../classes/Charts";
 import { firebaseAuth } from "../../config/firebase";
 import { signOut } from "firebase/auth";
 import Swal from "sweetalert2";
-import { checkAuthState, getUserData } from "./auth";
+import { checkAuthState, getAllUserDocuments, getUserData } from "./auth";
 
 const logoutBtn = document.getElementById("logout");
 
@@ -11,6 +11,37 @@ async function init() {
   const user = await checkAuthState();
   if (!user) return (window.location.href = "/");
   const userData = await getUserData(user);
+
+  const users = await getAllUserDocuments();
+
+  const leaderboard = document.getElementById("leaderboard");
+
+  users.forEach((user, i) => {
+    const html = `<tr class="leaderboard-item fade-in-right"   style="animation-delay: ${
+      i / 2
+    }s">
+    <td>
+      <span class="text-warning">🥇</span>
+    </td>
+    <td>
+      <a
+        class="d-flex justify-content-center"
+        href="profile.html"
+      >
+        <span class="d-block text-center">${user.name}</span>
+      </a>
+    </td>
+    <td>20</td>
+    <td>35</td>
+    <td>60</td>
+    <td>
+      <span class="badge bg-soft-success text-success p-1">
+        1.5%
+      </span>
+    </td>
+    </tr>`;
+    leaderboard.insertAdjacentHTML("beforeend", html);
+  });
 
   const profileIcon = document.getElementById("profile");
   profileIcon.innerHTML = `<i class="fa-solid fa-user"></i> ${userData.name}`;

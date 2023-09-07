@@ -19,6 +19,12 @@
 
 body {
     color: #198754;
+    background: url("../images/river-landscape-illustration-with-view-mountains-green-fields-trees-and-forest-surrounding-the-rivers-in-flat-cartoon-hand-drawn-templates-vector.jpg")
+    no-repeat center center;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .card h1 {
