@@ -1,8 +1,15 @@
 .grid-forms-charts {
   display: grid;
-  grid-auto-flow: column;
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .display-none {
   display: none;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-items: start;
+  gap: 0.5em;
 }
