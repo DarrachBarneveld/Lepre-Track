@@ -17,7 +17,13 @@
 
 /* BASIC CSS FOR DEMO PURPOSES */
 
-body {
+.dropdown button {
+  border: none;
+  background: inherit;
+  color: black !important;
+}
+
+/* body {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -77,4 +83,4 @@ input:focus:valid {
 }
 
 #loginMessage {
-}
+} */
