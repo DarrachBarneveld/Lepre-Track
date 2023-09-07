@@ -16,4 +16,5 @@ body {
 .start-tracking {
   padding-block: 0.5em;
   border-radius: 100vmax;
+  transform: translateX(-1500px);
 }
