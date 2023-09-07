@@ -10,7 +10,7 @@ let wood = 0;
 let average_house = 4;
 
 let input_form = document.querySelector(".energy_form");
-let btn = document.querySelector(".btn");
+let btn = document.querySelector(".submit-btn");
 let inputs = document.querySelectorAll("input");
 
 function data() {
