@@ -12,10 +12,11 @@
     />
   </head>
   <link rel="stylesheet" href="src/assets/css/transport.css" />
+  <link rel="stylesheet" href="src/assets/css/styles.css" />
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">LepreTrackLogo</a>
+        <a class="logo" href="#"><img src="src/assets/images/logo.png" /></a>
 
         <button
           class="navbar-toggler"
@@ -31,9 +32,42 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="index.html"
-                >Home</a
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="dashboard.html"
+                >Dashboard</a
               >
+            </li>
+            <li class="nav-item dropdown">
+              <div class="dropdown">
+                <button
+                  class="nav-link"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Categories
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="transport.html">Travel</a>
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="diet calculator/calculator.html"
+                      >Food</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="energy.html">Energy</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="index.html">Community</a>
+                  </li>
+                </ul>
+              </div>
             </li>
           </ul>
           <div class="d-flex">
