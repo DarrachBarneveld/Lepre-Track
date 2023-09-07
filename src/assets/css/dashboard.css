@@ -1,12 +1,15 @@
-body {
-  background-color: #8ae9b3;
-  background-image: url("../images/background-image.jpg");
-  background-size: cover;
-  min-height: 100vh;
+.pie-container {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(50, 50, 93, 0.5);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 .category {
-  border: 1px solid black;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
@@ -14,7 +17,9 @@ body {
   align-items: center;
   text-align: center;
   background: rgba(255, 255, 255, 0.75);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(50, 50, 93, 0.5);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   font: bolder;

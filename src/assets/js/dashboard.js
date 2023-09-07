@@ -24,3 +24,28 @@ const communityChart = new ApexCharts(
   new DashboardRadialBarChartOptions([33])
 );
 communityChart.render();
+
+var options = {
+  series: [44, 15, 29, 12],
+  chart: {
+    width: "100%",
+    type: "pie",
+  },
+  labels: ["Travel", "Diet", "Energy", "Community"],
+  // responsive: [
+  //   {
+  //     breakpoint: 480,
+  //     options: {
+  //       chart: {
+  //         width: 200,
+  //       },
+  //       legend: {
+  //         position: "bottom",
+  //       },
+  //     },
+  //   },
+  // ],
+};
+
+var pieChart = new ApexCharts(document.querySelector("#pieChart"), options);
+pieChart.render();
