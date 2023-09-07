@@ -26,6 +26,53 @@ body {
 }
 
 .h3 {
-  font-weight: 400;
-  font-size: 1.5rem;
+  padding: 0;
+  margin: 0;
+  font-size: 1em;
+  font-weight: 500;
+  margin-bottom: 0.25em;
+}
+
+#transportForm {
+  display: grid;
+}
+
+#transportForm > div {
+  display: grid;
+  margin-bottom: 0.5em;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+}
+
+#transportForm > div > span {
+  justify-self: start;
+  margin-left: 0.125em;
+}
+
+#transportForm > div > label {
+  justify-self: center;
+  align-items: center;
+}
+
+#transportForm > div > input,
+#carForm > input[type="number"],
+#flightForm > input[type="number"] {
+  border-radius: 5px;
+  outline: 1.25px solid;
+  outline: none;
+  border: none;
+}
+
+#transportForm > input[type="submit"],
+#carForm > input[type="submit"],
+#flightForm > input[type="submit"] {
+  justify-self: center;
+  background-color: #6e9c11;
+  padding: 0.5em 2em;
+  color: white;
+  font-weight: 600;
+  border-radius: 100vmax;
+  border: none;
+  margin-top: 1em;
+  box-shadow: 11px 7px 23px -4px rgba(0, 0, 0, 0.43);
 }

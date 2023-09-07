@@ -12,6 +12,8 @@
   margin-left: 0.5em;
   overflow: hidden;
   transition: color 500ms ease;
+  border-radius: 10px;
+  border: none;
 }
 .submit-btn::after,
 .reset-btn::after {
