@@ -1,4 +1,4 @@
-function graphColor(num) {
+export function graphColor(num) {
   if (num < 25) {
     return ["#FF0000"];
   } else if (num < 35) {

@@ -1,5 +1,5 @@
 import ApexCharts from "apexcharts";
-import { DashboardRadialBarChartOptions } from "../classes/Charts";
+import { DashboardRadialBarChartOptions, graphColor } from "../classes/Charts";
 import { firebaseAuth } from "../../config/firebase";
 import { signOut } from "firebase/auth";
 import Swal from "sweetalert2";
@@ -20,8 +20,21 @@ async function init() {
 
   const users = await getAllUserDocuments();
 
-  transportChart.updateSeries([userClass.calcTransportScore()]);
-  foodChart.updateSeries([userClass.calcFoodScore()]);
+  const userTransportScore = userClass.calcTransportScore();
+  const userFoodScore = userClass.calcFoodScore();
+
+  const transColor = graphColor(userTransportScore);
+  const foodColor = graphColor(userFoodScore);
+
+  transportChart.updateOptions({
+    colors: transColor,
+  });
+  foodChart.updateOptions({
+    colors: foodColor,
+  });
+
+  transportChart.updateSeries([userTransportScore]);
+  foodChart.updateSeries([userFoodScore]);
 
   const leaderboard = document.getElementById("leaderboard");
 
@@ -88,19 +101,19 @@ transportChart.render();
 
 const foodChart = new ApexCharts(
   document.querySelector("#foodChart"),
-  new DashboardRadialBarChartOptions([20])
+  new DashboardRadialBarChartOptions([0])
 );
 foodChart.render();
 
 const energyChart = new ApexCharts(
   document.querySelector("#energyChart"),
-  new DashboardRadialBarChartOptions([100])
+  new DashboardRadialBarChartOptions([0])
 );
 energyChart.render();
 
 const communityChart = new ApexCharts(
   document.querySelector("#communityChart"),
-  new DashboardRadialBarChartOptions([33])
+  new DashboardRadialBarChartOptions([0])
 );
 communityChart.render();
 
