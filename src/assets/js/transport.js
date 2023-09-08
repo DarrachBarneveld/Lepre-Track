@@ -88,13 +88,17 @@ function renderStoredData() {
   flightResultLabel.dataset.to = userClass.travel.flight.score;
 
   const userTotalChart = [
-    DUMMY_DATA.flightKperWeek *
-      (userClass.travel.flight.score / 100).toFixed(0),
-    DUMMY_DATA.carKperWeek * (userClass.travel.car.score / 100).toFixed(0),
-    DUMMY_DATA.communterKperWeek *
-      (userClass.travel.transport.score / 100).toFixed(0),
+    (DUMMY_DATA.flightKperWeek * userClass.travel.flight.score).toFixed(0) /
+      100,
+    (DUMMY_DATA.carKperWeek * userClass.travel.car.score).toFixed(0) / 100,
+    (DUMMY_DATA.communterKperWeek * userClass.travel.transport.score).toFixed(
+      0
+    ) / 100,
   ];
 
+  console.log(
+    (userClass.travel.flight.score * DUMMY_DATA.flightKperWeek) / 100
+  );
   totalChart.updateOptions({
     series: [
       {
