@@ -186,11 +186,15 @@ input:focus:valid {
 }
 
 #slide-item {
-  background: linear-gradient(#8ccebeff, #ffffffff);
+  background: linear-gradient(#8ccebeff, #ffffffff, #8ccebeff);
 }
 
 #fact-heading {
   background-image: linear-gradient(to right,rgb(106, 185, 166), rgb(56, 94, 23));
-    -webkit-background-clip: text; /* Clip the gradient to the text */
-    color: transparent; /* Make the text transparent */
+    -webkit-background-clip: text; 
+    color: transparent; 
+}
+
+#slide-container {
+  opacity:0.9;
 }
