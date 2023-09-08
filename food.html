@@ -115,31 +115,136 @@
       </div>
     </nav>
     <main class="container">
-      <div class="food-wrapper">
-        <h1>Carbon Footprint Calculator</h1>
-        <!-- Drop down diet selection -->
-        <div>
-          <label for="diet">Choose your diet:</label>
-          <select id="diet">
-            <option value="Meat-heavy">Meat-heavy</option>
-            <option value="Omnivore">Omnivore</option>
-            <option value="Pescatarian">Pescatarian</option>
-            <option value="Vegetarian">Vegetarian</option>
-            <option value="Vegan">Vegan</option>
-          </select>
+      <div class="container mt-5">
+        <div class="row container-row">
+          <h1>Carbon Dietary Calculator</h1>
+          <!-- First Card -->
+          <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+            <div class="card text-center">
+              <div
+                class="dashboard-progress dashboard-progress-1 d-flex align-items-center justify-content-center item-parent position-relative"
+              >
+                <div id="dietChart"></div>
+                <i class="fa-solid fa-pizza-slice chart-icon"></i>
+              </div>
+              <p>
+                <span
+                  id="diet-result"
+                  class="fw-bolder h4 counter"
+                  data-to="0"
+                  data-duration="1000"
+                ></span>
+                <span class="text-muted">Avg</span>
+              </p>
+              <form id="diet-form">
+                <div>
+                  <label for="diet">Choose your diet:</label>
+                  <select id="diet" name="diet">
+                    <option value="Meat-heavy">Meat-heavy</option>
+                    <option value="Omnivore">Omnivore</option>
+                    <option value="Pescatarian">Pescatarian</option>
+                    <option value="Vegetarian">Vegetarian</option>
+                    <option value="Vegan">Vegan</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="calories">Avg Daily Calories</label>
+                  <input
+                    type="number"
+                    id="calories"
+                    name="calories"
+                    required
+                    value="0"
+                  />
+                </div>
+                <button type="submit" class="submit-btn">
+                  Calculate Impact %
+                </button>
+              </form>
+            </div>
+          </div>
+          <!-- Second Card -->
+
+          <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+            <div class="card text-center">
+              <div
+                class="dashboard-progress dashboard-progress-1 d-flex align-items-center justify-content-center item-parent position-relative"
+              >
+                <div id="farmingChart"></div>
+                <i class="fa-solid fa-seedling chart-icon"></i>
+              </div>
+              <p>
+                <span
+                  id="farming-result"
+                  class="fw-bolder h4 counter"
+                  data-to="0"
+                  data-duration="1000"
+                ></span>
+                <span class="text-muted">Avg</span>
+              </p>
+              <form id="farming-form">
+                <div>
+                  <label for="local">Do you shop locally?</label>
+                  <input type="checkbox" id="local" name="local" />
+                </div>
+                <div>
+                  <label for="produce">% Local Produce</label>
+                  <input
+                    type="number"
+                    id="produce"
+                    name="produce"
+                    required
+                    value="0"
+                  />
+                </div>
+                <div>
+                  <label for="organic">% Organic/Regenrative Agr</label>
+                  <input
+                    type="number"
+                    id="organic"
+                    name="organic"
+                    required
+                    value="0"
+                  />
+                </div>
+                <div>
+                  <label for="seasonal"
+                    >Do you mostly eat seasonal fruit/veg</label
+                  >
+                  <input type="checkbox" id="seasonal" name="seasonal" />
+                </div>
+                <div>
+                  <label for="crop">Do you grow your own crop</label>
+                  <input type="checkbox" id="crop" name="crop" />
+                </div>
+                <button type="submit" class="submit-btn">
+                  Calculate Impact %
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+            <div class="card text-center">
+              <p>
+                <span
+                  id="total-result"
+                  class="fw-bolder h4 counter"
+                  data-to="0"
+                  data-duration="1000"
+                ></span>
+                <span class="text-muted">Average</span>
+              </p>
+              <div
+                class="d-flex align-items-center justify-content-center item-parent position-relative"
+              >
+                <div id="totalChart"></div>
+                <i class="fa-solid fa-seedling chart-icon"></i>
+              </div>
+            </div>
+          </div>
+          <h2>Your Carbon Footprint Score:</h2>
         </div>
-        <div>
-          <label for="local">Do you shop locally?</label>
-          <!-- Checkbox if eat locally -->
-          <input type="checkbox" id="local" />
-        </div>
-        <button onclick="calculateImpact()" class="submit-btn">
-          Calculate Impact %
-        </button>
-        <!-- when clicked this button will trigger the js function in script.js to calculate the user score -->
-        <!-- result display -->
-        <h2>Your Carbon Footprint Score:</h2>
-        <div id="result"></div>
       </div>
     </main>
     <script
@@ -151,6 +256,6 @@
       src="https://kit.fontawesome.com/27545168c5.js"
       crossorigin="anonymous"
     ></script>
-    <script src="src/assets/js/food.js"></script>
+    <script type="module" src="src/assets/js/food.js"></script>
   </body>
 </html>

@@ -38,6 +38,7 @@ function IrishAverageTravelMethodTotal() {
 }
 
 let activeUser;
+let userClass;
 
 async function init() {
   activeUser = await checkAuthState();
@@ -46,16 +47,93 @@ async function init() {
 
   userClass = new User(userData);
 
-  console.log(userData);
+  renderStoredData();
+}
 
-  console.log(userClass);
+function renderStoredData() {
   document.getElementById(userClass.travel.flight.class).checked = true;
   flightKM.value = userClass.travel.flight.yearlyKM;
   numFlights.value = userClass.travel.flight.numFlights;
 
   kilometers.value = userClass.travel.car.weeklyKm;
-  document.getElementById(userClass.travel.car.typeCar).checked = true;
+  document.getElementById(userClass.travel.car.type).checked = true;
   document.getElementById("before").checked = true;
+
+  const flightScore =
+    userClass.travel.flight.score > 100 ? 100 : userClass.travel.flight.score;
+  flightChart.updateSeries([flightScore]);
+
+  const carScore =
+    userClass.travel.car.score > 100 ? 100 : userClass.travel.car.score;
+  carChart.updateSeries([carScore]);
+  carResultLabel.innerText = `${userClass.travel.car.score}%`;
+
+  driveValue.value = userClass.travel.transport.drive;
+
+  carpoolValue.value = userClass.travel.transport.carpool;
+  walkValue.value = userClass.travel.transport.walk;
+  cycleValue.value = userClass.travel.transport.cycle;
+  trainValue.value = userClass.travel.transport.train;
+  busValue.value = userClass.travel.transport.bus;
+
+  const transportScore =
+    userClass.travel.transport.score > 100
+      ? 100
+      : userClass.travel.transport.score;
+  transportChart.updateSeries([transportScore]);
+  transportResultLabel.innerText = `${userClass.travel.transport.score}%`;
+
+  flightResultLabel.dataset.to = userClass.travel.flight.score;
+
+  const userTotalChart = [
+    DUMMY_DATA.flightKperWeek *
+      (userClass.travel.flight.score / 100).toFixed(0),
+    DUMMY_DATA.carKperWeek * (userClass.travel.car.score / 100).toFixed(0),
+    DUMMY_DATA.communterKperWeek *
+      (userClass.travel.transport.score / 100).toFixed(0),
+  ];
+
+  totalChart.updateOptions({
+    series: [
+      {
+        name: userClass.name,
+        type: "column",
+        data: userTotalChart,
+      },
+      {
+        name: "Irish Average",
+        type: "line",
+        data: [
+          DUMMY_DATA.flightKperWeek,
+          DUMMY_DATA.carKperWeek,
+          DUMMY_DATA.communterKperWeek,
+        ],
+      },
+    ],
+  });
+
+  $(".counter").each(function () {
+    const $this = $(this),
+      countTo = $this.attr("data-to");
+    countDuration = parseInt($this.attr("data-duration"));
+    $({ counter: $this.text() }).animate(
+      {
+        counter: countTo,
+      },
+      {
+        duration: countDuration,
+        easing: "linear",
+        step: function () {
+          $this.text(Math.floor(this.counter));
+        },
+        complete: function () {
+          $this.text(this.counter);
+        },
+      }
+    );
+  });
+
+  flightResultLabel.innerText = `${userClass.travel.flight.score}%`;
 }
 
 init();
@@ -66,6 +144,9 @@ const DUMMY_DATA = {
   averageFlights: 6.5,
   averageFlightKM: 6850,
   tonnesPerKM: 0.0002582,
+  flightKperWeek: 34,
+  carKperWeek: 36,
+  communterKperWeek: 29,
   averageTravelMethod: {
     car: 65,
     carpool: 8,
@@ -113,6 +194,8 @@ async function flightCarbonCalc(e) {
     averageFlightCarbon
   );
 
+  const truePercent = percentOfFlightKM;
+
   flightResultLabel.innerText = `${percentOfFlightKM.toFixed(2)}%`;
 
   const totalChartValue = tonnesPerDistance * 100;
@@ -128,38 +211,47 @@ async function flightCarbonCalc(e) {
   totalChart.updateOptions({
     series: [
       {
-        name: "Tom",
+        name: userClass.name,
         type: "column",
-        data: [totalChartValue, currentArray[1], currentArray[2]],
+        data: [
+          DUMMY_DATA.flightKperWeek * (totalChartValue / 100).toFixed(0),
+          currentArray[1],
+          currentArray[2],
+        ],
       },
       {
         name: "Irish Average",
         type: "line",
-        data: [176.867, 327, 73],
+        data: [
+          DUMMY_DATA.flightKperWeek,
+          DUMMY_DATA.carKperWeek,
+          DUMMY_DATA.communterKperWeek,
+        ],
       },
     ],
   });
 
-  // UPDATEFIREBASE
-
+  const data = {
+    yearlyKM: estimatedDistance,
+    numFlights: totalFlights,
+    class: selectedFlightClass.value,
+    score: truePercent.toFixed(2),
+  };
+  updateFireBase(data, "flight");
+}
+async function updateFireBase(data, prop) {
   const userRef = doc(firebaseDB, "users", activeUser.uid);
 
   const userData = await getUserData(activeUser);
 
-  userData.travel.flight = {
-    yearlyKM: estimatedDistance,
-    numFlights: totalFlights,
-    class: selectedFlightClass.value,
-    score: percentOfFlightKM.toFixed(2),
-  };
-
-  const update = updateDoc(userRef, userData);
+  userData.travel[prop] = data;
+  updateDoc(userRef, userData);
 }
 
 // Electric Car - 60% emissions "Source: EDF Energy"
 // Hybrid Car - 40% emissions "Source: EDF Energy"
 
-function carCarbonCalc(e) {
+async function carCarbonCalc(e) {
   e.preventDefault();
 
   const selectedCarType = document.querySelector(
@@ -171,6 +263,7 @@ function carCarbonCalc(e) {
   );
 
   let totalKilometers = +kilometers.value;
+  const trueTotalKM = totalKilometers;
 
   if (selectedCarType) {
     const carTypeValue = selectedCarType.value;
@@ -199,6 +292,7 @@ function carCarbonCalc(e) {
     DUMMY_DATA.averageKM
   );
 
+  const trueScorePercent = percentOfCarKM;
   carResultLabel.innerText = `${percentOfCarKM.toFixed(2)}%`;
   let color;
   //   percentOfCarKM > 100 ? (color = "#FF0000") : (color = "#569ef9");
@@ -218,21 +312,34 @@ function carCarbonCalc(e) {
   totalChart.updateOptions({
     series: [
       {
-        name: "Tom",
+        name: userClass.name,
         type: "column",
-        data: [currentArray[0], percentOfCarKM.toFixed(2), currentArray[2]],
+        data: [
+          currentArray[0],
+          DUMMY_DATA.carKperWeek * (trueScorePercent / 100).toFixed(0),
+          currentArray[2],
+        ],
       },
       {
         name: "Irish Average",
         type: "line",
-        data: [176.867, 327, 73],
+        data: [
+          DUMMY_DATA.flightKperWeek,
+          DUMMY_DATA.carKperWeek,
+          DUMMY_DATA.communterKperWeek,
+        ],
       },
     ],
   });
 
   const data = {
-    totalKilometers,
+    weeklyKm: trueTotalKM,
+    type: selectedCarType.value,
+    year2000: selectedCarYear.value,
+    score: trueScorePercent.toFixed(2),
   };
+
+  updateFireBase(data, "car");
 }
 
 async function transportCarbonCalc(e) {
@@ -278,6 +385,7 @@ async function transportCarbonCalc(e) {
     averageCarbonSum
   );
 
+  const truePercent = percentMode;
   transportResultLabel.innerText = `${percentMode.toFixed(2)}%`;
 
   percentMode > 100 ? (percentMode = 100) : percentMode;
@@ -291,17 +399,37 @@ async function transportCarbonCalc(e) {
   totalChart.updateOptions({
     series: [
       {
-        name: "Tom",
+        name: userClass.name,
         type: "column",
-        data: [currentArray[0], currentArray[1], percentMode.toFixed(2)],
+        data: [
+          currentArray[0],
+          currentArray[1],
+          DUMMY_DATA.communterKperWeek * (truePercent / 100).toFixed(0),
+        ],
       },
       {
         name: "Irish Average",
         type: "line",
-        data: [176.867, 327, 73],
+        data: [
+          DUMMY_DATA.flightKperWeek,
+          DUMMY_DATA.carKperWeek,
+          DUMMY_DATA.communterKperWeek,
+        ],
       },
     ],
   });
+
+  const data = {
+    drive: drivePercentage,
+    carpool: carpoolPercentage,
+    walk: walkPercentage,
+    cycle: cyclePercentage,
+    train: trainPercentage,
+    bus: busPercentage,
+    score: truePercent.toFixed(2),
+  };
+
+  updateFireBase(data, "transport");
 }
 
 carForm.addEventListener("submit", carCarbonCalc);
@@ -470,7 +598,6 @@ const flightOptions = {
   labels: ["Percent"],
 };
 
-// #34a744
 const transportOptions = {
   series: [0],
   colors: ["#63D471"],
@@ -549,24 +676,32 @@ const transportOptions = {
   stroke: {
     lineCap: "round",
   },
-  labels: ["Percent"],
 };
 
 const totalOptions = {
   series: [
     {
-      name: "Tom",
+      name: "",
       type: "column",
-      data: [200, 440, 5],
+      data: [0, 0, 0],
     },
     {
       name: "Irish Average",
       type: "line",
-      data: [176.867, 327, 73],
+      data: [
+        DUMMY_DATA.flightKperWeek,
+        DUMMY_DATA.carKperWeek,
+        DUMMY_DATA.communterKperWeek,
+      ],
     },
   ],
   colors: ["#4b7bff", "#DA2D2D"],
 
+  plotOptions: {
+    bar: {
+      borderRadius: 10,
+    },
+  },
   chart: {
     height: 350,
     type: "line",
@@ -579,27 +714,13 @@ const totalOptions = {
     width: [0, 4],
   },
   title: {
-    text: "Transport Totals",
+    text: "Kilos Carbon Per Week",
   },
   dataLabels: {
     enabled: true,
     enabledOnSeries: [1],
   },
   labels: ["Flights", "Car", "Transport"],
-
-  yaxis: [
-    {
-      title: {
-        text: "Yoy",
-      },
-    },
-    {
-      opposite: true,
-      title: {
-        text: "Average",
-      },
-    },
-  ],
 };
 
 const carChart = new ApexCharts(

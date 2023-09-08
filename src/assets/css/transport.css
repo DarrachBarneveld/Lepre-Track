@@ -12,9 +12,6 @@
   color: var(--primary-blue);
   font-size: 2rem;
 }
-body {
-  background-color: darkslategray;
-}
 
 .container-row {
   margin-top: 2em;
