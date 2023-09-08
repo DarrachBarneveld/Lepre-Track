@@ -83,7 +83,7 @@ export function renderAuthenticatedNavBar(user) {
           <a class="dropdown-item" href="energy.html">Energy</a>
         </li>
         <li>
-          <a class="dropdown-item" href="index.html">Community</a>
+          <a class="dropdown-item" href="recycling.html">Community</a>
         </li>
       </ul>
     </div>
