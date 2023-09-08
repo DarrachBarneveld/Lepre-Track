@@ -84,6 +84,12 @@ var options = {
               strokeColor: "#FFD700",
             },
             {
+              name: "GreenFingers",
+              value: 150,
+              strokeHeight: 5,
+              strokeColor: "#4b7bff",
+            },
+            {
               name: "Average",
               value: 100,
               strokeHeight: 5,
@@ -101,7 +107,7 @@ var options = {
     },
   ],
   chart: {
-    height: 350,
+    height: 400,
     type: "bar",
     toolbar: {
       show: false,
@@ -123,10 +129,11 @@ var options = {
       "Tom",
       "Destroyer Of Worlds",
       "Average",
+      "GreenFingers",
       "Protector of Gaia",
     ],
     markers: {
-      fillColors: ["#00E396", "#FF0000", "#775DD0", "#FFD700"],
+      fillColors: ["#00E396", "#FF0000", "#775DD0", "#4b7bff", "#FFD700"],
     },
   },
 };
