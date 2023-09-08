@@ -4,19 +4,28 @@ import { firebaseAuth } from "../../config/firebase";
 import { signOut } from "firebase/auth";
 import Swal from "sweetalert2";
 import { checkAuthState, getAllUserDocuments, getUserData } from "./auth";
+import { User } from "../classes/User";
 
 const logoutBtn = document.getElementById("logout");
 
-async function init() {
-  const user = await checkAuthState();
-  if (!user) return (window.location.href = "/");
-  const userData = await getUserData(user);
+let activeUser;
+let userClass;
 
+async function init() {
+  activeUser = await checkAuthState();
+
+  if (!activeUser) return (window.location.href = "/");
+  const userData = await getUserData(activeUser);
+  userClass = new User(userData);
+
+  transportChart.updateSeries([userClass.travel.flight.score]);
   const users = await getAllUserDocuments();
 
   const leaderboard = document.getElementById("leaderboard");
 
   users.forEach((user, i) => {
+    const newUser = new User(user);
+
     const html = `<tr class="leaderboard-item fade-in-right"   style="animation-delay: ${
       i / 2
     }s">
@@ -28,15 +37,15 @@ async function init() {
         class="d-flex justify-content-center"
         href="profile.html"
       >
-        <span class="d-block text-center">${user.name}</span>
+        <span class="d-block text-center">${newUser.name}</span>
       </a>
     </td>
-    <td>20</td>
-    <td>35</td>
-    <td>60</td>
+    <td>${newUser.travel.flight.score}</td>
+    <td>${newUser.food}</td>
+    <td>${newUser.food}</td>
     <td>
-      <span class="badge bg-soft-success text-success p-1">
-        1.5%
+      <span class="text-success p-1">
+      <i class="fa-solid fa-star text-warning"></i> ${newUser.starRating()}
       </span>
     </td>
     </tr>`;
@@ -71,7 +80,7 @@ logoutBtn.addEventListener("click", logOutUser);
 
 const transportChart = new ApexCharts(
   document.querySelector("#transportChart"),
-  new DashboardRadialBarChartOptions([67])
+  new DashboardRadialBarChartOptions([0])
 );
 transportChart.render();
 
