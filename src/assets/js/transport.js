@@ -96,9 +96,6 @@ function renderStoredData() {
     ) / 100,
   ];
 
-  console.log(
-    (userClass.travel.flight.score * DUMMY_DATA.flightKperWeek) / 100
-  );
   totalChart.updateOptions({
     series: [
       {
