@@ -36,10 +36,14 @@ async function init() {
 
   userClass = new User(userData);
 
+  renderStoredData();
+}
+
+function renderStoredData() {
   // DIET
   diet.value = userClass.food.diet.type;
   calories.value = userClass.food.diet.calories;
-  dietResultLabel.innerHTML = `${userClass.food.diet.score.toFixed(2)}%`;
+  dietResultLabel.innerText = `${userClass.food.diet.score.toFixed(2)}%`;
 
   const dietScore =
     userClass.food.diet.score > 100 ? 100 : userClass.food.diet.score;
@@ -51,18 +55,21 @@ async function init() {
   organic.value = userClass.food.farm.organic;
   seasonal.checked = userClass.food.farm.seasonal;
   crop.checked = userClass.food.farm.crop;
-
   farmingResultLabel.innerText = `${userClass.food.farm.score.toFixed(2)}%`;
 
   const foodScore =
     userClass.food.diet.score > 100 ? 100 : userClass.food.diet.score;
-
   farmingChart.updateSeries([foodScore]);
 
-  // renderStoredData();
-}
+  // DINING
+  diningOut.checked = userClass.food.dining.out;
+  wasteFood.checked = userClass.food.dining.waste;
+  diningResultLabel.innerText = `${userClass.food.dining.score.toFixed(2)}%`;
 
-function renderStoredData() {}
+  const diningScore =
+    userClass.food.dining.score > 100 ? 100 : userClass.food.dining.score;
+  diningChart.updateSeries([diningScore]);
+}
 init();
 
 async function updateFireBase(data, category, prop) {
@@ -178,6 +185,14 @@ async function calcDiningImpact(e) {
 
   diningResultLabel.innerHTML = `${value.toFixed(2)}%`;
   diningChart.updateSeries([value]);
+
+  const data = {
+    out: dineOutValue,
+    waste: foodWasteValue,
+    score: value,
+  };
+
+  updateFireBase(data, "food", "dining");
 
   return value;
 }
