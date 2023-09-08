@@ -175,3 +175,22 @@ input:focus:valid {
   border: none;
   padding: 0.5em 2em;
 }
+
+/*fact_page css*/
+#bicycle,
+#recycle,
+#bus,
+#energy,
+#food {
+    background-color: #6e9c11ff;
+}
+
+#slide-item {
+  background: linear-gradient(#8ccebeff, #ffffffff);
+}
+
+#fact-heading {
+  background-image: linear-gradient(to right,rgb(106, 185, 166), rgb(56, 94, 23));
+    -webkit-background-clip: text; /* Clip the gradient to the text */
+    color: transparent; /* Make the text transparent */
+}
