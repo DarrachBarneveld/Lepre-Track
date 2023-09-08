@@ -47,6 +47,8 @@ async function init() {
 
   userClass = new User(userData);
 
+  console.log(userClass);
+
   renderStoredData();
 }
 
@@ -230,8 +232,6 @@ async function flightCarbonCalc(e) {
       },
     ],
   });
-
-  // UPDATEFIREBASE
 
   const data = {
     yearlyKM: estimatedDistance,
@@ -678,7 +678,6 @@ const transportOptions = {
   stroke: {
     lineCap: "round",
   },
-  labels: ["Percent"],
 };
 
 const totalOptions = {
@@ -749,5 +748,3 @@ const totalChart = new ApexCharts(
   totalOptions
 );
 totalChart.render();
-
-// JQUERY FUNCTION FOR COUNTING

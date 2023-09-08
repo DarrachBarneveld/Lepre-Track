@@ -1,5 +1,5 @@
 import ApexCharts from "apexcharts";
-import { DashboardRadialBarChartOptions } from "../classes/Charts";
+import { DashboardRadialBarChartOptions, graphColor } from "../classes/Charts";
 import { firebaseAuth } from "../../config/firebase";
 import { signOut } from "firebase/auth";
 import Swal from "sweetalert2";
@@ -18,8 +18,23 @@ async function init() {
   const userData = await getUserData(activeUser);
   userClass = new User(userData);
 
-  transportChart.updateSeries([userClass.travel.flight.score]);
   const users = await getAllUserDocuments();
+
+  const userTransportScore = userClass.calcTransportScore();
+  const userFoodScore = userClass.calcFoodScore();
+
+  const transColor = graphColor(userTransportScore);
+  const foodColor = graphColor(userFoodScore);
+
+  transportChart.updateOptions({
+    colors: transColor,
+  });
+  foodChart.updateOptions({
+    colors: foodColor,
+  });
+
+  transportChart.updateSeries([userTransportScore]);
+  foodChart.updateSeries([userFoodScore]);
 
   const leaderboard = document.getElementById("leaderboard");
 
@@ -30,7 +45,7 @@ async function init() {
       i / 2
     }s">
     <td>
-      <span class="text-warning">🥇</span>
+      <span class="h4 text-warning">🥇</span>
     </td>
     <td>
       <a
@@ -40,8 +55,8 @@ async function init() {
         <span class="d-block text-center">${newUser.name}</span>
       </a>
     </td>
-    <td>${newUser.travel.flight.score}</td>
-    <td>${newUser.food}</td>
+    <td>${newUser.calcTransportScore()}</td>
+    <td>${newUser.calcFoodScore()}</td>
     <td>${newUser.food}</td>
     <td>
       <span class="text-success p-1">
@@ -86,19 +101,19 @@ transportChart.render();
 
 const foodChart = new ApexCharts(
   document.querySelector("#foodChart"),
-  new DashboardRadialBarChartOptions([20])
+  new DashboardRadialBarChartOptions([0])
 );
 foodChart.render();
 
 const energyChart = new ApexCharts(
   document.querySelector("#energyChart"),
-  new DashboardRadialBarChartOptions([100])
+  new DashboardRadialBarChartOptions([0])
 );
 energyChart.render();
 
 const communityChart = new ApexCharts(
   document.querySelector("#communityChart"),
-  new DashboardRadialBarChartOptions([33])
+  new DashboardRadialBarChartOptions([0])
 );
 communityChart.render();
 

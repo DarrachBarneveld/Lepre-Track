@@ -1,32 +1,32 @@
 .glassmorphism {
-    border-radius: 10px;
-    /* padding: 10px; */
-    background: rgba(255, 255, 255, 0.75);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    font: bolder;
+  border-radius: 10px;
+  /* padding: 10px; */
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font: bolder;
 }
 
 .glassmorphism-title {
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.75);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    font: bolder;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font: bolder;
 }
 
 body {
-    color: #198754;
-    background: url("../images/background-image.jpg") no-repeat center center;
-    background-size: cover;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  color: #198754;
+  background: url("../images/background-image.jpg") no-repeat center center;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .card h1 {
-    font-weight: bold;
-    font-size: 3rem;
+  font-weight: bold;
+  font-size: 3rem;
 }

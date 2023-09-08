@@ -9,12 +9,18 @@
   font: bolder;
 }
 
-body {
-  overflow: hidden;
-}
-
 .start-tracking {
   padding-block: 0.5em;
   border-radius: 100vmax;
   transform: translateX(-1500px);
+}
+
+.chat-prompt-section {
+  width: 25rem;
+  margin-top: 2rem;
+}
+
+.chat-prompt-section > form > * {
+  margin-bottom: 1rem;
+  width: 100%;
 }
