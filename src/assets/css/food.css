@@ -8,6 +8,10 @@
   font-size: 2rem;
 }
 
+.fa-pizza-slice {
+  color: #f06543;
+}
+
 .food-wrapper {
   background-color: var(--primary-white);
   padding: 2em 4em;

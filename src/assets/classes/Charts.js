@@ -57,7 +57,7 @@ export class DashboardRadialBarChartOptions {
 
 export class CategoryRadialChartOptions {
   constructor(series, color) {
-    this.series = series;
+    this.series = [100];
     this.colors = [color[0]];
     this.chart = {
       height: 225,
