@@ -3,3 +3,8 @@ export function getPercentInRelationToAverage(input, average) {
 
   return result;
 }
+
+export function calculateInvertedPercentage(result) {
+  const invertedPercentage = 100 - result;
+  return invertedPercentage;
+}

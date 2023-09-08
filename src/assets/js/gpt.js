@@ -1,10 +1,11 @@
 import { config } from "dotenv";
 config();
 
+console.log(process.env);
 const OpenAI = require("openai");
 
 const openai = new OpenAI({
-  apiKey: "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",
+  apiKey: process.env.API_KEY,
   dangerouslyAllowBrowser: true,
 });
 
@@ -37,5 +38,5 @@ const randomEnvironmentQuestion = async () => {
 let gptSubmitBtn = document.querySelector(".gpt-submit");
 gptSubmitBtn.addEventListener("click", (e) => {
   e.preventDefault;
-  randomEnvironmentQuestion();
+  askgpt();
 });

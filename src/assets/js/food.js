@@ -1,13 +1,28 @@
 import ApexCharts from "apexcharts";
 import { CategoryRadialChartOptions } from "../classes/Charts";
+import { calculateInvertedPercentage } from "../../helpers/math";
 
 const dietForm = document.getElementById("diet-form");
 const farmingForm = document.getElementById("farming-form");
+const diningForm = document.getElementById("dining-form");
+
+const shopLocal = document.getElementById("local");
+const produce = document.getElementById("produce");
+const organic = document.getElementById("organic");
+const seasonal = document.getElementById("seasonal");
+const crop = document.getElementById("crop");
+
+const diningOut = document.getElementById("dineout");
+const wasteFood = document.getElementById("waste");
+
+const dietResultLabel = document.getElementById("diet-result");
+const farmingResultLabel = document.getElementById("farming-result");
+const diningResultLabel = document.getElementById("dining-result");
 
 function planetImpactScore(diet, calories) {
   // Object for raw scores
   let scores = {
-    "Meat-heavy": 100,
+    Carnivore: 100,
     Omnivore: 80.5,
     Pescatarian: 62.5,
     Vegetarian: 52.7,
@@ -33,17 +48,69 @@ async function calcDietImpact(e) {
   score > 100 ? (score = 100) : score;
 
   // Display the result using .toFixed() method to round the score to two decimal places.
-  document.getElementById("diet-result").innerText = `${score.toFixed(2)}%`;
+  dietResultLabel.innerText = `${trueScore.toFixed(2)}%`;
 
   dietChart.updateSeries([score]);
 }
 
-async function calcFarmingImpact() {
-  const shopLocal = document.getElementById("local").checked;
+function calcFarmingPercent({
+  shopLocalValue,
+  produceValue,
+  organicValue,
+  seasonalValue,
+  cropValue,
+}) {
+  let value = 0;
+
+  shopLocalValue ? (value += 20) : value;
+  seasonalValue ? (value += 20) : value;
+  cropValue ? (value += 20) : value;
+  produceValue ? (value += (20 / 100) * produceValue) : value;
+  organicValue ? (value += (20 / 100) * organicValue) : value;
+
+  return calculateInvertedPercentage(value);
+}
+
+async function calcFarmingImpact(e) {
+  e.preventDefault();
+  const shopLocalValue = shopLocal.checked;
+  const produceValue = parseInt(produce.value);
+  const organicValue = parseInt(organic.value);
+  const seasonalValue = seasonal.checked;
+  const cropValue = crop.checked;
+
+  const data = {
+    shopLocalValue,
+    produceValue,
+    organicValue,
+    seasonalValue,
+    cropValue,
+  };
+
+  const invertPercent = calcFarmingPercent(data);
+  farmingResultLabel.innerHTML = `${invertPercent.toFixed(2)}%`;
+  farmingChart.updateSeries([invertPercent]);
+}
+
+async function calcDiningImpact(e) {
+  e.preventDefault();
+  const foodWasteValue = wasteFood.checked;
+  const dineOutValue = diningOut.checked;
+
+  let value = 0;
+
+  foodWasteValue ? (value += 50) : value;
+  dineOutValue ? (value += 50) : value;
+
+  diningResultLabel.innerHTML = `${value.toFixed(2)}%`;
+  diningChart.updateSeries([value]);
+
+  return value;
 }
 
 dietForm.addEventListener("submit", calcDietImpact);
 farmingForm.addEventListener("submit", calcFarmingImpact);
+diningForm.addEventListener("submit", calcDiningImpact);
 
 const dietChartOptions = new CategoryRadialChartOptions(
   [0],
@@ -67,6 +134,18 @@ const farmingChart = new ApexCharts(
   farmingChartOptions
 );
 farmingChart.render();
+
+const diningChartOptions = new CategoryRadialChartOptions(
+  [0],
+
+  ["#5F72BE", "#9921E8"]
+);
+
+const diningChart = new ApexCharts(
+  document.getElementById("diningChart"),
+  diningChartOptions
+);
+diningChart.render();
 
 var options = {
   series: [
