@@ -1,9 +1,11 @@
 import ApexCharts from "apexcharts";
 import { DashboardRadialBarChartOptions, graphColor } from "../classes/Charts";
-import { firebaseAuth } from "../../config/firebase";
-import { signOut } from "firebase/auth";
-import Swal from "sweetalert2";
-import { checkAuthState, getAllUserDocuments, getUserData } from "./auth";
+import {
+  checkAuthState,
+  getAllUserDocuments,
+  getUserData,
+  logOutUser,
+} from "./auth";
 import { User } from "../classes/User";
 
 const logoutBtn = document.getElementById("logout");
@@ -72,24 +74,6 @@ async function init() {
 }
 
 init();
-
-async function logOutUser() {
-  const result = await Swal.fire({
-    title: "Are you sure you want to log out?",
-    text: "You will be logged out from your account.",
-    icon: "question",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, log me out",
-  });
-
-  if (result.isConfirmed) {
-    await signOut(firebaseAuth);
-
-    window.location.href = "/";
-  }
-}
 
 logoutBtn.addEventListener("click", logOutUser);
 
