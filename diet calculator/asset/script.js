@@ -28,3 +28,9 @@ function calculateImpact() {
   // Display the result using .toFixed() method to round the score to two decimal places.
   document.getElementById("result").innerText = "Score: "+ score.toFixed(2)  + ' % ';
 }
+
+// ------------------------------------------------------------------
+
+// NEW Food script.js
+
+
