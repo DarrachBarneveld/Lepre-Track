@@ -1,10 +1,17 @@
 import ApexCharts from "apexcharts";
 import { CategoryRadialChartOptions } from "../classes/Charts";
 import { calculateInvertedPercentage } from "../../helpers/math";
+import { checkAuthState, getUserData } from "./auth";
+import { User } from "../classes/User";
+import { doc, updateDoc } from "@firebase/firestore";
+import { firebaseDB } from "../../config/firebase";
 
 const dietForm = document.getElementById("diet-form");
 const farmingForm = document.getElementById("farming-form");
 const diningForm = document.getElementById("dining-form");
+
+const diet = document.getElementById("diet");
+const calories = document.getElementById("calories");
 
 const shopLocal = document.getElementById("local");
 const produce = document.getElementById("produce");
@@ -19,14 +26,47 @@ const dietResultLabel = document.getElementById("diet-result");
 const farmingResultLabel = document.getElementById("farming-result");
 const diningResultLabel = document.getElementById("dining-result");
 
+let activeUser;
+let userClass;
+
+async function init() {
+  activeUser = await checkAuthState();
+
+  const userData = await getUserData(activeUser);
+
+  userClass = new User(userData);
+
+  diet.value = userClass.food.diet.type;
+  calories.value = userClass.food.diet.calories;
+  dietResultLabel.innerHTML = `${userClass.food.diet.score.toFixed(2)}%`;
+
+  const dietScore =
+    userClass.food.diet.score > 100 ? 100 : userClass.food.diet.score;
+  dietChart.updateSeries([dietScore]);
+
+  // renderStoredData();
+}
+
+function renderStoredData() {}
+init();
+
+async function updateFireBase(data, category, prop) {
+  const userRef = doc(firebaseDB, "users", activeUser.uid);
+
+  const userData = await getUserData(activeUser);
+
+  userData[category][prop] = data;
+  updateDoc(userRef, userData);
+}
+
 function planetImpactScore(diet, calories) {
   // Object for raw scores
   let scores = {
-    Carnivore: 100,
-    Omnivore: 80.5,
-    Pescatarian: 62.5,
-    Vegetarian: 52.7,
-    Vegan: 40.2,
+    carnivore: 100,
+    omnivore: 80.5,
+    pescatarian: 62.5,
+    vegetarian: 52.7,
+    vegan: 40.2,
   };
 
   const irishNationalAverage = 2307;
@@ -38,17 +78,25 @@ function planetImpactScore(diet, calories) {
 async function calcDietImpact(e) {
   e.preventDefault();
   // Get user inputs
-  let diet = document.getElementById("diet").value;
-  let calories = document.getElementById("calories").value;
+  let dietValue = diet.value;
+  let caloriesValue = calories.value;
 
   // Calculate the score
-  let score = planetImpactScore(diet, calories);
+  let score = planetImpactScore(dietValue, caloriesValue);
   const trueScore = score;
 
   score > 100 ? (score = 100) : score;
 
   // Display the result using .toFixed() method to round the score to two decimal places.
   dietResultLabel.innerText = `${trueScore.toFixed(2)}%`;
+
+  const data = {
+    type: dietValue,
+    calories: caloriesValue,
+    score: trueScore,
+  };
+
+  updateFireBase(data, "food", "diet");
 
   dietChart.updateSeries([score]);
 }
@@ -147,75 +195,75 @@ const diningChart = new ApexCharts(
 );
 diningChart.render();
 
-var options = {
-  series: [
-    {
-      name: "Actual",
-      data: [
-        {
-          x: "Tom",
-          y: 126,
-          goals: [
-            {
-              name: "Protector of Gaia",
-              value: 200,
-              strokeHeight: 5,
-              strokeColor: "#FFD700",
-            },
-            {
-              name: "GreenFingers",
-              value: 150,
-              strokeHeight: 5,
-              strokeColor: "#4b7bff",
-            },
-            {
-              name: "Average",
-              value: 100,
-              strokeHeight: 5,
-              strokeColor: "#775DD0",
-            },
-            {
-              name: "Destroyer Of Worlds",
-              value: 25,
-              strokeHeight: 5,
-              strokeColor: "#FF0000",
-            },
-          ],
-        },
-      ],
-    },
-  ],
-  chart: {
-    height: 400,
-    type: "bar",
-    toolbar: {
-      show: false,
-    },
-  },
-  plotOptions: {
-    bar: {
-      columnWidth: "60%",
-    },
-  },
-  colors: ["#00E396"],
-  dataLabels: {
-    enabled: false,
-  },
-  legend: {
-    show: true,
-    showForSingleSeries: true,
-    customLegendItems: [
-      "Tom",
-      "Destroyer Of Worlds",
-      "Average",
-      "GreenFingers",
-      "Protector of Gaia",
-    ],
-    markers: {
-      fillColors: ["#00E396", "#FF0000", "#775DD0", "#4b7bff", "#FFD700"],
-    },
-  },
-};
+// var options = {
+//   series: [
+//     {
+//       name: "Actual",
+//       data: [
+//         {
+//           x: "Tom",
+//           y: 126,
+//           goals: [
+//             {
+//               name: "Protector of Gaia",
+//               value: 200,
+//               strokeHeight: 5,
+//               strokeColor: "#FFD700",
+//             },
+//             {
+//               name: "GreenFingers",
+//               value: 150,
+//               strokeHeight: 5,
+//               strokeColor: "#4b7bff",
+//             },
+//             {
+//               name: "Average",
+//               value: 100,
+//               strokeHeight: 5,
+//               strokeColor: "#775DD0",
+//             },
+//             {
+//               name: "Destroyer Of Worlds",
+//               value: 25,
+//               strokeHeight: 5,
+//               strokeColor: "#FF0000",
+//             },
+//           ],
+//         },
+//       ],
+//     },
+//   ],
+//   chart: {
+//     height: 400,
+//     type: "bar",
+//     toolbar: {
+//       show: false,
+//     },
+//   },
+//   plotOptions: {
+//     bar: {
+//       columnWidth: "60%",
+//     },
+//   },
+//   colors: ["#00E396"],
+//   dataLabels: {
+//     enabled: false,
+//   },
+//   legend: {
+//     show: true,
+//     showForSingleSeries: true,
+//     customLegendItems: [
+//       "Tom",
+//       "Destroyer Of Worlds",
+//       "Average",
+//       "GreenFingers",
+//       "Protector of Gaia",
+//     ],
+//     markers: {
+//       fillColors: ["#00E396", "#FF0000", "#775DD0", "#4b7bff", "#FFD700"],
+//     },
+//   },
+// };
 
-var chart = new ApexCharts(document.querySelector("#totalChart"), options);
-chart.render();
+// var chart = new ApexCharts(document.querySelector("#totalChart"), options);
+// chart.render();

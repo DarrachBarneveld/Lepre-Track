@@ -20,6 +20,25 @@ const defaultTravel = {
   },
 };
 
+const defaultFood = {
+  diet: {
+    type: "carnivore",
+    calories: 0,
+    score: 0,
+  },
+  farm: {
+    local: false,
+    produce: 0,
+    organic: 0,
+    seasonal: false,
+    crop: false,
+  },
+  dining: {
+    out: false,
+    waste: false,
+  },
+};
+
 export class User {
   constructor(data) {
     this.id = data.id;
@@ -27,7 +46,7 @@ export class User {
     this.name = data.name;
     this.createdAt = data.createdAt;
     this.travel = data?.travel || defaultTravel;
-    this.food = data?.food || 0;
+    this.food = data?.food || defaultFood;
     this.energy = data?.energy || 0;
     this.community = data?.community || 0;
   }
