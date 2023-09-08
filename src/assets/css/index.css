@@ -9,10 +9,6 @@
   font: bolder;
 }
 
-body {
-  overflow: hidden;
-}
-
 .start-tracking {
   padding-block: 0.5em;
   border-radius: 100vmax;
