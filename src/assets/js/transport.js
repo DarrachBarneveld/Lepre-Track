@@ -47,6 +47,8 @@ async function init() {
 
   userClass = new User(userData);
 
+  console.log(userClass);
+
   renderStoredData();
 }
 

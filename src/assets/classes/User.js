@@ -9,6 +9,7 @@ const defaultTravel = {
     weeklyKm: 0,
     type: "petrol",
     year2000: "before",
+    score: 0,
   },
   transport: {
     drive: 0,
@@ -17,6 +18,7 @@ const defaultTravel = {
     cycle: 0,
     train: 0,
     bus: 0,
+    score: 0,
   },
 };
 
