@@ -676,7 +676,6 @@ const transportOptions = {
   stroke: {
     lineCap: "round",
   },
-  labels: ["Percent"],
 };
 
 const totalOptions = {
@@ -747,5 +746,3 @@ const totalChart = new ApexCharts(
   totalOptions
 );
 totalChart.render();
-
-// JQUERY FUNCTION FOR COUNTING

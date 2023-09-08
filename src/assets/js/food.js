@@ -1,3 +1,6 @@
+import ApexCharts from "apexcharts";
+import { CategoryRadialChartOptions } from "../classes/Charts";
+
 const dietForm = document.getElementById("diet-form");
 
 function planetImpactScore(Diet, shopLocal) {
@@ -13,13 +16,14 @@ function planetImpactScore(Diet, shopLocal) {
   let score = scores[Diet];
 
   if (shopLocal) {
-    score *= 0.9; // reduce score by 10%
-  }
+    score *= 0.9;
 
-  return score;
+    return score;
+  }
 }
 
-function calculateImpact() {
+async function calculateImpact(e) {
+  e.preventDefault();
   // Get user inputs
   let Diet = document.getElementById("diet").value;
   let shopLocal = document.getElementById("local").checked;
@@ -33,3 +37,14 @@ function calculateImpact() {
 }
 
 dietForm.addEventListener("submit", calculateImpact);
+
+const dietChartOptions = new CategoryRadialChartOptions(
+  [0],
+  ["#63D471", "#378B29"]
+);
+
+const dietChart = new ApexCharts(
+  document.getElementById("dietChart"),
+  dietChartOptions
+);
+dietChart.render();

@@ -115,30 +115,54 @@
       </div>
     </nav>
     <main class="container">
-      <div class="food-wrapper">
-        <h1>Carbon Footprint Calculator</h1>
-        <!-- Drop down diet selection -->
-        <form id="diet-form">
-          <div>
-            <label for="diet">Choose your diet:</label>
-            <select id="diet" name="diet">
-              <option value="Meat-heavy">Meat-heavy</option>
-              <option value="Omnivore">Omnivore</option>
-              <option value="Pescatarian">Pescatarian</option>
-              <option value="Vegetarian">Vegetarian</option>
-              <option value="Vegan">Vegan</option>
-            </select>
+      <div class="container mt-5">
+        <div class="row container-row">
+          <h1>Carbon Dietary Calculator</h1>
+          <!-- Drop down diet selection -->
+          <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+            <div class="card text-center">
+              <div
+                class="dashboard-progress dashboard-progress-1 d-flex align-items-center justify-content-center item-parent position-relative"
+              >
+                <div id="dietChart"></div>
+                <i class="fa-solid fa-pizza-slice chart-icon"></i>
+              </div>
+              <p>
+                <span
+                  id="flight-result"
+                  class="fw-bolder h4 counter"
+                  data-to="2"
+                  data-duration="1000"
+                ></span>
+                <span class="text-muted">Avg</span>
+              </p>
+              <form id="diet-form">
+                <div>
+                  <label for="diet">Choose your diet:</label>
+                  <select id="diet" name="diet">
+                    <option value="Meat-heavy">Meat-heavy</option>
+                    <option value="Omnivore">Omnivore</option>
+                    <option value="Pescatarian">Pescatarian</option>
+                    <option value="Vegetarian">Vegetarian</option>
+                    <option value="Vegan">Vegan</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="local">Do you shop locally?</label>
+                  <input type="checkbox" id="local" name="local" />
+                </div>
+                <button type="submit" class="submit-btn">
+                  Calculate Impact %
+                </button>
+              </form>
+            </div>
           </div>
-          <div>
-            <label for="local">Do you shop locally?</label>
-            <input type="checkbox" id="local" name="local" />
-          </div>
-          <button type="submit" class="submit-btn">Calculate Impact %</button>
-        </form>
-        <!-- when clicked this button will trigger the js function in script.js to calculate the user score -->
-        <!-- result display -->
-        <h2>Your Carbon Footprint Score:</h2>
-        <div id="result"></div>
+
+          <!-- when clicked this button will trigger the js function in script.js to calculate the user score -->
+          <!-- result display -->
+          <h2>Your Carbon Footprint Score:</h2>
+          <div id="result"></div>
+        </div>
       </div>
     </main>
     <script
@@ -150,6 +174,6 @@
       src="https://kit.fontawesome.com/27545168c5.js"
       crossorigin="anonymous"
     ></script>
-    <script src="src/assets/js/food.js"></script>
+    <script type="module" src="src/assets/js/food.js"></script>
   </body>
 </html>
