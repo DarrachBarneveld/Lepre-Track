@@ -5,12 +5,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { doc, getDoc, setDoc } from "@firebase/firestore";
-import {
-  checkAuthState,
-  getUserData,
-  logOutUser,
-  renderAuthenticatedNavBar,
-} from "./auth";
+import { getUserData, navbarInit } from "./auth";
 import { User } from "../classes/User";
 
 const signUpModal = document.getElementById("signup");
@@ -27,20 +22,8 @@ const loginHtml = `
 <input type="password" id="password" class="swal2-input" placeholder="Password" required />
 `;
 
-async function init() {
-  const user = await checkAuthState();
-  if (!user) return;
-
-  const userData = await getUserData(user);
-
-  renderAuthenticatedNavBar(userData);
-  // Add event listeners to new markup
-  const logoutBtn = document.getElementById("logout");
-
-  logoutBtn.addEventListener("click", logOutUser);
-}
-
-init();
+// Initalise the auth navbar check
+navbarInit();
 
 function signupForm() {
   Swal.fire({

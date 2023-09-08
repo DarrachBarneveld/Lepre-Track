@@ -112,3 +112,16 @@ export async function logOutUser() {
     window.location.href = "/";
   }
 }
+
+export async function navbarInit() {
+  const user = await checkAuthState();
+  if (!user) return;
+
+  const userData = await getUserData(user);
+
+  renderAuthenticatedNavBar(userData);
+  // Add event listeners to new markup
+  const logoutBtn = document.getElementById("logout");
+
+  logoutBtn.addEventListener("click", logOutUser);
+}
