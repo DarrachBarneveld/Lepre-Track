@@ -47,10 +47,10 @@ async function init() {
 
   userClass = new User(userData);
 
-  renderStoredData(userClass);
+  renderStoredData();
 }
 
-function renderStoredData(userClass) {
+function renderStoredData() {
   document.getElementById(userClass.travel.flight.class).checked = true;
   flightKM.value = userClass.travel.flight.yearlyKM;
   numFlights.value = userClass.travel.flight.numFlights;
@@ -233,17 +233,20 @@ async function flightCarbonCalc(e) {
 
   // UPDATEFIREBASE
 
-  const userRef = doc(firebaseDB, "users", activeUser.uid);
-
-  const userData = await getUserData(activeUser);
-
-  userData.travel.flight = {
+  const data = {
     yearlyKM: estimatedDistance,
     numFlights: totalFlights,
     class: selectedFlightClass.value,
     score: truePercent.toFixed(2),
   };
+  updateFireBase(data, "flight");
+}
+async function updateFireBase(data, prop) {
+  const userRef = doc(firebaseDB, "users", activeUser.uid);
 
+  const userData = await getUserData(activeUser);
+
+  userData.travel[prop] = data;
   updateDoc(userRef, userData);
 }
 
@@ -331,18 +334,14 @@ async function carCarbonCalc(e) {
     ],
   });
 
-  const userRef = doc(firebaseDB, "users", activeUser.uid);
-
-  const userData = await getUserData(activeUser);
-
-  userData.travel.car = {
+  const data = {
     weeklyKm: trueTotalKM,
     type: selectedCarType.value,
     year2000: selectedCarYear.value,
     score: trueScorePercent.toFixed(2),
   };
 
-  updateDoc(userRef, userData);
+  updateFireBase(data, "car");
 }
 
 async function transportCarbonCalc(e) {
@@ -422,11 +421,7 @@ async function transportCarbonCalc(e) {
     ],
   });
 
-  const userRef = doc(firebaseDB, "users", activeUser.uid);
-
-  const userData = await getUserData(activeUser);
-
-  userData.travel.transport = {
+  const data = {
     drive: drivePercentage,
     carpool: carpoolPercentage,
     walk: walkPercentage,
@@ -436,7 +431,7 @@ async function transportCarbonCalc(e) {
     score: truePercent.toFixed(2),
   };
 
-  updateDoc(userRef, userData);
+  updateFireBase(data, "transport");
 }
 
 carForm.addEventListener("submit", carCarbonCalc);
