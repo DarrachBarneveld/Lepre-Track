@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -9,110 +10,78 @@
     <link rel="stylesheet" href="src/assets/css/recycling.css" type="text/css" />
 
     <title>Recycling</title>
-  </head>
+</head>
 
-  <body>
+<body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-nav">
-      <div class="container-fluid">
-        <div class="logo">
-          <a class="navbar-brand" href="index.html">
-            <img
-              class="img-fluid"
-              src="../Lepre-Track/src/assets/images/logo.jpg"
-              alt="logo"
-            />
-          </a>
-        </div>
-        <button
-          class="navbar-toggler border-0"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNab"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse fs-4" id="navbarNav">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="navbar-list">
-            <li class="nav-item">
-              <a
-                class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3"
-                aria-current="page"
-                href="index.html"
-                >Home <i class="fa-solid fa-house"></i
-              ></a>
-            </li>
-            <li class="nav-item">
-              <div class="dropdown">
-                <button
-                  class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Categories <i class="fa-solid fa-sitemap"></i>
-                </button>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a class="dropdown-item" href="transport.html">Travel</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="food.html">Food</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="energy.html">Energy</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="recycling.html">Community</a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3"
-                href="fact_page.html"
-                >Learn More
-                <i class="fa-solid fa-book-open"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3"
-                href="recycling.html"
-                >Recycling
-                <i class="fa-solid fa-recycle"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3"
-                href="about.html"
-                >About Us
-                <i class="fa-solid fa-people-group"></i>
-              </a>
-            </li>
-          </ul>
-          <div id="authenticated" class="d-flex">
-            <a
-              class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3 text-capitalize"
-              href="dashboard.html"
-              id="profile"
-            >
-              <i class="fa-solid fa-user"></i>
-            </a>
-            <button
-              id="logout"
-              class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3"
-            >
-              Log out <i class="fa-solid fa-right-to-bracket"></i>
+        <div class="container-fluid">
+            <div class="logo">
+                <a class="navbar-brand" href="index.html">
+                    <img class="img-fluid" src="../Lepre-Track/src/assets/images/logo.jpg" alt="logo" />
+                </a>
+            </div>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNab" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
-          </div>
+            <div class="collapse navbar-collapse fs-4" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="navbar-list">
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3" aria-current="page"
+                            href="index.html">Home <i class="fa-solid fa-house"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Categories <i class="fa-solid fa-sitemap"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" href="transport.html">Travel</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="food.html">Food</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="energy.html">Energy</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="index.html">Community</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3" href="fact_page.html">Learn
+                            More
+                            <i class="fa-solid fa-book-open"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3"
+                            href="recycling.html">Recycling
+                            <i class="fa-solid fa-recycle"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3" href="about.html">About Us
+                            <i class="fa-solid fa-people-group"></i>
+                        </a>
+                    </li>
+                </ul>
+                <div id="authenticated" class="d-flex">
+                    <a class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3 text-capitalize"
+                        href="dashboard.html" id="profile">
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                    <button id="logout" class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3">
+                        Log out <i class="fa-solid fa-right-to-bracket"></i>
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
     </nav>
 
     <!-- main content - recycling -->
@@ -128,7 +97,7 @@
             </div>
         </div>
 
-        <div class="mx-3">
+        <div class="mx-3 w-100">
             <div class="container-fluid mx-3 mt-5 px-4">
                 <div class="col-lg-4 col-md-6 col-sm-12 mb-4 mx-auto">
                     <div class="form-card card text-center glassmorphism">
@@ -140,14 +109,14 @@
                         </div>
                         <p>
                             <span id="flight-result" class="fw-bolder h4 counter" data-to="2" data-duration="1000">
-                                108.9 kg <span class="text-muted">(No Recycling)</span> 
+                                108.9 kg <span class="text-muted">(No Recycling)</span>
                             </span>
                             <br>
                             <span>(amount of co2 emitted per month)</span>
                             <br>
                         </p>
                         <div class="text-muted my-2">Based on the average Irish person's waste levels per month.</div>
-    
+
                         <form id="flightForm" class="mt-4 glassmorphism">
                             <h5 class="mb-2 fw-bold">Check the box if you recycle that material</h5>
                             <div class="form-check">
@@ -179,7 +148,7 @@
                                 <label class="form-check-label" for="foodCheck">
                                     Food Waste (compost bin)
                                 </label>
-                            </div>                    
+                            </div>
                             <input type="submit" class="btn btn-success text-white" value="Submit" />
                         </form>
                     </div>
@@ -187,15 +156,12 @@
             </div>
         </div>
     </main>
-  </body>
+</body>
 
 <script type="module" src="src/assets/js/recycling.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"
-  ></script>
-  <script
-    src="https://kit.fontawesome.com/27545168c5.js"
-    crossorigin="anonymous"
-  ></script>
+    crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/27545168c5.js" crossorigin="anonymous"></script>
+
 </html>
