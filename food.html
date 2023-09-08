@@ -118,24 +118,23 @@
       <div class="food-wrapper">
         <h1>Carbon Footprint Calculator</h1>
         <!-- Drop down diet selection -->
-        <div>
-          <label for="diet">Choose your diet:</label>
-          <select id="diet">
-            <option value="Meat-heavy">Meat-heavy</option>
-            <option value="Omnivore">Omnivore</option>
-            <option value="Pescatarian">Pescatarian</option>
-            <option value="Vegetarian">Vegetarian</option>
-            <option value="Vegan">Vegan</option>
-          </select>
-        </div>
-        <div>
-          <label for="local">Do you shop locally?</label>
-          <!-- Checkbox if eat locally -->
-          <input type="checkbox" id="local" />
-        </div>
-        <button onclick="calculateImpact()" class="submit-btn">
-          Calculate Impact %
-        </button>
+        <form id="diet-form">
+          <div>
+            <label for="diet">Choose your diet:</label>
+            <select id="diet" name="diet">
+              <option value="Meat-heavy">Meat-heavy</option>
+              <option value="Omnivore">Omnivore</option>
+              <option value="Pescatarian">Pescatarian</option>
+              <option value="Vegetarian">Vegetarian</option>
+              <option value="Vegan">Vegan</option>
+            </select>
+          </div>
+          <div>
+            <label for="local">Do you shop locally?</label>
+            <input type="checkbox" id="local" name="local" />
+          </div>
+          <button type="submit" class="submit-btn">Calculate Impact %</button>
+        </form>
         <!-- when clicked this button will trigger the js function in script.js to calculate the user score -->
         <!-- result display -->
         <h2>Your Carbon Footprint Score:</h2>

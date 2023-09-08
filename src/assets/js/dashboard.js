@@ -30,7 +30,7 @@ async function init() {
       i / 2
     }s">
     <td>
-      <span class="text-warning">🥇</span>
+      <span class="h4 text-warning">🥇</span>
     </td>
     <td>
       <a

@@ -231,8 +231,6 @@ async function flightCarbonCalc(e) {
     ],
   });
 
-  // UPDATEFIREBASE
-
   const data = {
     yearlyKM: estimatedDistance,
     numFlights: totalFlights,
