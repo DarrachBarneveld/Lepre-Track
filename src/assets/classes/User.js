@@ -56,9 +56,14 @@ export class User {
   }
 
   overAllScore() {
-    const totalScore = this.travel + this.food + this.community + this.energy;
+    const valueTransport =
+      this.calcTransportScore() > 100 ? 100 : this.calcTransportScore();
 
-    const totalPercentage = totalScore / 4;
+    const valueFood = this.calcFoodScore() > 100 ? 100 : this.calcFoodScore();
+
+    const totalScore = +valueTransport + +valueFood;
+
+    const totalPercentage = totalScore / 2;
 
     return { totalScore, totalPercentage };
   }
@@ -71,17 +76,26 @@ export class User {
 
     const percentValue = (totalValue / 3).toFixed(2);
 
-    return percentValue;
+    return +percentValue;
+  }
+  calcFoodScore() {
+    const totalValue =
+      +this.food.diet.score + +this.food.farm.score + +this.food.dining.score;
+
+    const percentValue = (totalValue / 3).toFixed(2);
+
+    return +percentValue;
   }
 
   starRating() {
-    // const { totalScore } = this.overAllScore();
+    const { totalScore, totalPercentage } = this.overAllScore();
 
-    const totalScore = this.travel.flight.score;
-    const percentageDifference = Math.abs((totalScore - 400) / 400) * 100;
+    // const percentageDifference = Math.abs((totalScore - 400) / 400) * 100;
+    const percentageDifference = Math.abs((totalScore - 200) / 200) * 100;
 
     const starRating = Math.round((5 - percentageDifference / 20) * 100) / 100;
 
-    return Math.min(Math.max(starRating, 0), 5);
+    return Math.min(Math.max(5 - starRating, 0), 5).toFixed(2);
+    // return Math.min(Math.max(starRating, 0), 5);
   }
 }

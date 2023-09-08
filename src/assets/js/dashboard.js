@@ -18,10 +18,10 @@ async function init() {
   const userData = await getUserData(activeUser);
   userClass = new User(userData);
 
-  transportChart.updateSeries([userClass.travel.flight.score]);
   const users = await getAllUserDocuments();
 
   transportChart.updateSeries([userClass.calcTransportScore()]);
+  foodChart.updateSeries([userClass.calcFoodScore()]);
 
   const leaderboard = document.getElementById("leaderboard");
 
@@ -43,7 +43,7 @@ async function init() {
       </a>
     </td>
     <td>${newUser.calcTransportScore()}</td>
-    <td>${newUser.food}</td>
+    <td>${newUser.calcFoodScore()}</td>
     <td>${newUser.food}</td>
     <td>
       <span class="text-success p-1">

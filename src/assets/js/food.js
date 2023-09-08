@@ -138,7 +138,7 @@ function calcFarmingPercent({
   produceValue ? (value += (20 / 100) * produceValue) : value;
   organicValue ? (value += (20 / 100) * organicValue) : value;
 
-  return calculateInvertedPercentage(value);
+  return value;
 }
 
 async function calcFarmingImpact(e) {
@@ -157,9 +157,9 @@ async function calcFarmingImpact(e) {
     cropValue,
   };
 
-  const invertPercent = calcFarmingPercent(dataValues);
-  farmingResultLabel.innerHTML = `${invertPercent.toFixed(2)}%`;
-  farmingChart.updateSeries([invertPercent]);
+  const percent = calcFarmingPercent(dataValues);
+  farmingResultLabel.innerHTML = `${percent.toFixed(2)}%`;
+  farmingChart.updateSeries([percent]);
 
   const data = {
     local: shopLocalValue,
@@ -167,7 +167,7 @@ async function calcFarmingImpact(e) {
     organic: organicValue,
     seasonal: seasonalValue,
     crop: cropValue,
-    score: invertPercent,
+    score: calculateInvertedPercentage(percent),
   };
 
   updateFireBase(data, "food", "farm");
