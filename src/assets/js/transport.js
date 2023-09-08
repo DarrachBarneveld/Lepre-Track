@@ -38,13 +38,14 @@ function IrishAverageTravelMethodTotal() {
 }
 
 let activeUser;
+let userClass;
 
 async function init() {
   activeUser = await checkAuthState();
 
   const userData = await getUserData(activeUser);
 
-  const userClass = new User(userData);
+  userClass = new User(userData);
 
   renderStoredData(userClass);
 }
@@ -84,18 +85,20 @@ function renderStoredData(userClass) {
 
   flightResultLabel.dataset.to = userClass.travel.flight.score;
 
-  const tomTotalChart = [
-    DUMMY_DATA.flightKperWeek * (flightScore / 100),
-    DUMMY_DATA.carKperWeek * (carScore / 100),
-    DUMMY_DATA.communterKperWeek * (transportScore / 100),
+  const userTotalChart = [
+    DUMMY_DATA.flightKperWeek *
+      (userClass.travel.flight.score / 100).toFixed(0),
+    DUMMY_DATA.carKperWeek * (userClass.travel.car.score / 100).toFixed(0),
+    DUMMY_DATA.communterKperWeek *
+      (userClass.travel.transport.score / 100).toFixed(0),
   ];
 
   totalChart.updateOptions({
     series: [
       {
-        name: "Tom",
+        name: userClass.name,
         type: "column",
-        data: tomTotalChart,
+        data: userTotalChart,
       },
       {
         name: "Irish Average",
@@ -208,14 +211,22 @@ async function flightCarbonCalc(e) {
   totalChart.updateOptions({
     series: [
       {
-        name: "Tom",
+        name: userClass.name,
         type: "column",
-        data: [totalChartValue, currentArray[1], currentArray[2]],
+        data: [
+          DUMMY_DATA.flightKperWeek * (totalChartValue / 100).toFixed(0),
+          currentArray[1],
+          currentArray[2],
+        ],
       },
       {
         name: "Irish Average",
         type: "line",
-        data: [176.867, 327, 73],
+        data: [
+          DUMMY_DATA.flightKperWeek,
+          DUMMY_DATA.carKperWeek,
+          DUMMY_DATA.communterKperWeek,
+        ],
       },
     ],
   });
@@ -300,14 +311,22 @@ async function carCarbonCalc(e) {
   totalChart.updateOptions({
     series: [
       {
-        name: "Tom",
+        name: userClass.name,
         type: "column",
-        data: [currentArray[0], percentOfCarKM.toFixed(2), currentArray[2]],
+        data: [
+          currentArray[0],
+          DUMMY_DATA.carKperWeek * (trueScorePercent / 100).toFixed(0),
+          currentArray[2],
+        ],
       },
       {
         name: "Irish Average",
         type: "line",
-        data: [176.867, 327, 73],
+        data: [
+          DUMMY_DATA.flightKperWeek,
+          DUMMY_DATA.carKperWeek,
+          DUMMY_DATA.communterKperWeek,
+        ],
       },
     ],
   });
@@ -383,14 +402,22 @@ async function transportCarbonCalc(e) {
   totalChart.updateOptions({
     series: [
       {
-        name: "Tom",
+        name: userClass.name,
         type: "column",
-        data: [currentArray[0], currentArray[1], percentMode.toFixed(2)],
+        data: [
+          currentArray[0],
+          currentArray[1],
+          DUMMY_DATA.communterKperWeek * (truePercent / 100).toFixed(0),
+        ],
       },
       {
         name: "Irish Average",
         type: "line",
-        data: [176.867, 327, 73],
+        data: [
+          DUMMY_DATA.flightKperWeek,
+          DUMMY_DATA.carKperWeek,
+          DUMMY_DATA.communterKperWeek,
+        ],
       },
     ],
   });
@@ -662,7 +689,7 @@ const transportOptions = {
 const totalOptions = {
   series: [
     {
-      name: "Tom",
+      name: "",
       type: "column",
       data: [0, 0, 0],
     },
@@ -678,6 +705,11 @@ const totalOptions = {
   ],
   colors: ["#4b7bff", "#DA2D2D"],
 
+  plotOptions: {
+    bar: {
+      borderRadius: 10,
+    },
+  },
   chart: {
     height: 350,
     type: "line",
