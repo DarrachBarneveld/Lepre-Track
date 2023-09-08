@@ -36,6 +36,7 @@ async function init() {
 
   userClass = new User(userData);
 
+  // DIET
   diet.value = userClass.food.diet.type;
   calories.value = userClass.food.diet.calories;
   dietResultLabel.innerHTML = `${userClass.food.diet.score.toFixed(2)}%`;
@@ -43,6 +44,20 @@ async function init() {
   const dietScore =
     userClass.food.diet.score > 100 ? 100 : userClass.food.diet.score;
   dietChart.updateSeries([dietScore]);
+
+  // FARMING
+  shopLocal.checked = userClass.food.farm.local;
+  produce.value = userClass.food.farm.produce;
+  organic.value = userClass.food.farm.organic;
+  seasonal.checked = userClass.food.farm.seasonal;
+  crop.checked = userClass.food.farm.crop;
+
+  farmingResultLabel.innerText = `${userClass.food.farm.score.toFixed(2)}%`;
+
+  const foodScore =
+    userClass.food.diet.score > 100 ? 100 : userClass.food.diet.score;
+
+  farmingChart.updateSeries([foodScore]);
 
   // renderStoredData();
 }
@@ -127,7 +142,7 @@ async function calcFarmingImpact(e) {
   const seasonalValue = seasonal.checked;
   const cropValue = crop.checked;
 
-  const data = {
+  const dataValues = {
     shopLocalValue,
     produceValue,
     organicValue,
@@ -135,9 +150,20 @@ async function calcFarmingImpact(e) {
     cropValue,
   };
 
-  const invertPercent = calcFarmingPercent(data);
+  const invertPercent = calcFarmingPercent(dataValues);
   farmingResultLabel.innerHTML = `${invertPercent.toFixed(2)}%`;
   farmingChart.updateSeries([invertPercent]);
+
+  const data = {
+    local: shopLocalValue,
+    produce: produceValue,
+    organic: organicValue,
+    seasonal: seasonalValue,
+    crop: cropValue,
+    score: invertPercent,
+  };
+
+  updateFireBase(data, "food", "farm");
 }
 
 async function calcDiningImpact(e) {

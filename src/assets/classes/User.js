@@ -32,10 +32,12 @@ const defaultFood = {
     organic: 0,
     seasonal: false,
     crop: false,
+    score: 0,
   },
   dining: {
     out: false,
     waste: false,
+    score: 0,
   },
 };
 
