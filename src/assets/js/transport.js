@@ -84,6 +84,31 @@ function renderStoredData(userClass) {
 
   flightResultLabel.dataset.to = userClass.travel.flight.score;
 
+  const tomTotalChart = [
+    DUMMY_DATA.flightKperWeek * (flightScore / 100),
+    DUMMY_DATA.carKperWeek * (carScore / 100),
+    DUMMY_DATA.communterKperWeek * (transportScore / 100),
+  ];
+
+  totalChart.updateOptions({
+    series: [
+      {
+        name: "Tom",
+        type: "column",
+        data: tomTotalChart,
+      },
+      {
+        name: "Irish Average",
+        type: "line",
+        data: [
+          DUMMY_DATA.flightKperWeek,
+          DUMMY_DATA.carKperWeek,
+          DUMMY_DATA.communterKperWeek,
+        ],
+      },
+    ],
+  });
+
   $(".counter").each(function () {
     const $this = $(this),
       countTo = $this.attr("data-to");
@@ -116,6 +141,9 @@ const DUMMY_DATA = {
   averageFlights: 6.5,
   averageFlightKM: 6850,
   tonnesPerKM: 0.0002582,
+  flightKperWeek: 34,
+  carKperWeek: 36,
+  communterKperWeek: 29,
   averageTravelMethod: {
     car: 65,
     carpool: 8,
@@ -550,7 +578,6 @@ const flightOptions = {
   labels: ["Percent"],
 };
 
-// #34a744
 const transportOptions = {
   series: [0],
   colors: ["#63D471"],
@@ -637,12 +664,16 @@ const totalOptions = {
     {
       name: "Tom",
       type: "column",
-      data: [200, 440, 5],
+      data: [0, 0, 0],
     },
     {
       name: "Irish Average",
       type: "line",
-      data: [176.867, 327, 73],
+      data: [
+        DUMMY_DATA.flightKperWeek,
+        DUMMY_DATA.carKperWeek,
+        DUMMY_DATA.communterKperWeek,
+      ],
     },
   ],
   colors: ["#4b7bff", "#DA2D2D"],
@@ -659,27 +690,13 @@ const totalOptions = {
     width: [0, 4],
   },
   title: {
-    text: "Transport Totals",
+    text: "Kilos Carbon Per Week",
   },
   dataLabels: {
     enabled: true,
     enabledOnSeries: [1],
   },
   labels: ["Flights", "Car", "Transport"],
-
-  yaxis: [
-    {
-      title: {
-        text: "Yoy",
-      },
-    },
-    {
-      opposite: true,
-      title: {
-        text: "Average",
-      },
-    },
-  ],
 };
 
 const carChart = new ApexCharts(
