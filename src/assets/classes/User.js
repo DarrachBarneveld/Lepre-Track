@@ -63,6 +63,17 @@ export class User {
     return { totalScore, totalPercentage };
   }
 
+  calcTransportScore() {
+    const totalValue =
+      +this.travel.flight.score +
+      +this.travel.car.score +
+      +this.travel.transport.score;
+
+    const percentValue = (totalValue / 3).toFixed(2);
+
+    return percentValue;
+  }
+
   starRating() {
     // const { totalScore } = this.overAllScore();
 

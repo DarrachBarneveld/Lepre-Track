@@ -21,6 +21,8 @@ async function init() {
   transportChart.updateSeries([userClass.travel.flight.score]);
   const users = await getAllUserDocuments();
 
+  transportChart.updateSeries([userClass.calcTransportScore()]);
+
   const leaderboard = document.getElementById("leaderboard");
 
   users.forEach((user, i) => {
@@ -40,7 +42,7 @@ async function init() {
         <span class="d-block text-center">${newUser.name}</span>
       </a>
     </td>
-    <td>${newUser.travel.flight.score}</td>
+    <td>${newUser.calcTransportScore()}</td>
     <td>${newUser.food}</td>
     <td>${newUser.food}</td>
     <td>
