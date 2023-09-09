@@ -21,71 +21,50 @@
     </div>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-nav">
-      <div class="container-fluid">
-        <div class="logo">
-          <a class="navbar-brand" href="index.html">
-            <img
-              class="img-fluid"
-              src="./src/assets/images/logo.jpg"
-              alt="logo"
-            />
-          </a>
-        </div>
-        <button
-          class="navbar-toggler border-0"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse fs-4" id="navbarNav">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="navbar-list">
-            <li class="nav-item">
-              <a
-                class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3"
-                aria-current="page"
-                href="index.html"
-                >Home <i class="fa-solid fa-house"></i
-              ></a>
-            </li>
-            <li class="nav-item">
-              <div class="dropdown">
-                <button
-                  class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Categories <i class="fa-solid fa-sitemap"></i>
-                </button>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a class="dropdown-item" href="transport.html">Travel</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="food.html">Food</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="energy.html">Energy</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="index.html">Community</a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3"
-                href="fact_page.html"
-                >Learn More
-                <i class="fa-solid fa-book-open"></i>
-              </a>
-            </li>
+        <div class="container-fluid">
+            <div class="logo">
+                <a class="navbar-brand" href="index.html">
+                    <img class="img-fluid" src="./src/assets/images/logo.jpg" alt="logo" />
+                </a>
+            </div>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse fs-4" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="navbar-list">
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3" aria-current="page"
+                            href="index.html">Home <i class="fa-solid fa-house"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Categories <i class="fa-solid fa-sitemap"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" href="transport.html">Travel</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="food.html">Food</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="energy.html">Energy</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="index.html">Community</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3" href="fact_page.html">Learn
+                            More
+                            <i class="fa-solid fa-book-open"></i>
+                        </a>
+                    </li>
 
                     <li class="nav-item">
                         <a class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3" href="about.html">About Us
@@ -139,7 +118,7 @@
                         </div>
 
                         <form id="recyclingForm" class="mt-4 glassmorphism">
-                            <h5 class="mb-4 mx-3 fw-bold text-dark">
+                            <h5 class="mb-4 mx-3 fw-bold">
                                 Check the box if you recycle that material
                             </h5>
                             <div class="form-check">
@@ -172,8 +151,8 @@
                                     Food Waste (compost bin)
                                 </label>
                             </div>
-                            <button type="submit" class="submit-btn" value="Submit">
-                                Calculate Impact %
+                            <button type="submit" class="btn btn-success text-white mt-3" value="Submit">
+                                Calculate Impact
                             </button>
                         </form>
                     </div>
@@ -196,7 +175,7 @@
                         </div>
 
                         <form id="volunteerForm" class="mt-4 glassmorphism">
-                            <h5 class="mb-4 mx-3 fw-bold text-dark">
+                            <h5 class="mb-4 mx-3 fw-bold">
                                 Check the box if you volunteer in
                             </h5>
                             <div class="form-check">
@@ -226,7 +205,7 @@
                                 <input class="form-control" type="number" id="donation" name="donation" value="0" />
                             </div>
 
-                            <button type="submit" class="submit-btn" value="Submit">
+                            <button type="submit" class="btn btn-success text-white mt-3" value="Submit">
                                 Calculate Impact %
                             </button>
                         </form>
