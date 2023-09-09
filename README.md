@@ -35,6 +35,9 @@ Lepre-Track seamlessly integrates into your daily routine, allowing you to track
 * [Dashboard](/src/assets/images/wireframe-dashboard.png)
 
 ## Badges
+[Canva](https://www.canva.com/) was used to design the badges.
+
+
 
 ## Technologies Used
 In the tech section, we have provided information about the technology stack, dependencies, and any technical details related to the project.
