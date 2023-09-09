@@ -1,155 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="src/assets/css/styles.css" />
-    <link rel="icon" href="src/assets/images/favicon.ico" type="image/x-icon" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="src/assets/css/index.css" />
-    <link rel="stylesheet" href="src/assets/css/styles.css" />
-    <title>Lepre-Track</title>
-  </head>
-  <body>
-    <a href="dashboard.html"></a>
-    <nav class="navbar navbar-expand-lg navbar-light bg-nav">
-      <div class="container-fluid">
-        <div class="logo">
-          <a class="navbar-brand" href="index.html">
-            <img
-              class="img-fluid"
-              src="./src/assets/images/logo.jpg"
-              alt="logo"
-            />
-          </a>
-        </div>
-        <button
-          class="navbar-toggler border-0"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse fs-4" id="navbarNav">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="navbar-list">
-            <li class="nav-item">
-              <a
-                class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3"
-                aria-current="page"
-                href="index.html"
-                >Home <i class="fa-solid fa-house"></i
-              ></a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3"
-                href="fact_page.html"
-                >Learn More
-                <i class="fa-solid fa-book-open"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3"
-                href="about.html"
-                >About Us
-                <i class="fa-solid fa-people-group"></i>
-              </a>
-            </li>
-          </ul>
-          <div id="authenticated" class="d-flex">
-            <button
-              class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3"
-              id="signup"
-            >
-              Signup <i class="fa-solid fa-user-plus"></i>
-            </button>
-            <button
-              class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3"
-              id="login"
-            >
-              Login <i class="fa-solid fa-right-to-bracket"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </nav>
-    <main>
-      <div style="margin-bottom: 180px">
-        <h1>
-          "Welcome to Lepre-Track: Empowering Individuals for a Greener
-          Tomorrow"
-        </h1>
-        <p>
-          Join us on a journey to a sustainable future, where every action
-          counts. Our platform enables you to effortlessly track your carbon
-          footprint, empowering you to make informed choices that reduce your
-          CO2 emissions. Together, we're driving positive change, one person at
-          a time, towards a cleaner and more sustainable planet.
-        </p>
-      </div>
 
-      <div class="glassmorphism" id="text-overlay">
-        <h1 class="fade-in-text">Lepre-Track</h1>
-        <p class="fs-4">Tracking Solutions for a Greener Tomorrow</p>
-        <a class="btn btn-success text-white start-tracking" href="#">
-          Start Tracking
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="src/assets/css/styles.css" />
+  <link rel="icon" href="src/assets/images/favicon.ico" type="image/x-icon" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <link rel="stylesheet" href="src/assets/css/index.css" />
+  <link rel="stylesheet" href="src/assets/css/styles.css" />
+  <title>Lepre-Track</title>
+</head>
+
+<body>
+  <a href="dashboard.html"></a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-nav">
+    <div class="container-fluid">
+      <div class="logo">
+        <a class="navbar-brand" href="index.html">
+          <img class="img-fluid" src="./src/assets/images/logo.jpg" alt="logo" />
         </a>
       </div>
-      <section class="chat-prompt-section">
-        <form method="dialog">
-          <label for="input-gpt">Please ask us about the environment</label>
-          <input
-            type="text"
-            name="input-gpt"
-            id="input-gpt"
-            class="input-gpt"
-          />
-          <textarea
-            name="gpt-output"
-            id="gpt-output"
-            cols="30"
-            rows="10"
-            class="gpt-output"
-            disabled
-          ></textarea>
-          <div class="btn-wrapper">
-            <button type="submit" class="gpt-submit submit-btn btn-success">Submit</button>
-            <button type="reset" class="reset-btn btn-success">Reset</button>
-          </div>
-        </form>
-      </section>
-    </main>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse fs-4" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="navbar-list">
+          <li class="nav-item">
+            <a class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3" aria-current="page" href="index.html">Home
+              <i class="fa-solid fa-house"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3" href="fact_page.html">Learn More
+              <i class="fa-solid fa-book-open"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3" href="about.html">About Us
+              <i class="fa-solid fa-people-group"></i>
+            </a>
+          </li>
+        </ul>
+        <div id="authenticated" class="d-flex">
+          <button class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3" id="signup">
+            Signup <i class="fa-solid fa-user-plus"></i>
+          </button>
+          <button class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3" id="login">
+            Login <i class="fa-solid fa-right-to-bracket"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <main>
+    <div style="margin-bottom: 180px">
+      <h1>
+        "Welcome to Lepre-Track: Empowering Individuals for a Greener
+        Tomorrow"
+      </h1>
+      <p>
+        Join us on a journey to a sustainable future, where every action
+        counts. Our platform enables you to effortlessly track your carbon
+        footprint, empowering you to make informed choices that reduce your
+        CO2 emissions. Together, we're driving positive change, one person at
+        a time, towards a cleaner and more sustainable planet.
+      </p>
+    </div>
 
-    <script type="module" src="src/assets/js/auth.js"></script>
-    <!-- <script type="module" src="src/assets/js/index.js"></script> -->
-    <script type="module" src="src/assets/js/signin.js"></script>
+    <div class="glassmorphism" id="text-overlay">
+      <h1 class="fade-in-text">Lepre-Track</h1>
+      <p class="fs-4">Tracking Solutions for a Greener Tomorrow</p>
+      <a class="btn btn-success text-white start-tracking" href="#">
+        Start Tracking
+      </a>
+    </div>
+    <section class="chat-prompt-section">
+      <form method="dialog">
+        <label for="input-gpt">Please ask us about the environment</label>
+        <input type="text" name="input-gpt" id="input-gpt" class="input-gpt" />
+        <textarea name="gpt-output" id="gpt-output" cols="30" rows="10" class="gpt-output" disabled></textarea>
+        <div class="btn-wrapper">
+          <button type="submit" class="gpt-submit submit-btn btn-success">Submit</button>
+          <button type="reset" class="reset-btn btn-success">Reset</button>
+        </div>
+      </form>
+    </section>
+  </main>
 
-    <!-- <script type="module" src="src/assets/js/gpt.js"></script> -->
+  <script type="module" src="src/assets/js/auth.js"></script>
+  <!-- <script type="module" src="src/assets/js/index.js"></script> -->
+  <script type="module" src="src/assets/js/signin.js"></script>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://kit.fontawesome.com/27545168c5.js"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"
-      integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-  </body>
+  <!-- <script type="module" src="src/assets/js/gpt.js"></script> -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/27545168c5.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"
+    integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+
 </html>
