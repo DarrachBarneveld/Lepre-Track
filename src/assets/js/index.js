@@ -1,4 +1,5 @@
 import Swal from "sweetalert2";
+
 import { firebaseAuth, firebaseDB } from "../../config/firebase";
 import {
   createUserWithEmailAndPassword,
