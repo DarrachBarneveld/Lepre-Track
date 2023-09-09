@@ -31,6 +31,7 @@ const defaultEnergy = {
     propane: 0,
     wood: 0,
     factor: 0,
+    score: 0,
   },
 };
 
@@ -117,6 +118,21 @@ export class User {
     const percentValue = (totalValue / 3).toFixed(2);
 
     return +percentValue;
+  }
+
+  calcRecyclingScore() {
+    const totalValue =
+      +this.community.recycle.score + +this.community.volunteer.score;
+
+    const percentValue = (totalValue / 3).toFixed(2);
+
+    return +percentValue;
+  }
+
+  calcEnergyScore() {
+    const totalValue = +this.energy.energy.score;
+
+    return +totalValue;
   }
 
   starRating() {
