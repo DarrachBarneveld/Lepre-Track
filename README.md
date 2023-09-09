@@ -87,6 +87,12 @@ In the tech section, we have provided information about the technology stack, de
 - CSS
 - Javascript
 
+### Accessabilty
+ * Mobile and Desktop landing page
+   ![mobile ](../Lepre-Track/src/assets/images/mobilelanding%20page.png)
+
+ * ![desktop](../Lepre-Track/src/assets/images/desktoplandingpage.png)  
+
 ### Libraries and Programs Used
 - Parcel Index
 - Firebase
