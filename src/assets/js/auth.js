@@ -117,6 +117,7 @@ export async function logOutUser() {
 
 export async function navbarInit() {
   const user = await checkAuthState();
+
   if (!user) return;
 
   const userData = await getUserData(user);
