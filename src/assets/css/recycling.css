@@ -20,7 +20,8 @@ body {
   color: #198754;
 }
 
-.fa-handshake-angle {
+.fa-handshake-angle,
+#volunteer-result {
   color: #009ffd;
 }
 
@@ -37,4 +38,3 @@ body {
 .form-check-input:checked {
   background-color: #198754;
 }
-

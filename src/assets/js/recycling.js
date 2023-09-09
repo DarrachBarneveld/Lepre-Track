@@ -59,7 +59,7 @@ function renderStoredData() {
       '108.9 kg <span class="text-muted">(No Recycling)</span>';
   } else {
     recyclingResult.innerText = `${(
-      (100 - userClass.community.recycle.score)*1.089
+      (100 - userClass.community.recycle.score) * 1.089
     ).toFixed(2)} kg`;
   }
 
