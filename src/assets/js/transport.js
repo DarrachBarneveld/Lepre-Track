@@ -194,7 +194,6 @@ async function flightCarbonCalc(e) {
   const totalFlightCalc = 1 + totalFlights / 5;
 
   tonnesPerDistance *= totalFlightCalc;
-  console.log("result in tonnes", tonnesPerDistance.toFixed(2));
 
   const averageFlightCarbon =
     DUMMY_DATA.averageFlightKM * DUMMY_DATA.tonnesPerKM;
