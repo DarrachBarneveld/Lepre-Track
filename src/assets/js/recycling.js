@@ -218,7 +218,7 @@ recyclingForm.addEventListener("submit", recyclingCarbonCalc);
 volunteerForm.addEventListener("submit", volunteerCarbonCalc);
 
 const recyclingChartOptions = new CategoryRadialChartOptions(
-  [0],
+  [100],
 
   ["#63D471", "#378B29"]
 );
