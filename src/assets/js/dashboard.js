@@ -124,14 +124,25 @@ async function init() {
 
   const leaderboard = document.getElementById("leaderboard");
 
-  users.forEach((user, i) => {
+  const usersClasses = users.map((user) => new User(user));
+
+  console.log(usersClasses);
+
+  usersClasses.sort((userA, userB) => {
+    const userAScore = userA.overAllScore();
+    const userBScore = userB.overAllScore();
+
+    return userAScore.totalScore - userBScore.totalScore;
+  });
+
+  usersClasses.forEach((user, i) => {
     const newUser = new User(user);
 
     const html = `<tr class="leaderboard-item fade-in-right"   style="animation-delay: ${
       i / 2
     }s">
     <td>
-      <span class="h4 text-warning">🥇</span>
+      <span class="h4 text-warning">${i === 0 ? "🥇 " : i}</span>
     </td>
     <td>
       <a
