@@ -8,7 +8,7 @@
 </p>
 
 #  ♻️ DEPLOYMENT
-🚀 Lepre-Track is live and can be accessed ➡️ [http://your-deployed-link.com](https://lepretrack.netlify.app/).
+🚀 Lepre-Track is live and can be accessed ➡️ [Lepre-Track Link](https://lepretrack.netlify.app/).
  
 # ♻️ ABOUT LEPRE-TRACK
 ## Intro
