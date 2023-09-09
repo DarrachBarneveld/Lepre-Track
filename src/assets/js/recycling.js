@@ -4,7 +4,9 @@ import { checkAuthState, getUserData, removeLoader } from "./auth";
 import { User } from "../classes/User";
 import { doc, updateDoc } from "@firebase/firestore";
 import { firebaseDB } from "../../config/firebase";
+import { CategoryRadialChartOptions } from "../classes/Charts";
 
+const recyclingForm = document.getElementById("recyclingForm");
 const metalCheck = document.getElementById("metalCheck");
 const paperCheck = document.getElementById("paperCheck");
 const plasticCheck = document.getElementById("plasticCheck");
@@ -16,41 +18,24 @@ const flightResultLabel = document.getElementById("flight-result");
 let activeUser;
 let userClass;
 
-async function init() {
-  activeUser = await checkAuthState();
-  removeLoader();
+// async function init() {
+//   activeUser = await checkAuthState();
+//   removeLoader();
 
-  const userData = await getUserData(activeUser);
+//   const userData = await getUserData(activeUser);
 
-  userClass = new User(userData);
+//   userClass = new User(userData);
 
-  const profileIcon = document.getElementById("profile");
-  profileIcon.innerHTML = `<i class="fa-solid fa-user"></i> ${userData.name}`;
-  renderStoredData();
-}
+//   const profileIcon = document.getElementById("profile");
+//   profileIcon.innerHTML = `<i class="fa-solid fa-user"></i> ${userData.name}`;
+//   renderStoredData();
+// }
 
 function renderStoredData() {}
 
-init();
+// init();
 
 const DUMMY_DATA = {
-  // this is the average milage/carbon per week of a car
-  averageKM: 327,
-  averageFlights: 6.5,
-  averageFlightKM: 6850,
-  tonnesPerKM: 0.0002582,
-  flightKperWeek: 34,
-  carKperWeek: 36,
-  communterKperWeek: 29,
-  averageTravelMethod: {
-    car: 65,
-    carpool: 8,
-    walkCycle: 15,
-    bus: 6,
-    train: 6,
-  },
-  // average packaging & food waste per month, in kg.
-  // Only 10 percent of plastic waste is recyclable, so we times the amount of by 0.1 to get recyclable amount
   averageMetalWaste: 6.3,
   averagePaperWaste: 19.4,
   averagePlasticWaste: 9 * 0.1,
@@ -68,7 +53,7 @@ const DUMMY_DATA = {
   averageTotalCo2: 108.9,
 };
 
-async function flightCarbonCalc(e) {
+async function recyclingCarbonCalc(e) {
   e.preventDefault(); // Prevent form submission
 
   let co2Savings = 0;
@@ -100,7 +85,7 @@ async function flightCarbonCalc(e) {
 
   console.log(co2Savings);
 
-  flightChart.updateOptions({
+  recyclingChart.updateOptions({
     series: [((DUMMY_DATA.averageTotalCo2 - co2Savings) / 1.089).toFixed(2)],
   });
 }
@@ -114,91 +99,16 @@ async function updateFireBase(data, prop) {
   updateDoc(userRef, userData);
 }
 
-flightForm.addEventListener("submit", flightCarbonCalc);
+recyclingForm.addEventListener("submit", recyclingCarbonCalc);
 
-const flightOptions = {
-  series: [100],
-  colors: ["#DA2D2D"],
-  chart: {
-    height: 225,
-    type: "radialBar",
-    // toolbar: {
-    //   show: true,
-    // },
-  },
-  plotOptions: {
-    radialBar: {
-      startAngle: -135,
-      endAngle: 225,
-      hollow: {
-        margin: 0,
-        size: "70%",
-        background: "#fff",
-        image: undefined,
-        imageOffsetX: 0,
-        imageOffsetY: 0,
-        position: "front",
-        dropShadow: {
-          enabled: true,
-          top: 3,
-          left: 0,
-          blur: 4,
-          opacity: 0.24,
-        },
-      },
-      track: {
-        background: "#fff",
-        strokeWidth: "67%",
-        margin: 0,
-        dropShadow: {
-          enabled: true,
-          top: -3,
-          left: 0,
-          blur: 4,
-          opacity: 0.35,
-        },
-      },
+const recyclingChartOptions = new CategoryRadialChartOptions(
+  [0],
 
-      dataLabels: {
-        show: true,
-        name: {
-          // offsetY: -10,
-          show: false,
-          // color: "#888",
-          // fontSize: "17px",
-        },
-        value: {
-          formatter: function (val, i) {
-            return parseInt(val) + "%";
-          },
-          color: "#111",
-          fontSize: "36px",
-          show: false,
-        },
-      },
-    },
-  },
-  fill: {
-    type: "gradient",
-    gradient: {
-      shade: "dark",
-      type: "horizontal",
-      shadeIntensity: 0.5,
-      gradientToColors: ["#7C0000"],
-      inverseColors: false,
-      opacityFrom: 1,
-      opacityTo: 1,
-      stops: [0, 100],
-    },
-  },
-  stroke: {
-    lineCap: "round",
-  },
-  labels: ["Percent"],
-};
-
-const flightChart = new ApexCharts(
-  document.getElementById("flightChart"),
-  flightOptions
+  ["#63D471", "#378B29"]
 );
-flightChart.render();
+
+const recyclingChart = new ApexCharts(
+  document.getElementById("recyclingChart"),
+  recyclingChartOptions
+);
+recyclingChart.render();

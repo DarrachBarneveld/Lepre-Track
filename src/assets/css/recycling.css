@@ -18,20 +18,6 @@
 
 body {
   color: #198754;
-  background: url("../images/background-image.jpg") no-repeat center center;
-  background-size: cover;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-main {
-  flex-grow: 1;
-  /* display: block; */
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
 }
 
 .card h1 {
