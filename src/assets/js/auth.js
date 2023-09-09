@@ -55,6 +55,8 @@ export async function getAllUserDocuments() {
 
 export function renderAuthenticatedNavBar(user) {
   const navAuth = document.getElementById("authenticated");
+
+  if (!user) return;
   const html = AuthNavBar(user);
 
   navAuth.innerHTML = html;
@@ -115,6 +117,7 @@ export async function logOutUser() {
 
 export async function navbarInit() {
   const user = await checkAuthState();
+
   if (!user) return;
 
   const userData = await getUserData(user);

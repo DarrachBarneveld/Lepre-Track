@@ -2,6 +2,12 @@
   display: none;
 }
 
+.chart-icon {
+  position: absolute;
+  color: #f07654;
+  font-size: 2rem;
+}
+
 /* .submit-btn,
 .reset-btn {
   position: relative;
