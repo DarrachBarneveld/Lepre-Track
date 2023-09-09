@@ -35,6 +35,8 @@ async function init() {
   const energyColor = graphColor(userEnergyScore);
   const recycleColor = graphColor(userFoodScore);
 
+  locateImageSrc(userClass.overAllScore());
+
   transportChart.updateOptions({
     colors: transColor,
   });
@@ -55,7 +57,8 @@ async function init() {
 
   const { totalScore } = userClass.overAllScore();
 
-  console.log(totalScore);
+  locateImageSrc(totalScore);
+
   pieChart.updateSeries([
     userTransportScore,
     userFoodScore,
@@ -100,6 +103,22 @@ async function init() {
       ],
     },
   ]);
+
+  function locateImageSrc(num) {
+    console.log(num);
+    if (num <= 300) {
+      userBadge.src = "src/assets/images/terra-tormentor.png";
+    }
+    if (num <= 100) {
+      userBadge.src = "./src/assets/images/balanced-foodprint.png";
+    }
+    if (num <= 150) {
+      userBadge.src = "./src/assets/images/green-finger.png";
+    }
+    if (num >= 200) {
+      userBadge.src = "./src/assets/images/earth-guardian.png";
+    }
+  }
 
   const leaderboard = document.getElementById("leaderboard");
 
