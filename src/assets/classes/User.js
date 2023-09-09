@@ -22,7 +22,7 @@ const defaultTravel = {
   },
 };
 const defaultEnergy = {
-  enery: {
+  energy: {
     electric: 0,
     gas: 0,
     oil: 0,
@@ -31,6 +31,7 @@ const defaultEnergy = {
     propane: 0,
     wood: 0,
     factor: 0,
+    score: 0,
   },
 };
 
@@ -119,6 +120,21 @@ export class User {
     return +percentValue;
   }
 
+  calcRecyclingScore() {
+    const totalValue =
+      +this.community.recycle.score + +this.community.volunteer.score;
+
+    const percentValue = (totalValue / 3).toFixed(2);
+
+    return +percentValue;
+  }
+
+  calcEnergyScore() {
+    const totalValue = +this.energy.energy.score;
+
+    return +totalValue;
+  }
+
   starRating() {
     const { totalScore, totalPercentage } = this.overAllScore();
 
@@ -127,7 +143,7 @@ export class User {
 
     const starRating = Math.round((5 - percentageDifference / 20) * 100) / 100;
 
-    return Math.min(Math.max(5 - starRating, 0), 5).toFixed(2);
+    return Math.min(Math.max(starRating, 0), 5).toFixed(2);
     // return Math.min(Math.max(starRating, 0), 5);
   }
 }
