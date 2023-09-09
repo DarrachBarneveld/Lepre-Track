@@ -145,6 +145,10 @@ export class User {
   starRating() {
     const { totalScore, totalPercentage } = this.overAllScore();
 
+    if (totalScore < 0) {
+      return 0;
+    }
+
     const percentageDifference = Math.abs((totalScore - 400) / 400) * 100;
 
     const starRating = Math.round((percentageDifference / 20) * 100) / 100;

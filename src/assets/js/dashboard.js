@@ -125,12 +125,16 @@ async function init() {
 
   const usersClasses = users.map((user) => new User(user));
 
-  usersClasses.sort((userA, userB) => {
-    const userAScore = userA.overAllScore();
-    const userBScore = userB.overAllScore();
+  usersClasses
+    .filter((user) => user.overAllScore().totalScore >= 0)
+    .sort((userA, userB) => {
+      const userAScore = userA.overAllScore();
+      const userBScore = userB.overAllScore();
 
-    return userAScore.totalScore - userBScore.totalScore;
-  });
+      console.log(userAScore.totalScore, userBScore.totalScore);
+
+      return userAScore.totalScore - userBScore.totalScore;
+    });
 
   usersClasses.forEach((user, i) => {
     const newUser = new User(user);
