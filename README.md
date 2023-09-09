@@ -93,6 +93,7 @@ In the tech section, we have provided information about the technology stack, de
 - NPM
 - ApexCharts
 - Animje.js
+- Node.js
 
 # ♻️ Credits
 We would like to give credit to the following individuals, organizations, and resources that have contributed to the project or provided inspiration:
