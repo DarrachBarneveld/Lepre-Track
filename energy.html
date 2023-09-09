@@ -13,9 +13,10 @@
 
 <body>
   <!-- Loader Auth Page -->
-  <div id="loader">
+   <div id="loader">
     <div class="img-container">
       <img src="src/assets/images/loading.gif" alt="Loading earth spinner" />
+    </div>
     </div>
 
     <!-- NAVBAR -->
@@ -35,7 +36,7 @@
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
-          aria-controls="navbarNab"
+          aria-controls="navbarNav"
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
@@ -85,7 +86,14 @@
                 <i class="fa-solid fa-book-open"></i>
               </a>
             </li>
-
+            <li class="nav-item">
+              <a
+                class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3"
+                href="recycling.html"
+                >Recycling
+                <i class="fa-solid fa-recycle"></i>
+              </a>
+            </li>
             <li class="nav-item">
               <a
                 class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3"
@@ -103,30 +111,17 @@
             >
               <i class="fa-solid fa-user"></i>
             </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3" href="recycling.html">Recycling
-              <i class="fa-solid fa-recycle"></i>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3" href="about.html">About Us
-              <i class="fa-solid fa-people-group"></i>
-            </a>
-          </li>
-        </ul>
-        <div id="authenticated" class="d-flex">
-          <a class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3 text-capitalize" href="dashboard.html"
-            id="profile">
-            <i class="fa-solid fa-user"></i>
-          </a>
-          <button id="logout" class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3">
-            Log out <i class="fa-solid fa-right-to-bracket"></i>
-          </button>
+            <button
+              id="logout"
+              class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3"
+            >
+              Log out <i class="fa-solid fa-right-to-bracket"></i>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  </nav>
+    </nav>
+
 
 
     <main>
@@ -137,7 +132,6 @@
       </div>
 
         <div class="row container-row">
-          <!-- First Card -->
           <div class=" col-sm-12 mb-4 mt-4">
             <div class="card text-center glassmorphism">
               <div class="d-flex align-items-center justify-content-center">
@@ -209,7 +203,6 @@
             </div>
           </div>
 
-          <!-- Second Card -->
     
       </div>
     </main>

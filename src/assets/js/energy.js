@@ -15,6 +15,8 @@ const energyResult = document.getElementById("energy-result");
 
 async function init() {
   activeUser = await checkAuthState();
+
+  console.log(activeUser);
   if (!activeUser) return (window.location.href = "/");
   removeLoader();
 
@@ -32,7 +34,6 @@ init();
 function renderStoredData() {
   // DIET
 
-  console.log(userClass.energy);
   const energyScore =
     userClass.energy.energy.score > 100 ? 100 : userClass.energy.energy.score;
 
