@@ -1,0 +1,74 @@
+<div class="row container-row">
+  <div class="col-sm-12 mb-4 mt-4">
+    <div class="card text-center glassmorphism">
+      <div class="d-flex align-items-center justify-content-center">
+        <div id="energyChart"></div>
+        <i class="fa-solid fa-plug-circle-exclamation chart-icon"></i>
+      </div>
+      <p>
+        <span
+          id="energy-result"
+          class="fw-bolder h4 counter"
+          data-to="2"
+          data-duration="1000"
+        >
+        </span>
+      </p>
+      <form id="energyForm" class="">
+        <h5 class="mb-2 fw-bold text-dark">
+          What is your yearly energy consumption?
+        </h5>
+        <div class="form-check">
+          <label for="elec">Electric</label>
+          <input type="number" name="elec" id="elect" />
+          <div>
+            <label for="factor">with a factor of</label>
+            <input type="number" name="factor" id="factor" value="0.2111" />
+            <span
+              ><abbr title="kilogram">KG</abbr>/<abbr
+                title="Carbon Dioxide Equivalent
+                  "
+                >C02e</abbr
+              >/<abbr title=" kilowatt hour">KWH</abbr></span
+            >
+          </div>
+        </div>
+        <div class="form-check">
+          <label for="gas">Natural Gas</label>
+          <input type="number" name="gas" id="gas" />
+          <p>in <abbr title=" kilowatt hour">KWH</abbr></p>
+        </div>
+        <div class="form-check">
+          <label for="oil">Oil</label>
+          <input type="number" name="oil" id="oil" />
+          <p>in <abbr title="Litre">LT</abbr></p>
+        </div>
+        <div class="form-check">
+          <label for="coal">Coal</label>
+          <input type="number" name="coal" id="coal" />
+          <p>in Tonnes</p>
+        </div>
+        <div class="form-check">
+          <label for="lpg"
+            ><abbr title="Liquefied petroleum gas">LPG</abbr></label
+          >
+          <input type="number" name="lpg" id="lpg" />
+          <p>in <abbr title="Litre">LT</abbr></p>
+        </div>
+        <div class="form-check">
+          <label for="propane">Propane</label>
+          <input type="number" name="propane" id="propane" />
+          <p>in <abbr title=" kilowatt hour">KWH</abbr></p>
+        </div>
+        <div class="form-check grid">
+          <label for="wood">Wood</label>
+          <input type="number" name="wood" id="wood" />
+          <p>in Tonnes</p>
+        </div>
+        <button type="submit" class="submit-btn" value="Submit">
+          Calculate Impact %
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
