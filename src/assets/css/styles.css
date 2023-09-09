@@ -158,7 +158,7 @@ input:focus:valid {
   opacity: 0.8;
 }
 
-.submit-btn,
+/* .submit-btn,
 .reset-btn {
   background-color: var(--forest-green);
   margin-top: 1em;
@@ -168,7 +168,7 @@ input:focus:valid {
   border-radius: 100vmax;
   border: none;
   padding: 0.5em 2em;
-}
+} */
 
 /*fact_page css*/
 #bicycle,

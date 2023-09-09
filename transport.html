@@ -189,23 +189,13 @@
                 />
                 <label for="business">Business</label><br />
 
-                <input
-                  type="radio"
-                  id="first"
-                  name="flightClass"
-                  value="first"
-                  required
-                />
-                <label for="first">First</label><br /><br />
-              </div>
-              <input
-                type="submit"
-                value="Submit"
-                class="btn btn-success text-white"
-              />
-            </form>
-          </div>
+              <input type="radio" id="first" name="flightClass" value="first" required />
+              <label for="first">First</label><br /><br />
+            </div>
+            <input type="submit" value="Submit" class="submit-btn btn btn-success text-white" />
+          </form>
         </div>
+      </div>
 
         <!-- Second Card -->
 
@@ -229,62 +219,28 @@
                 required
               /><br /><br />
 
-              <div class="car-wrapper mt-3">
-                <div class="1col">
-                  <label class="h3">Type of Car:</label><br />
-                  <input
-                    type="radio"
-                    id="electric"
-                    name="carType"
-                    value="electric"
-                    required
-                  />
-                  <label for="electric">Electric</label><br />
-                  <input
-                    type="radio"
-                    id="hybrid"
-                    name="carType"
-                    value="hybrid"
-                    required
-                  />
-                  <label for="hybrid">Hybrid</label><br />
-                  <input
-                    type="radio"
-                    id="petrol"
-                    name="carType"
-                    value="petrol"
-                    required
-                  />
-                  <label for="petrol">Petrol</label><br />
-                </div>
-                <div class="2col">
-                  <label class="h3">Car Manufactured:</label><br />
-                  <input
-                    type="radio"
-                    id="before"
-                    name="carYear"
-                    value="before"
-                    required
-                  />
-                  <label for="before">Before 2000</label><br />
-                  <input
-                    type="radio"
-                    id="after"
-                    name="carYear"
-                    value="after"
-                    required
-                  />
-                  <label for="after">After 2000</label><br /><br />
-                </div>
+            <div class="car-wrapper mt-3">
+              <div class="1col">
+                <label class="h3">Type of Car:</label><br />
+                <input type="radio" id="electric" name="carType" value="electric" required />
+                <label for="electric">Electric</label><br />
+                <input type="radio" id="hybrid" name="carType" value="hybrid" required />
+                <label for="hybrid">Hybrid</label><br />
+                <input type="radio" id="petrol" name="carType" value="petrol" required />
+                <label for="petrol">Petrol</label><br />
               </div>
-              <input
-                type="submit"
-                value="Submit"
-                class="btn btn-success text-white mt-4"
-              />
-            </form>
-          </div>
+              <div class="2col">
+                <label class="h3">Car Manufactured:</label><br />
+                <input type="radio" id="before" name="carYear" value="before" required />
+                <label for="before">Before 2000</label><br />
+                <input type="radio" id="after" name="carYear" value="after" required />
+                <label for="after">After 2000</label><br /><br />
+              </div>
+            </div>
+            <input type="submit" value="Submit" class="submit-btn btn btn-success text-white mt-4" />
+          </form>
         </div>
+      </div>
 
         <!-- Third Card -->
         <div class="col-lg-4 col-md-6 col-sm-12 mb-4 px-3">
@@ -299,119 +255,63 @@
               <span class="text-muted">Avg</span>
             </p>
 
-            <form id="transportForm" class="glassmorphism mt-3">
-              <div>
-                <label for="driveInput">Drive:</label>
-                <input
-                  type="number"
-                  id="driveInput"
-                  name="driveInput"
-                  min="0"
-                  max="100"
-                  value="0"
-                  required
-                />
-                <span>%</span>
-              </div>
-              <div>
-                <label for="carpoolInput">Carpool:</label>
-                <input
-                  type="number"
-                  id="carpoolInput"
-                  name="carpoolInput"
-                  min="0"
-                  max="100"
-                  value="0"
-                  required
-                />
-                <span>%</span>
-              </div>
-              <div>
-                <label for="walkInput">Walk:</label>
-                <input
-                  type="number"
-                  id="walkInput"
-                  name="walkInput"
-                  min="0"
-                  max="100"
-                  value="0"
-                  required
-                />
-                <span>%</span>
-              </div>
-              <div>
-                <label for="cycleInput">Cycle:</label>
-                <input
-                  type="number"
-                  id="cycleInput"
-                  name="cycleInput"
-                  min="0"
-                  max="100"
-                  value="0"
-                  required
-                />
-                <span>%</span>
-              </div>
-              <div>
-                <label for="trainInput">Train:</label>
-                <input
-                  type="number"
-                  id="trainInput"
-                  name="trainInput"
-                  min="0"
-                  max="100"
-                  value="0"
-                  required
-                />
-                <span>%</span>
-              </div>
-              <div>
-                <label for="busInput">Bus:</label>
-                <input
-                  type="number"
-                  id="busInput"
-                  name="busInput"
-                  min="0"
-                  max="100"
-                  value="0"
-                  required
-                />
-                <span>%</span>
-              </div>
-              <input
-                type="submit"
-                value="Submit"
-                class="btn btn-success text-white mt-4"
-              />
-            </form>
-          </div>
+          <form id="transportForm" class="glassmorphism mt-3">
+            <div>
+              <label for="driveInput">Drive:</label>
+              <input type="number" id="driveInput" name="driveInput" min="0" max="100" value="0" required />
+              <span>%</span>
+            </div>
+            <div>
+              <label for="carpoolInput">Carpool:</label>
+              <input type="number" id="carpoolInput" name="carpoolInput" min="0" max="100" value="0" required />
+              <span>%</span>
+            </div>
+            <div>
+              <label for="walkInput">Walk:</label>
+              <input type="number" id="walkInput" name="walkInput" min="0" max="100" value="0" required />
+              <span>%</span>
+            </div>
+            <div>
+              <label for="cycleInput">Cycle:</label>
+              <input type="number" id="cycleInput" name="cycleInput" min="0" max="100" value="0" required />
+              <span>%</span>
+            </div>
+            <div>
+              <label for="trainInput">Train:</label>
+              <input type="number" id="trainInput" name="trainInput" min="0" max="100" value="0" required />
+              <span>%</span>
+            </div>
+            <div>
+              <label for="busInput">Bus:</label>
+              <input type="number" id="busInput" name="busInput" min="0" max="100" value="0" required />
+              <span>%</span>
+            </div>
+            <input type="submit" value="Submit" class="submit-btn btn btn-success text-white mt-4" />
+          </form>
         </div>
       </div>
-      <div class="container mb-4">
-        <div class="card">
-          <div id="chart"></div>
+    </div>
+    <div class="container mb-4">
+      <div class="card">
+        <div id="chart"></div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <div class="w-100 card footer">
+      <div class="card-body">
+        <div class="card-title text-center fw-bold my-auto">
+          &copy;2023 GreenStep
         </div>
       </div>
-    </main>
-    <footer>
-      <div class="w-100 card footer">
-        <div class="card-body">
-          <div class="card-title text-center fw-bold my-auto">
-            &copy;2023 GreenStep
-          </div>
-        </div>
-      </div>
-    </footer>
-    <script type="module" src="src/assets/js/transport.js"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://kit.fontawesome.com/27545168c5.js"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  </body>
+    </div>
+  </footer>
+  <script type="module" src="src/assets/js/transport.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/27545168c5.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</body>
+
 </html>
