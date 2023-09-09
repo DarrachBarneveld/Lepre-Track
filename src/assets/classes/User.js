@@ -143,6 +143,5 @@ export class User {
     const starRating = Math.round((percentageDifference / 20) * 100) / 100;
 
     return Math.min(Math.max(starRating, 0), 5).toFixed(2);
-    // return Math.min(Math.max(starRating, 0), 5);
   }
 }

@@ -1,7 +1,10 @@
 // USE THIS AS A BASE MODULE FOR OTHER INPUT CALCULATIONS
 import ApexCharts from "apexcharts";
 import Swal from "sweetalert2";
-import { getPercentInRelationToAverage } from "../../helpers/math";
+import {
+  calculateInvertedPercentage,
+  getPercentInRelationToAverage,
+} from "../../helpers/math";
 import { checkAuthState, getUserData, removeLoader } from "./auth";
 import { User } from "../classes/User";
 import { doc, updateDoc } from "@firebase/firestore";
@@ -65,6 +68,7 @@ function renderStoredData() {
 
   const flightScore =
     userClass.travel.flight.score > 100 ? 100 : userClass.travel.flight.score;
+
   flightChart.updateSeries([flightScore]);
 
   const carScore =
@@ -84,6 +88,7 @@ function renderStoredData() {
     userClass.travel.transport.score > 100
       ? 100
       : userClass.travel.transport.score;
+
   transportChart.updateSeries([transportScore]);
   transportResultLabel.innerText = `${userClass.travel.transport.score}%`;
 
@@ -201,14 +206,16 @@ async function flightCarbonCalc(e) {
 
   const truePercent = percentOfFlightKM;
 
-  flightResultLabel.innerText = `${percentOfFlightKM.toFixed(2)}%`;
+  const inversePercent = calculateInvertedPercentage(truePercent);
+
+  flightResultLabel.innerText = `${inversePercent.toFixed(2)}%`;
 
   const totalChartValue = tonnesPerDistance * 100;
   // avoid strange css behaviour of over 100% on chart
   percentOfFlightKM > 100 ? (percentOfFlightKM = 100) : percentOfFlightKM;
 
   flightChart.updateOptions({
-    series: [percentOfFlightKM.toFixed(2)],
+    series: [inversePercent.toFixed(2)],
   });
 
   const currentArray = totalChart.w.globals.series[0];
@@ -240,7 +247,7 @@ async function flightCarbonCalc(e) {
     yearlyKM: estimatedDistance,
     numFlights: totalFlights,
     class: selectedFlightClass.value,
-    score: truePercent.toFixed(2),
+    score: inversePercent.toFixed(2),
   };
   updateFireBase(data, "flight");
 }
@@ -391,12 +398,14 @@ async function transportCarbonCalc(e) {
   );
 
   const truePercent = percentMode;
-  transportResultLabel.innerText = `${percentMode.toFixed(2)}%`;
+
+  const inverseScore = calculateInvertedPercentage(truePercent);
+  transportResultLabel.innerText = `${inverseScore.toFixed(2)}%`;
 
   percentMode > 100 ? (percentMode = 100) : percentMode;
 
   transportChart.updateOptions({
-    series: [percentMode.toFixed(2)],
+    series: [inverseScore.toFixed(2)],
   });
 
   const currentArray = totalChart.w.globals.series[0];
@@ -431,7 +440,7 @@ async function transportCarbonCalc(e) {
     cycle: cyclePercentage,
     train: trainPercentage,
     bus: busPercentage,
-    score: truePercent.toFixed(2),
+    score: inverseScore.toFixed(2),
   };
 
   updateFireBase(data, "transport");
