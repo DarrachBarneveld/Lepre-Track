@@ -114,17 +114,19 @@ async function calcDietImpact(e) {
   score > 100 ? (score = 100) : score;
 
   // Display the result using .toFixed() method to round the score to two decimal places.
-  dietResultLabel.innerText = `${trueScore.toFixed(2)}%`;
+  dietResultLabel.innerText = `${calculateInvertedPercentage(trueScore).toFixed(
+    2
+  )}%`;
 
   const data = {
     type: dietValue,
     calories: caloriesValue,
-    score: trueScore,
+    score: calculateInvertedPercentage(trueScore),
   };
 
   updateFireBase(data, "food", "diet");
 
-  dietChart.updateSeries([score]);
+  dietChart.updateSeries([calculateInvertedPercentage(score)]);
 }
 
 function calcFarmingPercent({
@@ -187,13 +189,15 @@ async function calcDiningImpact(e) {
   foodWasteValue ? (value += 50) : value;
   dineOutValue ? (value += 50) : value;
 
-  diningResultLabel.innerHTML = `${value.toFixed(2)}%`;
-  diningChart.updateSeries([value]);
+  diningResultLabel.innerHTML = `${calculateInvertedPercentage(value).toFixed(
+    2
+  )}%`;
+  diningChart.updateSeries([calculateInvertedPercentage(value)]);
 
   const data = {
     out: dineOutValue,
     waste: foodWasteValue,
-    score: value,
+    score: calculateInvertedPercentage(value),
   };
 
   updateFireBase(data, "food", "dining");
