@@ -61,7 +61,8 @@ async function init() {
     </td>
     <td>${newUser.calcTransportScore()}</td>
     <td>${newUser.calcFoodScore()}</td>
-    <td>${newUser.food}</td>
+    <td>${newUser.calcEnergyScore()}</td>
+    <td>${newUser.calcRecyclingScore()}</td>
     <td>
       <span class="text-success p-1">
       <i class="fa-solid fa-star text-warning"></i> ${newUser.starRating()}
