@@ -55,6 +55,8 @@ export async function getAllUserDocuments() {
 
 export function renderAuthenticatedNavBar(user) {
   const navAuth = document.getElementById("authenticated");
+
+  if (!user) return;
   const html = AuthNavBar(user);
 
   navAuth.innerHTML = html;

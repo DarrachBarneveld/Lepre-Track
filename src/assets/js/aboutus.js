@@ -1,13 +1,8 @@
 import Swal from "sweetalert2";
-
-import { firebaseAuth, firebaseDB } from "../../config/firebase";
 import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import { doc, getDoc, setDoc } from "@firebase/firestore";
-import { getUserData } from "./auth";
-import { User } from "../classes/User";
+  signUpUserWithEmailAndPassword,
+  signInUserWithEmailAndPassword,
+} from "./index";
 
 const signUpModal = document.getElementById("signup");
 const loginModal = document.getElementById("login");
@@ -22,8 +17,6 @@ const loginHtml = `
 <input type="email" class="swal2-input" id="email" placeholder="Email" required />
 <input type="password" id="password" class="swal2-input" placeholder="Password" required />
 `;
-
-// Initalise the auth navbar check
 
 function signupForm() {
   Swal.fire({
@@ -112,125 +105,6 @@ function loginForm() {
     );
   });
 }
-
-export async function signUpUserWithEmailAndPassword(
-  username,
-  email,
-  password
-) {
-  try {
-    const userCreds = await createUserWithEmailAndPassword(
-      firebaseAuth,
-      email,
-      password
-    );
-
-    const { user } = userCreds;
-
-    await Swal.fire({
-      title: "Success!",
-      text: `Welcome ${username}`,
-      icon: "success",
-      confirmButtonText: "Cool",
-    });
-
-    await createUserDocumentFromAuth(user, username);
-
-    window.location.href = "dashboard.html";
-  } catch (err) {
-    console.log(err);
-  }
-}
-
-export async function signInUserWithEmailAndPassword(email, password) {
-  try {
-    const { user } = await signInWithEmailAndPassword(
-      firebaseAuth,
-      email,
-      password
-    );
-
-    const userData = await getUserData(user);
-
-    // Pop up fired on success
-    await Swal.fire({
-      title: "Success!",
-      text: `Welcome back ${userData.name}`,
-      icon: "success",
-      confirmButtonText: "Cool",
-    });
-
-    // Awaits action before reloading page
-    window.location.href = "dashboard.html";
-  } catch (err) {
-    Swal.fire({
-      title: "Error!",
-      text: "Invalid Credentials",
-      icon: "error",
-      confirmButtonText: "Cool",
-    });
-  }
-}
-
-async function createUserDocumentFromAuth(userAuth, userName) {
-  if (!userAuth) return;
-
-  const userDocument = await getUserDocument(userAuth);
-
-  if (!userDocument) {
-    const { email, displayName, uid } = userAuth;
-
-    const createdAt = new Date();
-
-    const data = {
-      id: uid,
-      createdAt,
-      email,
-      name: userName,
-    };
-
-    // create a new class
-    const newUser = new User(data);
-
-    // User object for firebase
-    const userObject = {
-      id: newUser.id,
-      createdAt: newUser.createdAt,
-      email: newUser.email,
-      name: newUser.name,
-      travel: newUser.travel,
-      food: newUser.food,
-      energy: newUser.energy,
-      community: newUser.community,
-    };
-
-    try {
-      const userDocRef = doc(firebaseDB, "users", userAuth.uid);
-      await setDoc(userDocRef, userObject);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-}
-
-async function getUserDocument(userAuth) {
-  const userDocRef = doc(firebaseDB, "users", userAuth.uid);
-
-  const userSnapShot = await getDoc(userDocRef);
-
-  if (userSnapShot.exists()) {
-    return userSnapShot.data();
-  } else return null;
-}
-
-anime({
-  targets: ".start-tracking",
-  translateY: [-1500, 0], // from 100 to 250
-  //   delay: 150,
-  duration: 1500,
-  direction: "normal",
-  easing: "easeOutBack",
-});
 
 signUpModal.addEventListener("click", signupForm);
 loginModal.addEventListener("click", loginForm);
