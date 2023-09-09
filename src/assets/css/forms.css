@@ -56,15 +56,21 @@
 } */
 
 @media (min-width: 800px) {
-  .grid-forms-charts {
+  .form-check {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 0.5fr 1fr;
+  }
+  .form-check > * {
+    margin: 0;
+    padding: 0;
   }
 
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    justify-items: start;
-    gap: 0.5em;
+  .form-check > :first-child {
+    justify-self: end;
+    margin-right: 0.5em;
+  }
+
+  .form-check > :not(:first-child) {
+    justify-self: start;
   }
 }
