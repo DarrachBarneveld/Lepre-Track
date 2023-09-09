@@ -1,5 +1,5 @@
 .form-card {
-  padding: 0.5rem;
+  /* padding: 0.5rem; */
   border-radius: 1rem;
 }
 
@@ -9,7 +9,7 @@
 
 .chart-icon {
   position: absolute;
-  color: var(--primary-blue);
+  /* color: var(--primary-blue); */
   font-size: 2rem;
 }
 
@@ -30,39 +30,39 @@
   margin-bottom: 0.25em;
 }
 
-#transportForm {
+/* #transportForm {
   display: grid;
-}
+} */
 
-#transportForm > div {
+#transportForm>div {
   display: grid;
   margin-bottom: 0.5em;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
 }
 
-#transportForm > div > span {
+#transportForm>div>span {
   justify-self: start;
   margin-left: 0.125em;
 }
 
-#transportForm > div > label {
+#transportForm>div>label {
   justify-self: center;
   align-items: center;
 }
 
-#transportForm > div > input,
-#carForm > input[type="number"],
-#flightForm > input[type="number"] {
+#transportForm>div>input,
+#carForm>input[type="number"],
+#flightForm>input[type="number"] {
   border-radius: 5px;
   outline: 1.25px solid;
   outline: none;
   border: none;
 }
 
-#transportForm > input[type="submit"],
-#carForm > input[type="submit"],
-#flightForm > input[type="submit"] {
+/* #transportForm>input[type="submit"],
+#carForm>input[type="submit"],
+#flightForm>input[type="submit"] {
   justify-self: center;
   background-color: #6e9c11;
   padding: 0.5em 2em;
@@ -72,4 +72,17 @@
   border: none;
   margin-top: 1em;
   box-shadow: 11px 7px 23px -4px rgba(0, 0, 0, 0.43);
+} */
+
+.glassmorphism {
+  border-radius: 10px;
+  /* padding: 10px; */
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10px);
+  font: bolder;
+}
+
+body {
+  color: #198754;
 }
