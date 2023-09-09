@@ -234,7 +234,10 @@ main {
 .chat-btn {
   color: var(--apple-green);
   font-size: 3rem;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
   border: none;
+  box-shadow: var(--box-shadow);
   background: inherit;
 }
 
