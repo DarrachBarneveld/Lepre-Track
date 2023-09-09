@@ -22,7 +22,6 @@ const loginHtml = `
 <input type="password" id="password" class="swal2-input" placeholder="Password" required />
 `;
 
-console.log("fire");
 // navbarInit();
 // Initalise the auth navbar check
 
@@ -232,8 +231,6 @@ async function getUserDocument(userAuth) {
 //   direction: "normal",
 //   easing: "easeOutBack",
 // });
-
-console.log(signUpModal);
 
 signUpModal.addEventListener("click", signupForm);
 loginModal.addEventListener("click", loginForm);

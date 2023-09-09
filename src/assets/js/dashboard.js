@@ -110,7 +110,6 @@ async function init() {
   ]);
 
   function locateImageSrc(num) {
-    console.log(num);
     if (num <= 50) {
       userBadge.src = terra;
     } else if (num <= 100) {
@@ -125,8 +124,6 @@ async function init() {
   const leaderboard = document.getElementById("leaderboard");
 
   const usersClasses = users.map((user) => new User(user));
-
-  console.log(usersClasses);
 
   usersClasses.sort((userA, userB) => {
     const userAScore = userA.overAllScore();
