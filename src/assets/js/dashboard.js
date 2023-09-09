@@ -248,10 +248,10 @@ var options = {
     showForSingleSeries: true,
     customLegendItems: [
       "Tom",
-      "Destroyer Of Worlds",
-      "Average",
-      "GreenFingers",
-      "Protector of Gaia",
+      "Terra's Tormentor",
+      "Balance Footprint",
+      "Green Fingers",
+      "Earth's Guardian",
     ],
     markers: {
       fillColors: ["#00E396", "#FF0000", "#775DD0", "#4b7bff", "#FFD700"],
