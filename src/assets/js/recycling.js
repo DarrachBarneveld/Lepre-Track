@@ -9,33 +9,75 @@ import { CategoryRadialChartOptions } from "../classes/Charts";
 const recyclingForm = document.getElementById("recyclingForm");
 const volunteerForm = document.getElementById("volunteerForm");
 
+// Recycling
 const metalCheck = document.getElementById("metalCheck");
 const paperCheck = document.getElementById("paperCheck");
 const plasticCheck = document.getElementById("plasticCheck");
 const glassCheck = document.getElementById("glassCheck");
 const foodCheck = document.getElementById("foodCheck");
-
 const recyclingResult = document.getElementById("recycling-result");
+
+// Volunteering
+const trees = document.getElementById("trees");
+const gardens = document.getElementById("gardens");
+const wildlife = document.getElementById("wildlife");
+const ocean = document.getElementById("ocean");
+const other = document.getElementById("other");
+const donation = document.getElementById("donation");
+const volunteerResult = document.getElementById("volunteer-result");
 
 let activeUser;
 let userClass;
 
-// async function init() {
-//   activeUser = await checkAuthState();
-//   removeLoader();
+async function init() {
+  activeUser = await checkAuthState();
+  removeLoader();
 
-//   const userData = await getUserData(activeUser);
+  const userData = await getUserData(activeUser);
 
-//   userClass = new User(userData);
+  userClass = new User(userData);
 
-//   const profileIcon = document.getElementById("profile");
-//   profileIcon.innerHTML = `<i class="fa-solid fa-user"></i> ${userData.name}`;
-//   renderStoredData();
-// }
+  console.log(userClass);
 
-function renderStoredData() {}
+  const profileIcon = document.getElementById("profile");
+  profileIcon.innerHTML = `<i class="fa-solid fa-user"></i> ${userData.name}`;
+  renderStoredData();
+}
 
-// init();
+function renderStoredData() {
+  // RECYCLING
+  metalCheck.checked = userClass.community.recycle.metal;
+  paperCheck.checked = userClass.community.recycle.paper;
+  plasticCheck.checked = userClass.community.recycle.plastic;
+  glassCheck.checked = userClass.community.recycle.glass;
+  foodCheck.checked = userClass.community.recycle.food;
+
+  recyclingResult.innerText = `${userClass.community.recycle.score}%`;
+
+  const recycleScore = userClass.community.recycle.score;
+
+  const recyclePercent = recycleScore > 100 ? 100 : recycleScore;
+
+  recyclingChart.updateSeries([recyclePercent]);
+
+  // VOLUNTEERING
+  trees.checked = userClass.community.volunteer.tree;
+  gardens.checked = userClass.community.volunteer.gardens;
+  wildlife.checked = userClass.community.volunteer.wildlife;
+  ocean.checked = userClass.community.volunteer.ocean;
+  other.checked = userClass.community.volunteer.other;
+  donation.value = userClass.community.volunteer.donation;
+
+  const volunteerScore = userClass.community.volunteer.score;
+
+  const volunteerPercent = volunteerScore > 100 ? 100 : volunteerScore;
+
+  volunteerChart.updateSeries([volunteerPercent]);
+
+  volunteerResult.innerText = `${volunteerScore}%`;
+}
+
+init();
 
 const DUMMY_DATA = {
   averageMetalWaste: 6.3,
@@ -85,23 +127,94 @@ async function recyclingCarbonCalc(e) {
     ).toFixed(2)} kg`;
   }
 
-  console.log(co2Savings);
-
   recyclingChart.updateOptions({
     series: [((DUMMY_DATA.averageTotalCo2 - co2Savings) / 1.089).toFixed(2)],
   });
+
+  const data = {
+    metal: metalCheck.checked,
+    paper: paperCheck.checked,
+    plastic: plasticCheck.checked,
+    glass: glassCheck.checked,
+    food: foodCheck.checked,
+    score: ((DUMMY_DATA.averageTotalCo2 - co2Savings) / 1.089).toFixed(2),
+  };
+
+  updateFireBase(data, "community", "recycle");
 }
 
-async function updateFireBase(data, prop) {
+function calcVolunteerPercent({
+  treeValue,
+  gardensValue,
+  wildlifeValue,
+  oceanValue,
+  otherValue,
+  donationValue,
+}) {
+  let value = 0;
+
+  treeValue ? (value += 20) : value;
+  gardensValue ? (value += 20) : value;
+  wildlifeValue ? (value += 20) : value;
+  oceanValue ? (value += 20) : value;
+  otherValue ? (value += 20) : value;
+
+  const donationPercent = donationValue > 100 ? 100 : donationValue;
+
+  return value + +donationPercent;
+}
+
+async function volunteerCarbonCalc(e) {
+  e.preventDefault(); // Prevent form submission
+
+  const treeValue = trees.checked;
+  const gardensValue = gardens.checked;
+  const wildlifeValue = wildlife.checked;
+  const oceanValue = ocean.checked;
+  const otherValue = other.checked;
+  const donationValue = donation.value;
+
+  const dataValues = {
+    treeValue,
+    gardensValue,
+    wildlifeValue,
+    oceanValue,
+    otherValue,
+    donationValue,
+  };
+
+  const truePercent = calcVolunteerPercent(dataValues);
+
+  let percent = truePercent > 100 ? 100 : truePercent;
+
+  volunteerChart.updateOptions({
+    series: [percent.toFixed(2)],
+  });
+  volunteerResult.innerText = `${truePercent}%`;
+
+  const data = {
+    tree: treeValue,
+    gardens: gardensValue,
+    wildlife: wildlifeValue,
+    ocean: oceanValue,
+    other: otherValue,
+    donation: donationValue,
+    score: truePercent,
+  };
+  updateFireBase(data, "community", "volunteer");
+}
+
+async function updateFireBase(data, category, prop) {
   const userRef = doc(firebaseDB, "users", activeUser.uid);
 
   const userData = await getUserData(activeUser);
 
-  userData.travel[prop] = data;
+  userData[category][prop] = data;
   updateDoc(userRef, userData);
 }
 
 recyclingForm.addEventListener("submit", recyclingCarbonCalc);
+volunteerForm.addEventListener("submit", volunteerCarbonCalc);
 
 const recyclingChartOptions = new CategoryRadialChartOptions(
   [0],
@@ -116,7 +229,7 @@ const recyclingChart = new ApexCharts(
 recyclingChart.render();
 
 const volunteerChartOptions = new CategoryRadialChartOptions(
-  [100],
+  [0],
 
   ["#009FFD", "#5200AE"]
 );
