@@ -9,7 +9,13 @@ import {
 } from "./auth";
 import { User } from "../classes/User";
 
+import gaia from "../images/earth-guardian.png";
+import terra from "../images/terra-tormentor.png";
+import balanced from "../images/balanced-footprint.png";
+import fingers from "../images/green-finger.png";
+
 const logoutBtn = document.getElementById("logout");
+const userBadge = document.getElementById("badgeImage");
 
 let activeUser;
 let userClass;
@@ -34,6 +40,8 @@ async function init() {
   const energyColor = graphColor(userEnergyScore);
   const recycleColor = graphColor(userFoodScore);
 
+  locateImageSrc(userClass.overAllScore());
+
   transportChart.updateOptions({
     colors: transColor,
   });
@@ -54,7 +62,8 @@ async function init() {
 
   const { totalScore } = userClass.overAllScore();
 
-  console.log(totalScore);
+  locateImageSrc(totalScore);
+
   pieChart.updateSeries([
     userTransportScore,
     userFoodScore,
@@ -67,30 +76,30 @@ async function init() {
       name: "Actual",
       data: [
         {
-          x: "Tom",
+          x: userClass.name,
           y: totalScore,
           goals: [
             {
-              name: "Protector of Gaia",
+              name: "Earth's Guardian",
               value: 200,
               strokeHeight: 5,
               strokeColor: "#FFD700",
             },
             {
-              name: "GreenFingers",
+              name: "Green Fingers",
               value: 150,
               strokeHeight: 5,
               strokeColor: "#4b7bff",
             },
             {
-              name: "Average",
+              name: "Balance Footprint",
               value: 100,
               strokeHeight: 5,
               strokeColor: "#775DD0",
             },
             {
-              name: "Destroyer Of Worlds",
-              value: 25,
+              name: "Terra's Tormentor",
+              value: 50,
               strokeHeight: 5,
               strokeColor: "#FF0000",
             },
@@ -99,6 +108,19 @@ async function init() {
       ],
     },
   ]);
+
+  function locateImageSrc(num) {
+    console.log(num);
+    if (num <= 50) {
+      userBadge.src = terra;
+    } else if (num <= 100) {
+      userBadge.src = balanced;
+    } else if (num <= 150) {
+      userBadge.src = fingers;
+    } else if (num >= 200) {
+      userBadge.src = gaia;
+    }
+  }
 
   const leaderboard = document.getElementById("leaderboard");
 
@@ -199,26 +221,26 @@ var options = {
           y: 126,
           goals: [
             {
-              name: "Protector of Gaia",
+              name: "Earth's Guardian",
               value: 200,
               strokeHeight: 5,
               strokeColor: "#FFD700",
             },
             {
-              name: "GreenFingers",
+              name: "Green Fingers",
               value: 150,
               strokeHeight: 5,
               strokeColor: "#4b7bff",
             },
             {
-              name: "Average",
+              name: "Balance Footprint",
               value: 100,
               strokeHeight: 5,
               strokeColor: "#775DD0",
             },
             {
-              name: "Destroyer Of Worlds",
-              value: 25,
+              name: "Terra's Tormentor",
+              value: 50,
               strokeHeight: 5,
               strokeColor: "#FF0000",
             },
@@ -247,11 +269,11 @@ var options = {
     show: true,
     showForSingleSeries: true,
     customLegendItems: [
-      "Tom",
-      "Destroyer Of Worlds",
-      "Average",
-      "GreenFingers",
-      "Protector of Gaia",
+      "User",
+      "Terra's Tormentor",
+      "Balance Footprint",
+      "Green Fingers",
+      "Earth's Guardian",
     ],
     markers: {
       fillColors: ["#00E396", "#FF0000", "#775DD0", "#4b7bff", "#FFD700"],

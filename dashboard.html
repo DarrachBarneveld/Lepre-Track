@@ -53,32 +53,33 @@
                 >Home <i class="fa-solid fa-house"></i
               ></a>
             </li>
-            <li class="nav-item">
-              <div class="dropdown">
-                <button
-                  class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Categories <i class="fa-solid fa-sitemap"></i>
-                </button>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a class="dropdown-item" href="transport.html">Travel</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="food.html">Food</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="energy.html">Energy</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="recycling.html">Community</a>
-                  </li>
-                </ul>
-              </div>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle btn btn-success text-white m-1 ms-0 mx-2 px-3"
+                href="dashboard.html"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Categories <i class="fa-solid fa-sitemap"></i>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <a class="dropdown-item" href="transport.html">Travel</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="food.html">Food</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="energy.html">Energy</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="recycling.html">Community</a>
+                </li>
+              </ul>
             </li>
+
             <li class="nav-item">
               <a
                 class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3"
@@ -166,7 +167,13 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-6 col-md-3 pie-container">
-            <div id="totalChart"></div>
+            <img
+              id="badgeImage"
+              width="100%"
+              class="rounded-3"
+              src="./src/assets/images/earth-guardian.png"
+              alt="user badge image"
+            />
           </div>
           <div class="col-lg-6 leaderboard-container">
             <table class="table">
@@ -207,8 +214,14 @@
         </div>
       </div>
       <div class="container">
-        <div class="pie-container col-lg-6 mx-auto">
-          <div id="pieChart"></div>
+        <div class="row">
+          <div class="pie-container col-lg-6">
+            <div id="pieChart"></div>
+          </div>
+
+          <div class="col-lg-6 col-md-3 pie-container">
+            <div id="totalChart"></div>
+          </div>
         </div>
       </div>
     </main>

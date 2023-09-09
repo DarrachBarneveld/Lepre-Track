@@ -64,32 +64,26 @@ export function renderAuthenticatedNavBar(user) {
   const navbarList = document.getElementById("navbar-list");
 
   const categoriesBtnHtml = `
-    <li class="nav-item">
-    <div class="dropdown">
-      <button
-        class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3"
-        type="button"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-      >
-        Categories <i class="fa-solid fa-sitemap"></i>
-      </button>
-      <ul class="dropdown-menu">
-        <li>
-          <a class="dropdown-item" href="transport.html">Travel</a>
-        </li>
-        <li>
-          <a class="dropdown-item" href="food.html">Food</a>
-        </li>
-        <li>
-          <a class="dropdown-item" href="energy.html">Energy</a>
-        </li>
-        <li>
-          <a class="dropdown-item" href="recycling.html">Community</a>
-        </li>
-      </ul>
-    </div>
-  </li>`;
+  <li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle btn btn-success text-white m-1 ms-0 mx-2 px-3 " href="food.html"
+    id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Categories <i class="fa-solid fa-sitemap"></i>
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <li>
+      <a class="dropdown-item" href="transport.html">Travel</a>
+    </li>
+    <li>
+      <a class="dropdown-item" href="food.html">Food</a>
+    </li>
+    <li>
+      <a class="dropdown-item" href="energy.html">Energy</a>
+    </li>
+    <li>
+      <a class="dropdown-item" href="recycling.html">Community</a>
+    </li>
+  </ul>
+</li>`;
 
   navbarList.firstElementChild.insertAdjacentHTML(
     "afterend",
