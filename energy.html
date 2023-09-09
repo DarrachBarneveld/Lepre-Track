@@ -126,7 +126,7 @@
 
         <div class="row container-row">
           <!-- First Card -->
-          <div class="col-md-6 col-sm-12 mb-4 mt-4">
+          <div class=" col-sm-12 mb-4 mt-4">
             <div class="card text-center glassmorphism">
               <div class="d-flex align-items-center justify-content-center">
                 <div id="energyChart"></div>
@@ -149,6 +149,10 @@
                 <div class="form-check">
                   <label for="elec">Electric</label>
                   <input type="number" name="elec" id="elect" />
+                  <label for="factor">with a factor of</label>
+                  <input type="number" name="factor" id="factor" value="0.2111" />
+                  <span>kg/C02e/kwh</span>
+
                 
                 </div>
                 <div class="form-check">
@@ -194,97 +198,7 @@
           </div>
 
           <!-- Second Card -->
-          <div class="col-md-6 col-sm-12 mb-4 mt-4">
-            <div class="card text-center glassmorphism">
-              <div class="d-flex align-items-center justify-content-center">
-                <div id="volunteerChart"></div>
-                <i class="fa-solid fa-handshake-angle chart-icon"></i>
-              </div>
-              <p>
-                <span
-                  id="volunteer-result"
-                  class="fw-bolder h4 counter"
-                  data-to="2"
-                  data-duration="1000"
-                >
-                  <span class="text-muted">(No Volunteering)</span>
-                </span>
-              </p>
-              <div class="text-muted my-2">
-                Based on the average Irish person.
-              </div>
-
-              <form id="volunteerForm" class="mt-4">
-                <h5 class="mb-2 fw-bold text-dark">
-                  Check the box if you volunteer in
-                </h5>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    id="trees"
-                    name="trees"
-                  />
-                  <label class="form-check-label" for="trees">
-                    Planting Trees</label
-                  >
-                </div>
-                <div>
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    id="gardens"
-                    name="gardens"
-                  />
-                  <label for="trees">Community Gardens</label>
-                </div>
-                <div>
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    id="wildlife"
-                    name="wildlife"
-                  />
-                  <label for="wildlife">Protecting Wildlife</label>
-                </div>
-                <div>
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    id="ocean"
-                    name="ocean"
-                  />
-                  <label for="ocean">Ocean Cleanup</label>
-                </div>
-                <div>
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    id="other"
-                    name="other"
-                  />
-                  <label for="other">Other</label>
-                </div>
-
-                <div>
-                  <label for="donation" class="text-dark"
-                    >Donation Amount Weekly</label
-                  >
-                  <input
-                    class="form-control"
-                    type="number"
-                    id="donation"
-                    name="donation"
-                    value="0"
-                  />
-                </div>
-
-                <button type="submit" class="submit-btn" value="Submit">
-                  Calculate Impact %
-                </button>
-              </form>
-            </div>
-          </div>
+    
       </div>
     </main>
 

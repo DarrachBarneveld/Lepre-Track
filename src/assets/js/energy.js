@@ -4,13 +4,6 @@ import { CategoryRadialChartOptions } from "../classes/Charts";
 
 import { User } from "../classes/User";
 
-let electricity = 0;
-let gas = 0;
-let oil = 0;
-let coal = 0;
-let lpg = 0;
-let propane = 0;
-let wood = 0;
 let average_house = 4;
 
 let activeUser;

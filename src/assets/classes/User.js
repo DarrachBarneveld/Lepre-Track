@@ -21,6 +21,18 @@ const defaultTravel = {
     score: 0,
   },
 };
+const defaultEnergy = {
+  enery: {
+    electric: 0,
+    gas: 0,
+    oil: 0,
+    coal: 0,
+    lpg: 0,
+    propane: 0,
+    wood: 0,
+    factor: 0,
+  },
+};
 
 const defaultFood = {
   diet: {
@@ -71,7 +83,7 @@ export class User {
     this.createdAt = data.createdAt;
     this.travel = data?.travel || defaultTravel;
     this.food = data?.food || defaultFood;
-    this.energy = data?.energy || 0;
+    this.energy = data?.energy || defaultEnergy;
     this.community = data?.community || defaultCommunity;
   }
 
