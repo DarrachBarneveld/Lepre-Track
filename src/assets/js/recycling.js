@@ -55,11 +55,10 @@ function renderStoredData() {
 
   recyclingResult.innerText = `${userClass.community.recycle.score}%`;
 
-  const recycleScore = userClass.community.recycle.score;
+  const recycleScore = (userClass.community.recycle.score);
+  console.log(recycleScore)
 
-  const recyclePercent = recycleScore > 100 ? 100 : recycleScore;
-
-  recyclingChart.updateSeries([recyclePercent]);
+  recyclingChart.updateSeries([recycleScore]);
 
   // VOLUNTEERING
   trees.checked = userClass.community.volunteer.tree;
@@ -138,7 +137,7 @@ async function recyclingCarbonCalc(e) {
     plastic: plasticCheck.checked,
     glass: glassCheck.checked,
     food: foodCheck.checked,
-    score: ((DUMMY_DATA.averageTotalCo2 - co2Savings) / 1.089).toFixed(2),
+    score: calcInverse(DUMMY_DATA.averageTotalCo2 - co2Savings) / 1.089,
   };
 
   updateFireBase(data, "community", "recycle");
