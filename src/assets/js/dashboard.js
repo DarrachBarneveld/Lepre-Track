@@ -147,3 +147,76 @@ const pieOptions = {
 
 var pieChart = new ApexCharts(document.querySelector("#pieChart"), pieOptions);
 pieChart.render();
+
+var options = {
+  series: [
+    {
+      name: "Actual",
+      data: [
+        {
+          x: "Tom",
+          y: 126,
+          goals: [
+            {
+              name: "Protector of Gaia",
+              value: 200,
+              strokeHeight: 5,
+              strokeColor: "#FFD700",
+            },
+            {
+              name: "GreenFingers",
+              value: 150,
+              strokeHeight: 5,
+              strokeColor: "#4b7bff",
+            },
+            {
+              name: "Average",
+              value: 100,
+              strokeHeight: 5,
+              strokeColor: "#775DD0",
+            },
+            {
+              name: "Destroyer Of Worlds",
+              value: 25,
+              strokeHeight: 5,
+              strokeColor: "#FF0000",
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  chart: {
+    height: 400,
+    type: "bar",
+    toolbar: {
+      show: false,
+    },
+  },
+  plotOptions: {
+    bar: {
+      columnWidth: "60%",
+    },
+  },
+  colors: ["#00E396"],
+  dataLabels: {
+    enabled: false,
+  },
+  legend: {
+    show: true,
+    showForSingleSeries: true,
+    customLegendItems: [
+      "Tom",
+      "Destroyer Of Worlds",
+      "Average",
+      "GreenFingers",
+      "Protector of Gaia",
+    ],
+    markers: {
+      fillColors: ["#00E396", "#FF0000", "#775DD0", "#4b7bff", "#FFD700"],
+    },
+  },
+};
+
+var chart = new ApexCharts(document.querySelector("#totalChart"), options);
+chart.render();
