@@ -189,3 +189,15 @@ input:focus:valid {
 #slide-container {
   opacity: 0.9;
 }
+
+/* footer */
+.footer {
+  padding: 5px;
+  /* background: rgba(255, 255, 255, 0.75); */
+  background: #198754;
+  color: white;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font: bolder;
+}
