@@ -235,3 +235,22 @@ main {
   color: var(--apple-green);
   font-size: 3rem;
 }
+
+.zoom-in {
+  animation: zoomFadeIn 1s ease-in-out;
+}
+
+@keyframes zoomFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  90% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
