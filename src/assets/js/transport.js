@@ -42,6 +42,7 @@ let userClass;
 
 async function init() {
   activeUser = await checkAuthState();
+  if (!activeUser) return (window.location.href = "/");
   removeLoader();
 
   const userData = await getUserData(activeUser);
