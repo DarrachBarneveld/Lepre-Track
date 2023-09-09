@@ -52,6 +52,13 @@ async function init() {
   energyChart.updateSeries([userEnergyScore]);
   communityChart.updateSeries([userRecyclingScore]);
 
+  pieChart.updateSeries([
+    userTransportScore,
+    userFoodScore,
+    userEnergyScore,
+    userRecyclingScore,
+  ]);
+
   const leaderboard = document.getElementById("leaderboard");
 
   users.forEach((user, i) => {
