@@ -158,7 +158,49 @@
               </div>
             </form>
           </div>
-        </section>
+
+        </div>
+        <div class="div">
+          <h3>Still have questions?</h3>
+          <p>Click the below Chat Icon to ask more questions</p>
+          <section>
+            <button class="chat-btn">
+              <i class="fa-solid fa-comment"></i>
+            </button>
+            <div class="chat-div">
+              <form method="dialog">
+                <label for="input-gpt"
+                  >Please ask us about the environment</label
+                >
+                <input
+                  type="text"
+                  name="input-gpt"
+                  id="input-gpt"
+                  class="input-gpt"
+                />
+                <textarea
+                  name="gpt-output"
+                  id="gpt-output"
+                  cols="30"
+                  rows="10"
+                  class="gpt-output"
+                  disabled
+                ></textarea>
+                <div class="btn-wrapper">
+                  <button
+                    type="submit"
+                    class="gpt-submit submit-btn btn-success"
+                  >
+                    Submit
+                  </button>
+                  <button type="reset" class="reset-btn btn-success">
+                    Reset
+                  </button>
+                </div>
+              </form>
+            </div>
+          </section>
+        </div>
       </div>
     </div>
   </main>
