@@ -114,17 +114,19 @@ async function calcDietImpact(e) {
   score > 100 ? (score = 100) : score;
 
   // Display the result using .toFixed() method to round the score to two decimal places.
-  dietResultLabel.innerText = `${trueScore.toFixed(2)}%`;
+  dietResultLabel.innerText = `${calculateInvertedPercentage(trueScore).toFixed(
+    2
+  )}%`;
 
   const data = {
     type: dietValue,
     calories: caloriesValue,
-    score: trueScore,
+    score: calculateInvertedPercentage(trueScore),
   };
 
   updateFireBase(data, "food", "diet");
 
-  dietChart.updateSeries([score]);
+  dietChart.updateSeries([calculateInvertedPercentage(score)]);
 }
 
 function calcFarmingPercent({
