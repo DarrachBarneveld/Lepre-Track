@@ -2,11 +2,12 @@
 
 </h1>
 
-![Lepre-Track Logo](/src/assets/images/logo.jpg)
+<p align="center">
+<img src="src/assets/images/logo.jpg" alt="Lepre-Track Logo">
 
-#  ♻️ SUBMISSION
-## Deployment
+</p>
 
+#  ♻️ DEPLOYMENT
 🚀 Lepre-Track is live and can be accessed ➡️ [http://your-deployed-link.com](http://your-deployed-link.com).
  
 # ♻️ ABOUT LEPRE-TRACK
@@ -24,6 +25,7 @@ Lepre-Track seamlessly integrates into your daily routine, allowing you to track
 
 ➡️ Benefits of Lepre-Track is to help users with their daily decision-making on sustainable habits. It helps the user have accountability. They can monitor their environmental footprint and set sustainability goals, fostering a sense of responsibility and encouraging eco-conscious decision making. Facts are essential, so providing reputable sources can help further a users education and awareness of living a more sustainable life.
 
+# ♻️ Design
 ## Wireframes
 [Canva](https://www.canva.com/) was used to design the wireframes.
 
@@ -31,6 +33,11 @@ Lepre-Track seamlessly integrates into your daily routine, allowing you to track
 * [Log In](/src/assets/images/wireframe-login.png)
 * [Chocie - Dashboard/Profile](/src/assets/images/wireframe-choice.png)
 * [Dashboard](/src/assets/images/wireframe-dashboard.png)
+
+## Badges
+[Canva](https://www.canva.com/) was used to design the badges.
+
+
 
 ## Technologies Used
 In the tech section, we have provided information about the technology stack, dependencies, and any technical details related to the project.
@@ -47,11 +54,12 @@ In the tech section, we have provided information about the technology stack, de
 - ApexCharts
 - Animje.js
 
-## ♻️ Credits
+# ♻️ Credits
 We would like to give credit to the following individuals, organizations, and resources that have contributed to the project or provided inspiration:
 - 🌐 [Carbon Calculator](https://www.carbonfootprint.com/calculator.aspx)
 - 🌐 [Irish Evs](https://www.irishevs.com/how-to-calculate-your-carbon-footprint)
 - 🌐 [Transport By Bicycle](https://www.cyclinguk.org/article/how-much-carbon-can-you-save-cycling-work#:~:text=They%20found%20that%20swapping%20just,drastically%20reduce%20your%20carbon%20footprint.)
+- 🌐 [Transport By Bus](https://www.un.org/en/actnow/transport#:~:text=Walk%2C%20bike%2C%20take%20public%20transport%2C%20or%20carpool&text=taking%20public%20transportation.-,Shifting%20from%20cars%20to%20public%20transportation%20can%20reduce%20up%20to,carbon%20emissions%20annually%20per%20individual.)
 - 🌐 [Energy](https://www.pawprint.eco/eco-guides/how-to-reduce-carbon-footprint-morning#:~:text=Pawprint%20estimates%20that%2010%20minutes,to%20five%20minutes%20or%20less.)
 - 🌐 [Food](https://ourworldindata.org/less-meat-or-sustainable-meat)
 - 🌐 [Recycling](https://kingcounty.gov/en/legacy/depts/dnrp/solid-waste/programs/climate/climate-change-recycling#:~:text=Recycling%20helps%20reduce%20greenhouse%20gas,extracting%20or%20mining%20virgin%20materials.)
