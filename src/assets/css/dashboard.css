@@ -20,8 +20,6 @@
     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
-table {
-}
 .leaderboard-item {
   border-bottom: 1px solid darkslategrey;
   background: var(--primary-grey);
@@ -71,3 +69,37 @@ a {
 #community .category {
   color: forestgreen;
 }
+
+/* CSS code to hide specific columns for screens 800px or smaller */
+
+@media (max-width: 800px) {
+  .table th:nth-child(2), 
+  .table td:nth-child(2), 
+  .table th:nth-child(3), 
+  .table td:nth-child(3), 
+  .table th:nth-child(4), 
+  .table td:nth-child(4),
+  .table th:nth-child(5), 
+  .table td:nth-child(5),
+  .table th:nth-child(6), 
+  .table td:nth-child(6) {
+    display: none;
+  }
+}
+/* CSS code to hide specific columns for screens 800px or smaller */
+
+@media (max-width: 800px) {
+  .table th:nth-child(2), 
+  .table td:nth-child(2), 
+  .table th:nth-child(3), 
+  .table td:nth-child(3), 
+  .table th:nth-child(4), 
+  .table td:nth-child(4),
+  .table th:nth-child(5), 
+  .table td:nth-child(5),
+  .table th:nth-child(6), 
+  .table td:nth-child(6) {
+    display: none;
+  }
+}
+
