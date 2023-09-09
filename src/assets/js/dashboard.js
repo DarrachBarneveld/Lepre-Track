@@ -52,11 +52,52 @@ async function init() {
   energyChart.updateSeries([userEnergyScore]);
   communityChart.updateSeries([userRecyclingScore]);
 
+  const { totalScore } = userClass.overAllScore();
+
+  console.log(totalScore);
   pieChart.updateSeries([
     userTransportScore,
     userFoodScore,
     userEnergyScore,
     userRecyclingScore,
+  ]);
+
+  totalChart.updateSeries([
+    {
+      name: "Actual",
+      data: [
+        {
+          x: "Tom",
+          y: totalScore,
+          goals: [
+            {
+              name: "Protector of Gaia",
+              value: 200,
+              strokeHeight: 5,
+              strokeColor: "#FFD700",
+            },
+            {
+              name: "GreenFingers",
+              value: 150,
+              strokeHeight: 5,
+              strokeColor: "#4b7bff",
+            },
+            {
+              name: "Average",
+              value: 100,
+              strokeHeight: 5,
+              strokeColor: "#775DD0",
+            },
+            {
+              name: "Destroyer Of Worlds",
+              value: 25,
+              strokeHeight: 5,
+              strokeColor: "#FF0000",
+            },
+          ],
+        },
+      ],
+    },
   ]);
 
   const leaderboard = document.getElementById("leaderboard");
@@ -218,5 +259,8 @@ var options = {
   },
 };
 
-var chart = new ApexCharts(document.querySelector("#totalChart"), options);
-chart.render();
+const totalChart = new ApexCharts(
+  document.querySelector("#totalChart"),
+  options
+);
+totalChart.render();

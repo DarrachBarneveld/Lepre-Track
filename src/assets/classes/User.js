@@ -94,7 +94,14 @@ export class User {
 
     const valueFood = this.calcFoodScore() > 100 ? 100 : this.calcFoodScore();
 
-    const totalScore = +valueTransport + +valueFood;
+    const valueRecycle =
+      this.calcRecyclingScore() > 100 ? 100 : this.calcRecyclingScore();
+
+    const valueEnergy =
+      this.calcEnergyScore() > 100 ? 100 : this.calcEnergyScore();
+
+    const totalScore =
+      +valueTransport + +valueFood + +valueRecycle + +valueEnergy;
 
     const totalPercentage = totalScore / 2;
 
