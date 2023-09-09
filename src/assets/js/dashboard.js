@@ -9,6 +9,11 @@ import {
 } from "./auth";
 import { User } from "../classes/User";
 
+import gaia from "../images/earth-guardian.png";
+import terra from "../images/terra-tormentor.png";
+import balanced from "../images/balanced-footprint.png";
+import fingers from "../images/green-finger.png";
+
 const logoutBtn = document.getElementById("logout");
 const userBadge = document.getElementById("badgeImage");
 
@@ -106,17 +111,14 @@ async function init() {
 
   function locateImageSrc(num) {
     console.log(num);
-    if (num <= 300) {
-      userBadge.src = "src/assets/images/terra-tormentor.png";
-    }
-    if (num <= 100) {
-      userBadge.src = "./src/assets/images/balanced-foodprint.png";
-    }
-    if (num <= 150) {
-      userBadge.src = "./src/assets/images/green-finger.png";
-    }
-    if (num >= 200) {
-      userBadge.src = "./src/assets/images/earth-guardian.png";
+    if (num <= 50) {
+      userBadge.src = terra;
+    } else if (num <= 100) {
+      userBadge.src = balanced;
+    } else if (num <= 150) {
+      userBadge.src = fingers;
+    } else if (num >= 200) {
+      userBadge.src = gaia;
     }
   }
 
