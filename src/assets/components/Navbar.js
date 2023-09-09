@@ -28,6 +28,6 @@ export function AuthNavBar(user) {
         </button>
   `;
 
-  html = user ? authenticated : unAuthenticated;
+  const html = user ? authenticated : unAuthenticated;
   return html;
 }
