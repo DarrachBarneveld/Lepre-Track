@@ -118,70 +118,176 @@
     </nav>
 
     <main>
-      <div
-        class="d-flex justify-content-center text-center flex-wrap forms-div"
-      >
-        <!-- energy form -->
-        <form action="" class="energy_form">
-          <div class="grid">
-            <label for="elect">Electric</label>
-            <input type="number" name="electricity" id="elect" />
-            <label for="factor">with a factor of</label>
-            <input type="number" name="factor" id="factor" value="0.2111" />
-            <span>kg/C02e/kwh</span>
+      <div class="w-100 card glassmorphism-title">
+        <div class="card-body">
+          <h1 class="card-title text-center">Energy</h1>
+        </div>
+      </div>
+
+        <div class="row container-row">
+          <!-- First Card -->
+          <div class="col-md-6 col-sm-12 mb-4 mt-4">
+            <div class="card text-center glassmorphism">
+              <div class="d-flex align-items-center justify-content-center">
+                <div id="energyChart"></div>
+                <i class="fa-solid fa-plug-circle-exclamation chart-icon"></i>
+              </div>
+              <p>
+                <span
+                  id="energy-result"
+                  class="fw-bolder h4 counter"
+                  data-to="2"
+                  data-duration="1000"
+                >
+  
+              </p>
+
+              <form id="volunteerForm" class="mt-4">
+                <h5 class="mb-2 fw-bold text-dark">
+                  Check the box if you volunteer in
+                </h5>
+                <div class="form-check">
+                  <label for="elec">Electric</label>
+                  <input type="number" name="elec" id="elect" />
+                
+                </div>
+                <div class="form-check">
+                  <label for="gas">Natural Gas</label>
+                  <input type="number" name="gas" id="gas" />
+                
+                </div>
+                <div class="form-check">
+                  <label for="oil">Oil</label>
+                  <input type="number" name="oil" id="oil" />
+                
+                </div>
+                <div class="form-check">
+                  <label for="coal">Coal</label>
+                  <input type="number" name="coal" id="coal" />
+                
+                </div>
+                <div class="form-check">
+                  <label for="lpg"
+                  ><abbr title="Liquefied petroleum gas">LPG</abbr></label
+                >
+                <input type="number" name="lpg" id="lpg" />
+                
+                </div>
+                <div class="form-check">
+                  <label for="propane">Propane</label>
+                  <input type="number" name="propane" id="propane" />
+            
+                </div>
+
+                <div class="form-check">
+                  <label for="wood">Wood</label>
+                  <input type="number" name="wood" id="wood" />
+            
+                </div>
+                <button type="submit" class="submit-btn" value="Submit">
+                  Calculate Impact %
+                </button>
+              </form>
+    
+
+            </div>
           </div>
-          <div class="grid">
-            <label for="gas">Natural Gas</label>
-            <input type="number" name="gas" id="gas" />
-            <select name="units" id="units-select">
-              <option value="kwh">KWH</option>
-            </select>
+
+          <!-- Second Card -->
+          <div class="col-md-6 col-sm-12 mb-4 mt-4">
+            <div class="card text-center glassmorphism">
+              <div class="d-flex align-items-center justify-content-center">
+                <div id="volunteerChart"></div>
+                <i class="fa-solid fa-handshake-angle chart-icon"></i>
+              </div>
+              <p>
+                <span
+                  id="volunteer-result"
+                  class="fw-bolder h4 counter"
+                  data-to="2"
+                  data-duration="1000"
+                >
+                  <span class="text-muted">(No Volunteering)</span>
+                </span>
+              </p>
+              <div class="text-muted my-2">
+                Based on the average Irish person.
+              </div>
+
+              <form id="volunteerForm" class="mt-4">
+                <h5 class="mb-2 fw-bold text-dark">
+                  Check the box if you volunteer in
+                </h5>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="trees"
+                    name="trees"
+                  />
+                  <label class="form-check-label" for="trees">
+                    Planting Trees</label
+                  >
+                </div>
+                <div>
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="gardens"
+                    name="gardens"
+                  />
+                  <label for="trees">Community Gardens</label>
+                </div>
+                <div>
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="wildlife"
+                    name="wildlife"
+                  />
+                  <label for="wildlife">Protecting Wildlife</label>
+                </div>
+                <div>
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="ocean"
+                    name="ocean"
+                  />
+                  <label for="ocean">Ocean Cleanup</label>
+                </div>
+                <div>
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="other"
+                    name="other"
+                  />
+                  <label for="other">Other</label>
+                </div>
+
+                <div>
+                  <label for="donation" class="text-dark"
+                    >Donation Amount Weekly</label
+                  >
+                  <input
+                    class="form-control"
+                    type="number"
+                    id="donation"
+                    name="donation"
+                    value="0"
+                  />
+                </div>
+
+                <button type="submit" class="submit-btn" value="Submit">
+                  Calculate Impact %
+                </button>
+              </form>
+            </div>
           </div>
-          <div class="grid">
-            <label for="oil">Oil</label>
-            <input type="number" name="oil" id="oil" />
-            <select name="units" id="oil-select">
-              <option value="lt">litres</option>
-            </select>
-          </div>
-          <div class="grid">
-            <label for="coal">Coal</label>
-            <input type="number" name="coal" id="coal" />
-            <select name="units" id="coal-select">
-              <option value="tonne">Tonnes</option>
-            </select>
-          </div>
-          <div class="grid">
-            <label for="lpg"
-              ><abbr title="Liquefied petroleum gas">LPG</abbr></label
-            >
-            <input type="number" name="lpg" id="lpg" />
-            <select name="units" id="lpg-select">
-              <option value="lt">litres</option>
-            </select>
-          </div>
-          <div class="grid">
-            <label for="propane">Propane</label>
-            <input type="number" name="propane" id="propane" />
-            <select name="units" id="propane-select">
-              <option value="lt">litres</option>
-            </select>
-          </div>
-          <div class="grid">
-            <label for="wood">Wood</label>
-            <input type="number" name="wood" id="wood" />
-            <select name="units" id="wood-select">
-              <option value="lt">Tonnes</option>
-            </select>
-          </div>
-          <div class="button-wrapper">
-            <button type="submit" class="btns submit-btn">Submit</button>
-            <button type="reset" class="btns reset-btn">Reset</button>
-          </div>
-        </form>
-        <div class="energy-chart"></div>
       </div>
     </main>
+
 
     <script type="module" src="src/assets/js/energy.js"></script>
     <script

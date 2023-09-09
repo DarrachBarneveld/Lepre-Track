@@ -1,5 +1,7 @@
 import ApexCharts from "apexcharts";
 import { checkAuthState, getUserData, removeLoader } from "./auth";
+import { CategoryRadialChartOptions } from "../classes/Charts";
+
 import { User } from "../classes/User";
 
 let electricity = 0;
@@ -83,31 +85,14 @@ function calculateAverage(array) {
   return total / count;
 }
 
-inputs.forEach((element) => {
-  element.addEventListener("input", console.log(data()));
-});
-btn.addEventListener("click", (e) => {
-  e.preventDefault();
-  let charting = document.querySelector(".energy-chart");
+const energyChartOptions = new CategoryRadialChartOptions(
+  [100],
 
-  let comparedToAverage = (data() / average_house) * 100;
+  ["#F07654", "#F5DF2E"]
+);
 
-  var options = {
-    series: [comparedToAverage.toFixed(2)],
-    chart: {
-      height: 350,
-      type: "radialBar",
-    },
-    plotOptions: {
-      radialBar: {
-        hollow: {
-          size: "70%",
-        },
-      },
-    },
-    labels: ["Testing"],
-  };
-
-  var chart = new ApexCharts(document.querySelector(".energy-chart"), options);
-  chart.render();
-});
+const energyChart = new ApexCharts(
+  document.getElementById("energyChart"),
+  energyChartOptions
+);
+energyChart.render();
