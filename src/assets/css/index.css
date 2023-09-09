@@ -1,6 +1,14 @@
 .glassmorphism {
-  max-width: 400px;
+  /* max-width: 400px; */
   border-radius: 10px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10px);
+  font: bolder;
+}
+
+.glassmorphism-title {
   padding: 20px;
   background: rgba(255, 255, 255, 0.75);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
@@ -10,9 +18,9 @@
 }
 
 .start-tracking {
-  padding-block: 0.5em;
-  border-radius: 100vmax;
-  transform: translateX(-1500px);
+  /* padding-block: 0.5em; */
+  /* border-radius: 100vmax; */
+  /* transform: translateX(-1500px); */
 }
 
 .chat-prompt-section {
@@ -20,7 +28,7 @@
   margin-top: 2rem;
 }
 
-.chat-prompt-section > form > * {
+.chat-prompt-section>form>* {
   margin-bottom: 1rem;
   width: 100%;
 }
@@ -30,14 +38,20 @@
 }
 
 .typewriter h1 {
-  overflow: hidden; /* Ensures the content is not revealed until the animation */
-  border-right: 0.15em solid orange; /* The typwriter cursor */
-  white-space: nowrap; /* Keeps the content on a single line */
-  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-  letter-spacing: 0.15em; /* Adjust as needed */
+  overflow: hidden;
+  /* Ensures the content is not revealed until the animation */
+  border-right: 0.15em solid orange;
+  /* The typwriter cursor */
+  white-space: nowrap;
+  /* Keeps the content on a single line */
+  margin: 0 auto;
+  /* Gives that scrolling effect as the typing happens */
+  letter-spacing: 0.15em;
+  /* Adjust as needed */
   animation: typing 2s steps(16, end), blink-caret 0.5s step-end infinite;
   animation-delay: 0.5s;
-  animation-fill-mode: forwards; /* Retains final style after animation */
+  animation-fill-mode: forwards;
+  /* Retains final style after animation */
 }
 
 /* The typing effect */
@@ -56,11 +70,34 @@
 
 /* The typewriter cursor effect */
 @keyframes blink-caret {
+
   from,
   to {
     border-color: transparent;
   }
+
   50% {
     border-color: orange;
   }
+}
+
+body {
+  color: #198754;
+}
+
+.card h1 {
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+/* footer */
+.index-top {
+  padding: 5px;
+  /* background: rgba(255, 255, 255, 0.75); */
+  background: #198754;
+  color: white;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font: bolder;
 }
