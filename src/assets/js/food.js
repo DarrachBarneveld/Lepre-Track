@@ -187,13 +187,15 @@ async function calcDiningImpact(e) {
   foodWasteValue ? (value += 50) : value;
   dineOutValue ? (value += 50) : value;
 
-  diningResultLabel.innerHTML = `${value.toFixed(2)}%`;
-  diningChart.updateSeries([value]);
+  diningResultLabel.innerHTML = `${calculateInvertedPercentage(value).toFixed(
+    2
+  )}%`;
+  diningChart.updateSeries([calculateInvertedPercentage(value)]);
 
   const data = {
     out: dineOutValue,
     waste: foodWasteValue,
-    score: value,
+    score: calculateInvertedPercentage(value),
   };
 
   updateFireBase(data, "food", "dining");
