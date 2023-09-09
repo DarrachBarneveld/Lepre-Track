@@ -1,6 +1,6 @@
 // USE THIS AS A BASE MODULE FOR OTHER INPUT CALCULATIONS
 import ApexCharts from "apexcharts";
-import { checkAuthState, getUserData } from "./auth";
+import { checkAuthState, getUserData, removeLoader } from "./auth";
 import { User } from "../classes/User";
 import { doc, updateDoc } from "@firebase/firestore";
 import { firebaseDB } from "../../config/firebase";
@@ -18,13 +18,14 @@ let userClass;
 
 async function init() {
   activeUser = await checkAuthState();
+  removeLoader();
 
   const userData = await getUserData(activeUser);
 
   userClass = new User(userData);
 
-  console.log(userClass);
-
+  const profileIcon = document.getElementById("profile");
+  profileIcon.innerHTML = `<i class="fa-solid fa-user"></i> ${userData.name}`;
   renderStoredData();
 }
 
