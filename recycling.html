@@ -140,18 +140,18 @@
         </div>
       </div>
 
-      <div class="mx-3 w-100">
-        <div class="container-fluid mx-3 mt-5 px-4">
-          <div class="col-lg-4 col-md-6 col-sm-12 mb-4 mx-auto">
-            <div class="form-card card text-center glassmorphism">
-              <!-- <h2 class="mb-2 text-dark font-weight-bold">Flights</h2> -->
+      <div class="row container-row">
+        <div class="row container-row">
+          <!-- First Card -->
+          <div class="col-md-6 col-sm-12 mb-4">
+            <div class="card text-center glassmorphism">
               <div class="d-flex align-items-center justify-content-center">
                 <div id="recyclingChart"></div>
                 <i class="fa-solid fa-recycle chart-icon"></i>
               </div>
               <p>
                 <span
-                  id="flight-result"
+                  id="recycling-result"
                   class="fw-bolder h4 counter"
                   data-to="2"
                   data-duration="1000"
@@ -174,7 +174,7 @@
                   <input
                     class="form-check-input"
                     type="checkbox"
-                    value=""
+                    name="metalCheck"
                     id="metalCheck"
                   />
                   <label class="form-check-label" for="metalCheck">
@@ -185,7 +185,7 @@
                   <input
                     class="form-check-input"
                     type="checkbox"
-                    value=""
+                    name="paperCheck"
                     id="paperCheck"
                   />
                   <label class="form-check-label" for="paperCheck">
@@ -196,7 +196,7 @@
                   <input
                     class="form-check-input"
                     type="checkbox"
-                    value=""
+                    name="plasticCheck"
                     id="plasticCheck"
                   />
                   <label class="form-check-label" for="plasticCheck">
@@ -207,7 +207,7 @@
                   <input
                     class="form-check-input"
                     type="checkbox"
-                    value=""
+                    name="glassCheck"
                     id="glassCheck"
                   />
                   <label class="form-check-label" for="glassCheck">
@@ -218,13 +218,106 @@
                   <input
                     class="form-check-input"
                     type="checkbox"
-                    value=""
+                    name="foodCheck"
                     id="foodCheck"
                   />
                   <label class="form-check-label" for="foodCheck">
                     Food Waste (compost bin)
                   </label>
                 </div>
+                <button type="submit" class="submit-btn" value="Submit">
+                  Calculate Impact %
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Second Card -->
+          <div class="col-md-6 col-sm-12 mb-4">
+            <div class="card text-center glassmorphism">
+              <div class="d-flex align-items-center justify-content-center">
+                <div id="volunteerChart"></div>
+                <i class="fa-solid fa-handshake-angle chart-icon"></i>
+              </div>
+              <p>
+                <span
+                  id="volunteer-result"
+                  class="fw-bolder h4 counter"
+                  data-to="2"
+                  data-duration="1000"
+                >
+                  <span class="text-muted">(No Volunteering)</span>
+                </span>
+              </p>
+              <div class="text-muted my-2">
+                Based on the average Irish person.
+              </div>
+
+              <form id="volunteerForm" class="mt-4">
+                <h5 class="mb-2 fw-bold text-dark">
+                  Check the box if you volunteer in
+                </h5>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="trees"
+                    name="trees"
+                  />
+                  <label class="form-check-label" for="trees">
+                    Planting Trees</label
+                  >
+                </div>
+                <div>
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="gardens"
+                    name="gardens"
+                  />
+                  <label for="trees">Community Gardens</label>
+                </div>
+                <div>
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="wildlife"
+                    name="wildlife"
+                  />
+                  <label for="wildlife">Protecting Wildlife</label>
+                </div>
+                <div>
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="ocean"
+                    name="ocean"
+                  />
+                  <label for="ocean">Ocean Cleanup</label>
+                </div>
+                <div>
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="other"
+                    name="other"
+                  />
+                  <label for="other">Other</label>
+                </div>
+
+                <div>
+                  <label for="donation" class="text-dark"
+                    >Donation Amount</label
+                  >
+                  <input
+                    class="form-control"
+                    type="number"
+                    id="donation"
+                    name="donation"
+                    value="0"
+                  />
+                </div>
+
                 <button type="submit" class="submit-btn" value="Submit">
                   Calculate Impact %
                 </button>

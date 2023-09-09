@@ -230,7 +230,7 @@ farmingChart.render();
 const diningChartOptions = new CategoryRadialChartOptions(
   [0],
 
-  ["#5F72BE", "#9921E8"]
+  ["#A594F9", "#6247AA"]
 );
 
 const diningChart = new ApexCharts(

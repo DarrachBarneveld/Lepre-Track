@@ -7,13 +7,15 @@ import { firebaseDB } from "../../config/firebase";
 import { CategoryRadialChartOptions } from "../classes/Charts";
 
 const recyclingForm = document.getElementById("recyclingForm");
+const volunteerForm = document.getElementById("volunteerForm");
+
 const metalCheck = document.getElementById("metalCheck");
 const paperCheck = document.getElementById("paperCheck");
 const plasticCheck = document.getElementById("plasticCheck");
 const glassCheck = document.getElementById("glassCheck");
 const foodCheck = document.getElementById("foodCheck");
 
-const flightResultLabel = document.getElementById("flight-result");
+const recyclingResult = document.getElementById("recycling-result");
 
 let activeUser;
 let userClass;
@@ -75,10 +77,10 @@ async function recyclingCarbonCalc(e) {
   }
 
   if (co2Savings == 0) {
-    flightResultLabel.innerHTML =
+    recyclingResult.innerHTML =
       '108.9 kg <span class="text-muted">(No Recycling)</span>';
   } else {
-    flightResultLabel.innerText = `${(
+    recyclingResult.innerText = `${(
       DUMMY_DATA.averageTotalCo2 - co2Savings
     ).toFixed(2)} kg`;
   }
@@ -112,3 +114,15 @@ const recyclingChart = new ApexCharts(
   recyclingChartOptions
 );
 recyclingChart.render();
+
+const volunteerChartOptions = new CategoryRadialChartOptions(
+  [100],
+
+  ["#009FFD", "#5200AE"]
+);
+
+const volunteerChart = new ApexCharts(
+  document.getElementById("volunteerChart"),
+  volunteerChartOptions
+);
+volunteerChart.render();
