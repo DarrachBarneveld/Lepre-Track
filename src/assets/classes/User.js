@@ -138,10 +138,9 @@ export class User {
   starRating() {
     const { totalScore, totalPercentage } = this.overAllScore();
 
-    // const percentageDifference = Math.abs((totalScore - 400) / 400) * 100;
-    const percentageDifference = Math.abs((totalScore - 200) / 200) * 100;
+    const percentageDifference = Math.abs((totalScore - 400) / 400) * 100;
 
-    const starRating = Math.round((5 - percentageDifference / 20) * 100) / 100;
+    const starRating = Math.round((percentageDifference / 20) * 100) / 100;
 
     return Math.min(Math.max(starRating, 0), 5).toFixed(2);
     // return Math.min(Math.max(starRating, 0), 5);
