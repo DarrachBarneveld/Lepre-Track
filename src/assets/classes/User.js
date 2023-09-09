@@ -22,7 +22,7 @@ const defaultTravel = {
   },
 };
 const defaultEnergy = {
-  enery: {
+  energy: {
     electric: 0,
     gas: 0,
     oil: 0,
