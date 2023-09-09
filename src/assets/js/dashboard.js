@@ -10,6 +10,7 @@ import {
 import { User } from "../classes/User";
 
 const logoutBtn = document.getElementById("logout");
+const userBadge = document.getElementById("badgeImage");
 
 let activeUser;
 let userClass;
@@ -67,30 +68,30 @@ async function init() {
       name: "Actual",
       data: [
         {
-          x: "Tom",
+          x: userClass.name,
           y: totalScore,
           goals: [
             {
-              name: "Protector of Gaia",
+              name: "Earth's Guardian",
               value: 200,
               strokeHeight: 5,
               strokeColor: "#FFD700",
             },
             {
-              name: "GreenFingers",
+              name: "Green Fingers",
               value: 150,
               strokeHeight: 5,
               strokeColor: "#4b7bff",
             },
             {
-              name: "Average",
+              name: "Balance Footprint",
               value: 100,
               strokeHeight: 5,
               strokeColor: "#775DD0",
             },
             {
-              name: "Destroyer Of Worlds",
-              value: 25,
+              name: "Terra's Tormentor",
+              value: 50,
               strokeHeight: 5,
               strokeColor: "#FF0000",
             },
@@ -199,26 +200,26 @@ var options = {
           y: 126,
           goals: [
             {
-              name: "Protector of Gaia",
+              name: "Earth's Guardian",
               value: 200,
               strokeHeight: 5,
               strokeColor: "#FFD700",
             },
             {
-              name: "GreenFingers",
+              name: "Green Fingers",
               value: 150,
               strokeHeight: 5,
               strokeColor: "#4b7bff",
             },
             {
-              name: "Average",
+              name: "Balance Footprint",
               value: 100,
               strokeHeight: 5,
               strokeColor: "#775DD0",
             },
             {
-              name: "Destroyer Of Worlds",
-              value: 25,
+              name: "Terra's Tormentor",
+              value: 50,
               strokeHeight: 5,
               strokeColor: "#FF0000",
             },
@@ -247,7 +248,7 @@ var options = {
     show: true,
     showForSingleSeries: true,
     customLegendItems: [
-      "Tom",
+      "User",
       "Terra's Tormentor",
       "Balance Footprint",
       "Green Fingers",
