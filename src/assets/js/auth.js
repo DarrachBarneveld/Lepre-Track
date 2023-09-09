@@ -125,3 +125,8 @@ export async function navbarInit() {
 
   logoutBtn.addEventListener("click", logOutUser);
 }
+
+export function removeLoader() {
+  const loader = document.getElementById("loader");
+  loader.remove();
+}

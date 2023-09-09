@@ -80,7 +80,20 @@ input:focus:valid {
     0 0 0 3px rgba(44, 255, 2, 0.5);
 }
 
-#loginMessage {
+#loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  background: var(--green-gradient);
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+}
+
+#loader img {
+  border-radius: 2rem;
+  width: 100%;
 }
 
 .bg-nav {

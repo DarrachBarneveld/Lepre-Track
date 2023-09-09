@@ -5,6 +5,7 @@ import {
   getAllUserDocuments,
   getUserData,
   logOutUser,
+  removeLoader,
 } from "./auth";
 import { User } from "../classes/User";
 
@@ -15,6 +16,7 @@ let userClass;
 
 async function init() {
   activeUser = await checkAuthState();
+  removeLoader();
 
   if (!activeUser) return (window.location.href = "/");
   const userData = await getUserData(activeUser);
@@ -101,7 +103,7 @@ const communityChart = new ApexCharts(
 );
 communityChart.render();
 
-var options = {
+const pieOptions = {
   series: [44, 15, 29, 12],
   chart: {
     width: "100%",
@@ -123,5 +125,5 @@ var options = {
   // ],
 };
 
-var pieChart = new ApexCharts(document.querySelector("#pieChart"), options);
+var pieChart = new ApexCharts(document.querySelector("#pieChart"), pieOptions);
 pieChart.render();
