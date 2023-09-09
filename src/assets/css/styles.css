@@ -208,3 +208,30 @@ input:focus:valid {
   -webkit-backdrop-filter: blur(10px);
   font: bolder;
 }
+
+.chat-div {
+  position: absolute;
+  bottom: -50px;
+  left: 45px;
+  height: 500px;
+  width: 500px;
+  transform: scaleY(0);
+  overflow: hidden;
+  transition: transform 600ms ease-in-out;
+  transform-origin: bottom left;
+}
+
+main {
+  position: relative;
+}
+
+.active {
+  height: auto;
+  transform: scaleY(1);
+  transform-origin: bottom left;
+}
+
+.chat-btn {
+  color: var(--apple-green);
+  font-size: 3rem;
+}

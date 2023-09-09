@@ -108,3 +108,10 @@ function loginForm() {
 
 signUpModal.addEventListener("click", signupForm);
 loginModal.addEventListener("click", loginForm);
+
+let chatBtn = document.querySelector(".chat-btn");
+
+chatBtn.addEventListener("click", () => {
+  let chatDiv = document.querySelector(".chat-div");
+  chatDiv.classList.toggle("active");
+});
