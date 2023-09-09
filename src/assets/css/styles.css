@@ -53,6 +53,14 @@ form {
   box-shadow: var(--box-shadow);
 }
 
+.glassmorphism-title {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10px);
+  font: bolder;
+}
+
 /* NAVBAR CSS */
 
 input:focus:invalid {
@@ -152,8 +160,7 @@ input:focus:valid {
 
 .submit-btn,
 .reset-btn {
-  background-color: #6e9c11;
-  color: white;
+  background-color: var(--forest-green);
   margin-top: 1em;
   margin-left: 0.5em;
   overflow: hidden;
@@ -188,4 +195,43 @@ input:focus:valid {
 
 #slide-container {
   opacity: 0.9;
+}
+
+/* footer */
+.footer {
+  padding: 5px;
+  /* background: rgba(255, 255, 255, 0.75); */
+  background: #198754;
+  color: white;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font: bolder;
+}
+
+.chat-div {
+  position: absolute;
+  bottom: -50px;
+  left: 45px;
+  height: 500px;
+  width: 500px;
+  transform: scaleY(0);
+  overflow: hidden;
+  transition: transform 600ms ease-in-out;
+  transform-origin: bottom left;
+}
+
+main {
+  position: relative;
+}
+
+.active {
+  height: auto;
+  transform: scaleY(1);
+  transform-origin: bottom left;
+}
+
+.chat-btn {
+  color: var(--apple-green);
+  font-size: 3rem;
 }

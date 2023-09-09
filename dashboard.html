@@ -37,7 +37,7 @@
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
-          aria-controls="navbarNab"
+          aria-controls="navbarNav"
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
@@ -87,14 +87,7 @@
                 <i class="fa-solid fa-book-open"></i>
               </a>
             </li>
-            <li class="nav-item">
-              <a
-                class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3"
-                href="recycling.html"
-                >Recycling
-                <i class="fa-solid fa-recycle"></i>
-              </a>
-            </li>
+
             <li class="nav-item">
               <a
                 class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3"
@@ -123,46 +116,6 @@
       </div>
     </nav>
     <main>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 col-md-3 pie-container">
-            <div id="pieChart"></div>
-          </div>
-          <div class="col-lg-6 leaderboard-container">
-            <table class="table">
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col">Rank</th>
-                  <th scope="col">User</th>
-                  <th scope="col">Travel</th>
-                  <th scope="col">Food</th>
-                  <th scope="col">Energy</th>
-                  <th scope="col">Rating</th>
-                </tr>
-              </thead>
-              <tbody id="leaderboard">
-                <!-- USERS ARE RENDERED HERE -->
-                <tr class="leaderboard-item fade-in-right align-items-center">
-                  <td>
-                    <span class="text-warning">🥇</span>
-                  </td>
-                  <td>
-                    <a href="profile.html">
-                      <span class="d-block text-center">Tommy</span>
-                    </a>
-                  </td>
-                  <td>20</td>
-                  <td>35</td>
-                  <td>60</td>
-                  <td>
-                    <span class="bg-soft-success text-success p-1"> 1.5% </span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
       <div class="container">
         <div class="row">
           <div class="col-xl-3 col-md-6">
@@ -208,6 +161,54 @@
               </div>
             </a>
           </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-md-3 pie-container">
+            <div id="totalChart"></div>
+          </div>
+          <div class="col-lg-6 leaderboard-container">
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Rank</th>
+                  <th scope="col">User</th>
+                  <th scope="col">Travel</th>
+                  <th scope="col">Food</th>
+                  <th scope="col">Energy</th>
+                  <th scope="col">Community</th>
+                  <th scope="col">Rating</th>
+                </tr>
+              </thead>
+              <tbody id="leaderboard">
+                <!-- USERS ARE RENDERED HERE -->
+                <tr class="leaderboard-item fade-in-right align-items-center">
+                  <td>
+                    <span class="text-warning">🥇</span>
+                  </td>
+                  <td>
+                    <a href="profile.html">
+                      <span class="d-block text-center">Tommy</span>
+                    </a>
+                  </td>
+                  <td>20</td>
+                  <td>35</td>
+                  <td>60</td>
+                  <td>60</td>
+
+                  <td>
+                    <span class="bg-soft-success text-success p-1"> 1.5% </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="pie-container col-lg-6 mx-auto">
+          <div id="pieChart"></div>
         </div>
       </div>
     </main>

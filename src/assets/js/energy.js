@@ -1,21 +1,22 @@
 import ApexCharts from "apexcharts";
 import { checkAuthState, getUserData, removeLoader } from "./auth";
-import { User } from "../classes/User";
+import { CategoryRadialChartOptions } from "../classes/Charts";
 
-let electricity = 0;
-let gas = 0;
-let oil = 0;
-let coal = 0;
-let lpg = 0;
-let propane = 0;
-let wood = 0;
+import { User } from "../classes/User";
+import { doc, updateDoc } from "@firebase/firestore";
+import { firebaseDB } from "../../config/firebase";
+import { calculateInvertedPercentage } from "../../helpers/math";
+
 let average_house = 4;
 
 let activeUser;
 let userClass;
 
+const energyResult = document.getElementById("energy-result");
+
 async function init() {
   activeUser = await checkAuthState();
+
   if (!activeUser) return (window.location.href = "/");
   removeLoader();
 
@@ -24,28 +25,45 @@ async function init() {
   userClass = new User(userData);
   const profileIcon = document.getElementById("profile");
   profileIcon.innerHTML = `<i class="fa-solid fa-user"></i> ${userData.name}`;
+
+  renderStoredData();
 }
 
 init();
 
-let input_form = document.querySelector(".energy_form");
-let btn = document.querySelector(".submit-btn");
+function renderStoredData() {
+  // DIET
+
+  const energyScore =
+    userClass.energy.energy.score > 100 ? 100 : userClass.energy.energy.score;
+
+  energyResult.innerHTML = `${userClass.energy.energy.score.toFixed(2)}%`;
+
+  energyChart.updateSeries([energyScore]);
+}
+
+const energyForm = document.getElementById("energyForm");
+
+energyForm.addEventListener("submit", data);
+
 let inputs = document.querySelectorAll("input");
 
-function data() {
+function data(e) {
+  e.preventDefault();
+
   inputs.forEach((element) => {
     if (element.length === 0) {
       element.value = 0;
     }
   });
-  let factor = +input_form.factor.value;
-  let electricity_input = +input_form.electricity.value;
-  let gas_input = +input_form.gas.value;
-  let oil_input = +input_form.oil.value;
-  let coal_input = +input_form.coal.value;
-  let lpg_input = +input_form.lpg.value;
-  let propane_input = +input_form.propane.value;
-  let wood_input = +input_form.wood.value;
+  let factor = +energyForm.factor.value;
+  let electricity_input = +energyForm.elec.value;
+  let gas_input = +energyForm.gas.value;
+  let oil_input = +energyForm.oil.value;
+  let coal_input = +energyForm.coal.value;
+  let lpg_input = +energyForm.lpg.value;
+  let propane_input = +energyForm.propane.value;
+  let wood_input = +energyForm.wood.value;
   let array = [];
   array.push(kgToTonnes(electricity_input * factor));
   array.push(kgToTonnes(gas_input * 0.183));
@@ -55,6 +73,29 @@ function data() {
   array.push(kgToTonnes(propane_input * 1.542857142857143));
   array.push(wood_input * 0.0505547619047619);
   let a = addNumbers(array);
+
+  const inverseScore = calculateInvertedPercentage(a);
+
+  const data = {
+    electric: electricity_input,
+    gas: gas_input,
+    oil: oil_input,
+    coal: coal_input,
+    lpg: lpg_input,
+    propane: propane_input,
+    wood: wood_input,
+    factor,
+    score: inverseScore,
+  };
+
+  updateFireBase(data, "energy", "energy");
+
+  a > 100 ? 100 : a;
+
+  energyResult.innerHTML = `${inverseScore.toFixed(2)}%`;
+
+  energyChart.updateSeries([inverseScore]);
+
   return a;
 }
 function kgToTonnes(number) {
@@ -71,43 +112,23 @@ function addNumbers(numbers) {
   return +sum.toFixed(2);
 }
 
-function calculateAverage(array) {
-  var total = 0;
-  var count = 0;
+const energyChartOptions = new CategoryRadialChartOptions(
+  [100],
 
-  array.forEach(function (item, index) {
-    total += item;
-    count++;
-  });
+  ["#F07654", "#F5DF2E"]
+);
 
-  return total / count;
+const energyChart = new ApexCharts(
+  document.getElementById("energyChart"),
+  energyChartOptions
+);
+energyChart.render();
+
+async function updateFireBase(data, category, prop) {
+  const userRef = doc(firebaseDB, "users", activeUser.uid);
+
+  const userData = await getUserData(activeUser);
+
+  userData[category][prop] = data;
+  updateDoc(userRef, userData);
 }
-
-inputs.forEach((element) => {
-  element.addEventListener("input", console.log(data()));
-});
-btn.addEventListener("click", (e) => {
-  e.preventDefault();
-  let charting = document.querySelector(".energy-chart");
-
-  let comparedToAverage = (data() / average_house) * 100;
-
-  var options = {
-    series: [comparedToAverage.toFixed(2)],
-    chart: {
-      height: 350,
-      type: "radialBar",
-    },
-    plotOptions: {
-      radialBar: {
-        hollow: {
-          size: "70%",
-        },
-      },
-    },
-    labels: ["Testing"],
-  };
-
-  var chart = new ApexCharts(document.querySelector(".energy-chart"), options);
-  chart.render();
-});

@@ -21,6 +21,19 @@ const defaultTravel = {
     score: 0,
   },
 };
+const defaultEnergy = {
+  energy: {
+    electric: 0,
+    gas: 0,
+    oil: 0,
+    coal: 0,
+    lpg: 0,
+    propane: 0,
+    wood: 0,
+    factor: 0,
+    score: 0,
+  },
+};
 
 const defaultFood = {
   diet: {
@@ -71,7 +84,7 @@ export class User {
     this.createdAt = data.createdAt;
     this.travel = data?.travel || defaultTravel;
     this.food = data?.food || defaultFood;
-    this.energy = data?.energy || 0;
+    this.energy = data?.energy || defaultEnergy;
     this.community = data?.community || defaultCommunity;
   }
 
@@ -81,7 +94,14 @@ export class User {
 
     const valueFood = this.calcFoodScore() > 100 ? 100 : this.calcFoodScore();
 
-    const totalScore = +valueTransport + +valueFood;
+    const valueRecycle =
+      this.calcRecyclingScore() > 100 ? 100 : this.calcRecyclingScore();
+
+    const valueEnergy =
+      this.calcEnergyScore() > 100 ? 100 : this.calcEnergyScore();
+
+    const totalScore =
+      +valueTransport + +valueFood + +valueRecycle + +valueEnergy;
 
     const totalPercentage = totalScore / 2;
 
@@ -107,15 +127,28 @@ export class User {
     return +percentValue;
   }
 
+  calcRecyclingScore() {
+    const totalValue =
+      +this.community.recycle.score + +this.community.volunteer.score;
+
+    const percentValue = (totalValue / 3).toFixed(2);
+
+    return +percentValue;
+  }
+
+  calcEnergyScore() {
+    const totalValue = +this.energy.energy.score;
+
+    return +totalValue;
+  }
+
   starRating() {
     const { totalScore, totalPercentage } = this.overAllScore();
 
-    // const percentageDifference = Math.abs((totalScore - 400) / 400) * 100;
-    const percentageDifference = Math.abs((totalScore - 200) / 200) * 100;
+    const percentageDifference = Math.abs((totalScore - 400) / 400) * 100;
 
-    const starRating = Math.round((5 - percentageDifference / 20) * 100) / 100;
+    const starRating = Math.round((percentageDifference / 20) * 100) / 100;
 
-    return Math.min(Math.max(5 - starRating, 0), 5).toFixed(2);
-    // return Math.min(Math.max(starRating, 0), 5);
+    return Math.min(Math.max(starRating, 0), 5).toFixed(2);
   }
 }

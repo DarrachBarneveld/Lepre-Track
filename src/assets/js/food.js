@@ -114,17 +114,19 @@ async function calcDietImpact(e) {
   score > 100 ? (score = 100) : score;
 
   // Display the result using .toFixed() method to round the score to two decimal places.
-  dietResultLabel.innerText = `${trueScore.toFixed(2)}%`;
+  dietResultLabel.innerText = `${calculateInvertedPercentage(trueScore).toFixed(
+    2
+  )}%`;
 
   const data = {
     type: dietValue,
     calories: caloriesValue,
-    score: trueScore,
+    score: calculateInvertedPercentage(trueScore),
   };
 
   updateFireBase(data, "food", "diet");
 
-  dietChart.updateSeries([score]);
+  dietChart.updateSeries([calculateInvertedPercentage(score)]);
 }
 
 function calcFarmingPercent({
@@ -187,13 +189,15 @@ async function calcDiningImpact(e) {
   foodWasteValue ? (value += 50) : value;
   dineOutValue ? (value += 50) : value;
 
-  diningResultLabel.innerHTML = `${value.toFixed(2)}%`;
-  diningChart.updateSeries([value]);
+  diningResultLabel.innerHTML = `${calculateInvertedPercentage(value).toFixed(
+    2
+  )}%`;
+  diningChart.updateSeries([calculateInvertedPercentage(value)]);
 
   const data = {
     out: dineOutValue,
     waste: foodWasteValue,
-    score: value,
+    score: calculateInvertedPercentage(value),
   };
 
   updateFireBase(data, "food", "dining");
@@ -239,76 +243,3 @@ const diningChart = new ApexCharts(
   diningChartOptions
 );
 diningChart.render();
-
-var options = {
-  series: [
-    {
-      name: "Actual",
-      data: [
-        {
-          x: "Tom",
-          y: 126,
-          goals: [
-            {
-              name: "Protector of Gaia",
-              value: 200,
-              strokeHeight: 5,
-              strokeColor: "#FFD700",
-            },
-            {
-              name: "GreenFingers",
-              value: 150,
-              strokeHeight: 5,
-              strokeColor: "#4b7bff",
-            },
-            {
-              name: "Average",
-              value: 100,
-              strokeHeight: 5,
-              strokeColor: "#775DD0",
-            },
-            {
-              name: "Destroyer Of Worlds",
-              value: 25,
-              strokeHeight: 5,
-              strokeColor: "#FF0000",
-            },
-          ],
-        },
-      ],
-    },
-  ],
-  chart: {
-    height: 400,
-    type: "bar",
-    toolbar: {
-      show: false,
-    },
-  },
-  plotOptions: {
-    bar: {
-      columnWidth: "60%",
-    },
-  },
-  colors: ["#00E396"],
-  dataLabels: {
-    enabled: false,
-  },
-  legend: {
-    show: true,
-    showForSingleSeries: true,
-    customLegendItems: [
-      "Tom",
-      "Destroyer Of Worlds",
-      "Average",
-      "GreenFingers",
-      "Protector of Gaia",
-    ],
-    markers: {
-      fillColors: ["#00E396", "#FF0000", "#775DD0", "#4b7bff", "#FFD700"],
-    },
-  },
-};
-
-var chart = new ApexCharts(document.querySelector("#totalChart"), options);
-chart.render();

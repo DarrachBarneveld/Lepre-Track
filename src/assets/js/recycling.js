@@ -5,6 +5,7 @@ import { User } from "../classes/User";
 import { doc, updateDoc } from "@firebase/firestore";
 import { firebaseDB } from "../../config/firebase";
 import { CategoryRadialChartOptions } from "../classes/Charts";
+import { calculateInvertedPercentage } from "../../helpers/math";
 
 const recyclingForm = document.getElementById("recyclingForm");
 const volunteerForm = document.getElementById("volunteerForm");
@@ -53,13 +54,19 @@ function renderStoredData() {
   glassCheck.checked = userClass.community.recycle.glass;
   foodCheck.checked = userClass.community.recycle.food;
 
-  recyclingResult.innerText = `${userClass.community.recycle.score}%`;
+  if (userClass.community.recycle.score == 0) {
+    recyclingResult.innerHTML =
+      '108.9 kg <span class="text-muted">(No Recycling)</span>';
+  } else {
+    recyclingResult.innerText = `${(
+      (100 - userClass.community.recycle.score)*1.089
+    ).toFixed(2)} kg`;
+  }
 
-  const recycleScore = userClass.community.recycle.score;
+  const recycleScore = 100 - userClass.community.recycle.score;
+  console.log(recycleScore)
 
-  const recyclePercent = recycleScore > 100 ? 100 : recycleScore;
-
-  recyclingChart.updateSeries([recyclePercent]);
+  recyclingChart.updateSeries([recycleScore]);
 
   // VOLUNTEERING
   trees.checked = userClass.community.volunteer.tree;
@@ -138,9 +145,10 @@ async function recyclingCarbonCalc(e) {
     plastic: plasticCheck.checked,
     glass: glassCheck.checked,
     food: foodCheck.checked,
-    score: ((DUMMY_DATA.averageTotalCo2 - co2Savings) / 1.089).toFixed(2),
+    score: calculateInvertedPercentage((DUMMY_DATA.averageTotalCo2 - co2Savings) / 1.089),
   };
 
+  console.log(data.score)
   updateFireBase(data, "community", "recycle");
 }
 
@@ -218,7 +226,7 @@ recyclingForm.addEventListener("submit", recyclingCarbonCalc);
 volunteerForm.addEventListener("submit", volunteerCarbonCalc);
 
 const recyclingChartOptions = new CategoryRadialChartOptions(
-  [0],
+  [100],
 
   ["#63D471", "#378B29"]
 );

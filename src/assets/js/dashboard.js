@@ -25,10 +25,14 @@ async function init() {
   const users = await getAllUserDocuments();
 
   const userTransportScore = userClass.calcTransportScore();
+  const userRecyclingScore = userClass.calcRecyclingScore();
+  const userEnergyScore = userClass.calcEnergyScore();
   const userFoodScore = userClass.calcFoodScore();
 
   const transColor = graphColor(userTransportScore);
   const foodColor = graphColor(userFoodScore);
+  const energyColor = graphColor(userEnergyScore);
+  const recycleColor = graphColor(userFoodScore);
 
   transportChart.updateOptions({
     colors: transColor,
@@ -36,9 +40,65 @@ async function init() {
   foodChart.updateOptions({
     colors: foodColor,
   });
+  energyChart.updateOptions({
+    colors: energyColor,
+  });
+  communityChart.updateOptions({
+    colors: recycleColor,
+  });
 
   transportChart.updateSeries([userTransportScore]);
   foodChart.updateSeries([userFoodScore]);
+  energyChart.updateSeries([userEnergyScore]);
+  communityChart.updateSeries([userRecyclingScore]);
+
+  const { totalScore } = userClass.overAllScore();
+
+  console.log(totalScore);
+  pieChart.updateSeries([
+    userTransportScore,
+    userFoodScore,
+    userEnergyScore,
+    userRecyclingScore,
+  ]);
+
+  totalChart.updateSeries([
+    {
+      name: "Actual",
+      data: [
+        {
+          x: "Tom",
+          y: totalScore,
+          goals: [
+            {
+              name: "Protector of Gaia",
+              value: 200,
+              strokeHeight: 5,
+              strokeColor: "#FFD700",
+            },
+            {
+              name: "GreenFingers",
+              value: 150,
+              strokeHeight: 5,
+              strokeColor: "#4b7bff",
+            },
+            {
+              name: "Average",
+              value: 100,
+              strokeHeight: 5,
+              strokeColor: "#775DD0",
+            },
+            {
+              name: "Destroyer Of Worlds",
+              value: 25,
+              strokeHeight: 5,
+              strokeColor: "#FF0000",
+            },
+          ],
+        },
+      ],
+    },
+  ]);
 
   const leaderboard = document.getElementById("leaderboard");
 
@@ -61,7 +121,8 @@ async function init() {
     </td>
     <td>${newUser.calcTransportScore()}</td>
     <td>${newUser.calcFoodScore()}</td>
-    <td>${newUser.food}</td>
+    <td>${newUser.calcEnergyScore()}</td>
+    <td>${newUser.calcRecyclingScore()}</td>
     <td>
       <span class="text-success p-1">
       <i class="fa-solid fa-star text-warning"></i> ${newUser.starRating()}
@@ -127,3 +188,79 @@ const pieOptions = {
 
 var pieChart = new ApexCharts(document.querySelector("#pieChart"), pieOptions);
 pieChart.render();
+
+var options = {
+  series: [
+    {
+      name: "Actual",
+      data: [
+        {
+          x: "Tom",
+          y: 126,
+          goals: [
+            {
+              name: "Protector of Gaia",
+              value: 200,
+              strokeHeight: 5,
+              strokeColor: "#FFD700",
+            },
+            {
+              name: "GreenFingers",
+              value: 150,
+              strokeHeight: 5,
+              strokeColor: "#4b7bff",
+            },
+            {
+              name: "Average",
+              value: 100,
+              strokeHeight: 5,
+              strokeColor: "#775DD0",
+            },
+            {
+              name: "Destroyer Of Worlds",
+              value: 25,
+              strokeHeight: 5,
+              strokeColor: "#FF0000",
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  chart: {
+    height: 400,
+    type: "bar",
+    toolbar: {
+      show: false,
+    },
+  },
+  plotOptions: {
+    bar: {
+      columnWidth: "60%",
+    },
+  },
+  colors: ["#00E396"],
+  dataLabels: {
+    enabled: false,
+  },
+  legend: {
+    show: true,
+    showForSingleSeries: true,
+    customLegendItems: [
+      "Tom",
+      "Destroyer Of Worlds",
+      "Average",
+      "GreenFingers",
+      "Protector of Gaia",
+    ],
+    markers: {
+      fillColors: ["#00E396", "#FF0000", "#775DD0", "#4b7bff", "#FFD700"],
+    },
+  },
+};
+
+const totalChart = new ApexCharts(
+  document.querySelector("#totalChart"),
+  options
+);
+totalChart.render();
