@@ -25,10 +25,14 @@ async function init() {
   const users = await getAllUserDocuments();
 
   const userTransportScore = userClass.calcTransportScore();
+  const userRecyclingScore = userClass.calcRecyclingScore();
+  const userEnergyScore = userClass.calcEnergyScore();
   const userFoodScore = userClass.calcFoodScore();
 
   const transColor = graphColor(userTransportScore);
   const foodColor = graphColor(userFoodScore);
+  const energyColor = graphColor(userEnergyScore);
+  const recycleColor = graphColor(userFoodScore);
 
   transportChart.updateOptions({
     colors: transColor,
@@ -36,9 +40,17 @@ async function init() {
   foodChart.updateOptions({
     colors: foodColor,
   });
+  energyChart.updateOptions({
+    colors: energyColor,
+  });
+  communityChart.updateOptions({
+    colors: recycleColor,
+  });
 
   transportChart.updateSeries([userTransportScore]);
   foodChart.updateSeries([userFoodScore]);
+  energyChart.updateSeries([userEnergyScore]);
+  communityChart.updateSeries([userRecyclingScore]);
 
   const leaderboard = document.getElementById("leaderboard");
 
