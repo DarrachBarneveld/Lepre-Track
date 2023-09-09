@@ -43,6 +43,26 @@ const defaultFood = {
   },
 };
 
+const defaultCommunity = {
+  recycle: {
+    metal: false,
+    paper: false,
+    plastic: false,
+    glass: false,
+    food: false,
+    score: 0,
+  },
+  volunteer: {
+    tree: false,
+    gardens: false,
+    wildlife: false,
+    ocean: false,
+    other: false,
+    donation: 0,
+    score: 0,
+  },
+};
+
 export class User {
   constructor(data) {
     this.id = data.id;
@@ -52,7 +72,7 @@ export class User {
     this.travel = data?.travel || defaultTravel;
     this.food = data?.food || defaultFood;
     this.energy = data?.energy || 0;
-    this.community = data?.community || 0;
+    this.community = data?.community || defaultCommunity;
   }
 
   overAllScore() {

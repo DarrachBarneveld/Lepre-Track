@@ -13,11 +13,10 @@
 }
 
 .fa-utensils {
-  color: var(--primary-blue);
+  color: #a594f9;
 }
 
 .food-wrapper {
-  background-color: var(--primary-white);
   padding: 2em 4em;
   border-radius: 15px;
 }

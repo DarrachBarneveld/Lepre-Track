@@ -53,27 +53,7 @@ form {
   box-shadow: var(--box-shadow);
 }
 
-/* .dropdown button {
-  border: none;
-  background: inherit;
-} */
-
-/* button {
-  border: none;
-  border-radius: 1rem;
-  background-color: rgb(97, 212, 97);
-  padding: 1rem 2rem;
-  transition: all 300ms;
-  font-weight: bolder;
-}
-
-button:hover,
-button:focus {
-  background-color: green;
-  cursor: pointer;
-  transform: scale(0.98);
-  color: var(--primary-white);
-} */
+/* NAVBAR CSS */
 
 input:focus:invalid {
   border-color: rgba(255, 1, 1, 0.5) !important;
@@ -100,7 +80,20 @@ input:focus:valid {
     0 0 0 3px rgba(44, 255, 2, 0.5);
 }
 
-#loginMessage {
+#loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  background: var(--green-gradient);
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+}
+
+#loader img {
+  border-radius: 2rem;
+  width: 100%;
 }
 
 .bg-nav {
@@ -114,13 +107,7 @@ input:focus:valid {
   border-radius: 50%;
 }
 
-/*landing page text overlay*/
-/* #text-overlay {
-  width: 400px;
-  opacity: 0.6;
-  padding: 20px;
-  box-shadow: 0 0 5px 5px;
-} */
+/* ANIMATIONS */
 
 .fade-in {
   opacity: 0; /* Initially, the text is invisible */
@@ -182,15 +169,23 @@ input:focus:valid {
 #bus,
 #energy,
 #food {
-    background-color: #6e9c11ff;
+  background-color: #6e9c11ff;
 }
 
 #slide-item {
-  background: linear-gradient(#8ccebeff, #ffffffff);
+  background: linear-gradient(#8ccebeff, #ffffffff, #8ccebeff);
 }
 
 #fact-heading {
-  background-image: linear-gradient(to right,rgb(106, 185, 166), rgb(56, 94, 23));
-    -webkit-background-clip: text; /* Clip the gradient to the text */
-    color: transparent; /* Make the text transparent */
+  background-image: linear-gradient(
+    to right,
+    rgb(106, 185, 166),
+    rgb(56, 94, 23)
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+#slide-container {
+  opacity: 0.9;
 }

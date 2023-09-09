@@ -1,4 +1,6 @@
 import ApexCharts from "apexcharts";
+import { checkAuthState, getUserData, removeLoader } from "./auth";
+import { User } from "../classes/User";
 
 let electricity = 0;
 let gas = 0;
@@ -8,6 +10,23 @@ let lpg = 0;
 let propane = 0;
 let wood = 0;
 let average_house = 4;
+
+let activeUser;
+let userClass;
+
+async function init() {
+  activeUser = await checkAuthState();
+  if (!activeUser) return (window.location.href = "/");
+  removeLoader();
+
+  const userData = await getUserData(activeUser);
+
+  userClass = new User(userData);
+  const profileIcon = document.getElementById("profile");
+  profileIcon.innerHTML = `<i class="fa-solid fa-user"></i> ${userData.name}`;
+}
+
+init();
 
 let input_form = document.querySelector(".energy_form");
 let btn = document.querySelector(".submit-btn");

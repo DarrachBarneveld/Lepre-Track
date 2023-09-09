@@ -15,14 +15,20 @@
   </head>
 
   <body>
+    <!-- Loader Auth Page -->
+    <div id="loader">
+      <div class="img-container">
+        <img src="src/assets/images/loading.gif" alt="Loading earth spinner" />
+      </div>
+    </div>
     <!-- Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-nav fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-nav">
       <div class="container-fluid">
         <div class="logo">
           <a class="navbar-brand" href="index.html">
             <img
               class="img-fluid"
-              src="../Lepre-Track/src/assets/images/logo.jpg"
+              src="./src/assets/images/logo.jpg"
               alt="logo"
             />
           </a>
@@ -39,10 +45,10 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse fs-4" id="navbarNav">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="navbar-list">
             <li class="nav-item">
               <a
-                class="nav-link btn btn-success text-white m-1 ms-0 mx-4 px-3"
+                class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3"
                 aria-current="page"
                 href="index.html"
                 >Home <i class="fa-solid fa-house"></i
@@ -51,7 +57,7 @@
             <li class="nav-item">
               <div class="dropdown">
                 <button
-                  class="nav-link btn btn-success text-white m-1 ms-0 mx-4 px-3"
+                  class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3"
                   type="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
@@ -69,51 +75,55 @@
                     <a class="dropdown-item" href="energy.html">Energy</a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="index.html">Community</a>
+                    <a class="dropdown-item" href="recycling.html">Community</a>
                   </li>
                 </ul>
               </div>
             </li>
             <li class="nav-item">
               <a
-                class="nav-link btn btn-success text-white m-1 ms-0 mx-4 px-3"
-                href="#"
+                class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3"
+                href="fact_page.html"
                 >Learn More
                 <i class="fa-solid fa-book-open"></i>
               </a>
             </li>
             <li class="nav-item">
               <a
-                class="nav-link btn btn-success text-white m-1 ms-0 mx-4 px-3"
-                href="#"
-                >Contact
-                <i class="fa-solid fa-phone"></i>
+                class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3"
+                href="recycling.html"
+                >Recycling
+                <i class="fa-solid fa-recycle"></i>
               </a>
             </li>
-            <!-- <li class="nav-item">
+            <li class="nav-item">
               <a
-                class="nav-link btn btn-success text-white m-1 ms-0 mx-4 px-3"
-                href="#"
-                >Profile
-                <i class="fa-solid fa-user"></i>
+                class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3"
+                href="about.html"
+                >About Us
+                <i class="fa-solid fa-people-group"></i>
               </a>
-            </li> -->
+            </li>
           </ul>
-          <div class="d-flex">
+          <div id="authenticated" class="d-flex">
             <a
-              href="#"
-              class="m-1 ms-0 mx-4 text-decoration-none link-secondary px-3 btn btn-success text-white"
-              >Sign Up <i class="fa-solid fa-user-plus"></i
-            ></a>
-            <a
-              href="#"
-              class="m-1 ms-0 mx-4 text-decoration-none link-secondary px-3 btn btn-success text-white"
-              >Log in <i class="fa-solid fa-right-to-bracket"></i
-            ></a>
+              class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3 text-capitalize"
+              href="dashboard.html"
+              id="profile"
+            >
+              <i class="fa-solid fa-user"></i>
+            </a>
+            <button
+              id="logout"
+              class="nav-link btn btn-success text-white m-1 ms-0 mx-2 px-3"
+            >
+              Log out <i class="fa-solid fa-right-to-bracket"></i>
+            </button>
           </div>
         </div>
       </div>
     </nav>
+
     <main class="container">
       <div class="container mt-5">
         <div class="row container-row">
@@ -122,7 +132,7 @@
           <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
             <div class="card text-center">
               <div
-                class="dashboard-progress dashboard-progress-1 d-flex align-items-center justify-content-center item-parent position-relative"
+                class="d-flex align-items-center justify-content-center item-parent position-relative"
               >
                 <div id="dietChart"></div>
                 <i class="fa-solid fa-pizza-slice chart-icon"></i>
@@ -165,9 +175,7 @@
           <!-- Second Card -->
           <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
             <div class="card text-center">
-              <div
-                class="dashboard-progress dashboard-progress-1 d-flex align-items-center justify-content-center item-parent position-relative"
-              >
+              <div class="d-flex align-items-center justify-content-center">
                 <div id="farmingChart"></div>
                 <i class="fa-solid fa-seedling chart-icon"></i>
               </div>
@@ -224,9 +232,7 @@
           <!-- Third Card -->
           <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
             <div class="card text-center">
-              <div
-                class="d-flex align-items-center justify-content-center item-parent position-relative"
-              >
+              <div class="d-flex align-items-center justify-content-center">
                 <div id="diningChart"></div>
                 <i class="fa-solid fa-utensils chart-icon"></i>
               </div>
@@ -254,8 +260,7 @@
               </form>
             </div>
           </div>
-
-          <!-- <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+          <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
             <div class="card text-center">
               <p>
                 <span
@@ -266,14 +271,12 @@
                 ></span>
                 <span class="text-muted">Average</span>
               </p>
-              <div
-                class="d-flex align-items-center justify-content-center item-parent position-relative"
-              >
+              <div class="d-flex align-items-center justify-content-center">
                 <div id="totalChart"></div>
                 <i class="fa-solid fa-seedling chart-icon"></i>
               </div>
             </div>
-          </div> -->
+          </div>
         </div>
       </div>
     </main>

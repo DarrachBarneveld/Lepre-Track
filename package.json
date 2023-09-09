@@ -2,7 +2,6 @@
   "name": "lepre-track",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html "
@@ -15,7 +14,7 @@
     "dotenv": "^16.3.1",
     "firebase": "^10.3.1",
     "openai": "^4.5.0",
-    "parcel": "^2.9.3",
+    "parcel": "^2.8.3",
     "sweetalert2": "^11.7.27"
   },
   "devDependencies": {

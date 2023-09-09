@@ -2,7 +2,7 @@
 import ApexCharts from "apexcharts";
 import Swal from "sweetalert2";
 import { getPercentInRelationToAverage } from "../../helpers/math";
-import { checkAuthState, getUserData } from "./auth";
+import { checkAuthState, getUserData, removeLoader } from "./auth";
 import { User } from "../classes/User";
 import { doc, updateDoc } from "@firebase/firestore";
 import { firebaseDB } from "../../config/firebase";
@@ -42,13 +42,15 @@ let userClass;
 
 async function init() {
   activeUser = await checkAuthState();
+  if (!activeUser) return (window.location.href = "/");
+  removeLoader();
 
   const userData = await getUserData(activeUser);
 
   userClass = new User(userData);
 
-  console.log(userClass);
-
+  const profileIcon = document.getElementById("profile");
+  profileIcon.innerHTML = `<i class="fa-solid fa-user"></i> ${userData.name}`;
   renderStoredData();
 }
 
@@ -88,11 +90,12 @@ function renderStoredData() {
   flightResultLabel.dataset.to = userClass.travel.flight.score;
 
   const userTotalChart = [
-    DUMMY_DATA.flightKperWeek *
-      (userClass.travel.flight.score / 100).toFixed(0),
-    DUMMY_DATA.carKperWeek * (userClass.travel.car.score / 100).toFixed(0),
-    DUMMY_DATA.communterKperWeek *
-      (userClass.travel.transport.score / 100).toFixed(0),
+    (DUMMY_DATA.flightKperWeek * userClass.travel.flight.score).toFixed(0) /
+      100,
+    (DUMMY_DATA.carKperWeek * userClass.travel.car.score).toFixed(0) / 100,
+    (DUMMY_DATA.communterKperWeek * userClass.travel.transport.score).toFixed(
+      0
+    ) / 100,
   ];
 
   totalChart.updateOptions({
