@@ -5,6 +5,7 @@ import { CategoryRadialChartOptions } from "../classes/Charts";
 import { User } from "../classes/User";
 import { doc, updateDoc } from "@firebase/firestore";
 import { firebaseDB } from "../../config/firebase";
+import { calculateInvertedPercentage } from "../../helpers/math";
 
 let average_house = 4;
 
@@ -16,7 +17,6 @@ const energyResult = document.getElementById("energy-result");
 async function init() {
   activeUser = await checkAuthState();
 
-  console.log(activeUser);
   if (!activeUser) return (window.location.href = "/");
   removeLoader();
 
@@ -37,7 +37,7 @@ function renderStoredData() {
   const energyScore =
     userClass.energy.energy.score > 100 ? 100 : userClass.energy.energy.score;
 
-  energyResult.innerHTML = `${userClass.energy.energy.score}%`;
+  energyResult.innerHTML = `${userClass.energy.energy.score.toFixed(2)}%`;
 
   energyChart.updateSeries([energyScore]);
 }
@@ -74,6 +74,8 @@ function data(e) {
   array.push(wood_input * 0.0505547619047619);
   let a = addNumbers(array);
 
+  const inverseScore = calculateInvertedPercentage(a);
+
   const data = {
     electric: electricity_input,
     gas: gas_input,
@@ -83,14 +85,16 @@ function data(e) {
     propane: propane_input,
     wood: wood_input,
     factor,
-    score: a,
+    score: inverseScore,
   };
 
   updateFireBase(data, "energy", "energy");
 
   a > 100 ? 100 : a;
 
-  energyChart.updateSeries([a]);
+  energyResult.innerHTML = `${inverseScore.toFixed(2)}%`;
+
+  energyChart.updateSeries([inverseScore]);
 
   return a;
 }
