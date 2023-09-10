@@ -131,8 +131,6 @@ async function init() {
       const userAScore = userA.overAllScore();
       const userBScore = userB.overAllScore();
 
-      console.log(userAScore.totalScore, userBScore.totalScore);
-
       return userAScore.totalScore - userBScore.totalScore;
     });
 
