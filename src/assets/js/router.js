@@ -5,6 +5,7 @@ const routes = {
   "/": "/pages/index.html",
   "/about": "/pages/about.html",
   "/learn": "/pages/learn.html",
+  "/dashboard": "/pages/dashboard.html",
 };
 
 const rootDiv = document.getElementById("root");

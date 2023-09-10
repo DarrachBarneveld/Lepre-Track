@@ -22,9 +22,6 @@ const loginHtml = `
 <input type="password" id="password" class="swal2-input" placeholder="Password" required />
 `;
 
-// navbarInit();
-// Initalise the auth navbar check
-
 function signupForm() {
   Swal.fire({
     title: "Signup Form",
@@ -91,6 +88,7 @@ function signupForm() {
   });
 }
 function loginForm() {
+  console.log("fire");
   Swal.fire({
     title: "Login Form",
     icon: "question",
@@ -136,7 +134,7 @@ export async function signUpUserWithEmailAndPassword(
 
     await createUserDocumentFromAuth(user, username);
 
-    window.location.href = "dashboard.html";
+    window.location.href = "pages/dashboard.html";
   } catch (err) {
     console.log(err);
   }
@@ -222,15 +220,6 @@ async function getUserDocument(userAuth) {
     return userSnapShot.data();
   } else return null;
 }
-
-// anime({
-//   targets: ".start-tracking",
-//   translateY: [-1500, 0], // from 100 to 250
-//   //   delay: 150,
-//   duration: 1500,
-//   direction: "normal",
-//   easing: "easeOutBack",
-// });
 
 signUpModal.addEventListener("click", signupForm);
 loginModal.addEventListener("click", loginForm);
