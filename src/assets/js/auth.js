@@ -36,6 +36,9 @@ export async function getUserData(user) {
   }
 }
 
+
+
+
 export async function getAllUserDocuments() {
   try {
     const userCollectionRef = collection(firebaseDB, "users");

@@ -17,6 +17,32 @@
   font: bolder;
 }
 
+.version2 {
+  padding: 1rem 2rem;
+  color: var(--primary-green);
+  font-weight: bolder;
+  font-size: 1.4rem;
+  background: white;
+  width: fit-content;
+  margin: 0.5rem auto;
+  box-shadow: var(--box-shadow);
+  border-radius: 1rem;
+  display: flex;
+  gap: 0.25rem;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  transition: 300ms;
+  border: 1px solid rgba(31, 38, 135, 0.37);
+}
+
+.version2:hover,
+.version2:focus {
+  background-color: var(--primary-green);
+  color: white;
+  transform: scale(0.99);
+}
+
 .start-tracking {
   /* padding-block: 0.5em; */
   /* border-radius: 100vmax; */
@@ -28,7 +54,7 @@
   margin-top: 2rem;
 }
 
-.chat-prompt-section>form>* {
+.chat-prompt-section > form > * {
   margin-bottom: 1rem;
   width: 100%;
 }
@@ -70,7 +96,6 @@
 
 /* The typewriter cursor effect */
 @keyframes blink-caret {
-
   from,
   to {
     border-color: transparent;
